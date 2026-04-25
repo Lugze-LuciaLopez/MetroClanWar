@@ -2,9 +2,12 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Metro Clan War</title>
     
+    <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     
     <script>
@@ -12,27 +15,101 @@
           theme: {
             extend: {
               colors: {
-                l1: '#ED1C24', // Rojo
-                l2: '#93278F', // Lila
-                l3: '#00A651', // Verde
-                l4: '#FDB913', // Amarillo
-                l5: '#005596', // Azul
-                l7: '#B97D05',    // Marrón
-                l9sud: '#F37021', //Naranja
+                l1: '#ED1C24', l2: '#93278F', l3: '#00A651',
+                l4: '#FDB913', l5: '#005596', l7: '#B97D05', 
+                l9sud: '#F37021',
               }
             }
           }
         }
     </script>
 </head>
-<body class="bg-slate-900 text-white min-h-screen">
+<body class="overflow-hidden bg-slate-900 text-white font-sans">
 
-    <div id="app">
-        <div class="p-10 text-center">
-            <h1 class="text-4xl font-black text-l5">METRO CLAN WAR</h1>
-            <p class="mt-4 opacity-70">Cargando sistema de facciones...</p>
+    <section id="view-quiz" class="h-screen w-full flex flex-col p-6 overflow-y-auto">
+        <header class="py-8 text-center">
+            <h1 class="text-3xl font-black tracking-tighter">METRO <span class="text-l5">CLAN</span> WAR</h1>
+            <p class="text-sm opacity-60 mt-2">Descubre tu facción en el subsuelo</p>
+        </header>
+
+        <div id="quiz-container" class="flex-1 flex flex-col justify-center gap-6">
+            <div class="bg-slate-800 p-6 rounded-3xl border border-slate-700 shadow-xl">
+                <span class="text-xs font-bold text-l5 uppercase">Pregunta</span>
+                <h2 class="text-xl font-bold mt-1">¿Qué es lo que nunca falta en tu mochila al subir al metro?</h2>
+                
+                <div class="grid gap-3 mt-6">
+                    <button onclick="selectAnswer('a')" class="btn-active w-full p-4 bg-slate-700 hover:bg-slate-600 rounded-2xl text-left transition-all border border-transparent active:border-l5">
+                        <span class="font-bold mr-2 text-l5">A</span> El portátil y un café
+                    </button>
+                    <button onclick="selectAnswer('b')" class="btn-active w-full p-4 bg-slate-700 hover:bg-slate-600 rounded-2xl text-left transition-all border border-transparent active:border-l5">
+                        <span class="font-bold mr-2 text-l5">B</span> Un libro y cascos de música
+                    </button>
+                    <button onclick="selectAnswer('c')" class="btn-active w-full p-4 bg-slate-700 hover:bg-slate-600 rounded-2xl text-left transition-all border border-transparent active:border-l5">
+                        <span class="font-bold mr-2 text-l5">C</span> La toalla de playa y gafas de sol
+                    </button>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <section id="view-dashboard" class="hidden h-screen w-full flex flex-col">
+        <div id="event-banner" class="hidden bg-red-600 p-2 text-center text-[10px] font-black uppercase tracking-widest animate-pulse">
+            ⚠️ Alerta: Pickpockets detectados en L1
+        </div>
+
+        <header class="p-6 flex justify-between items-center">
+            <div id="clan-indicator" class="w-14 h-14 rounded-full border-4 flex items-center justify-center text-xl font-black">
+                ??
+            </div>
+            <div class="text-right">
+                <p class="text-[10px] uppercase opacity-50 font-bold">Puntos Totales</p>
+                <p id="score-display" class="text-3xl font-black text-yellow-400">0</p>
+            </div>
+        </header>
+
+        <main class="flex-1 p-6 space-y-6 overflow-y-auto">
+            <div class="bg-slate-800 rounded-3xl p-8 text-center border border-slate-700 shadow-2xl">
+                <p class="text-xs uppercase tracking-widest opacity-50 mb-2">Estación Actual</p>
+                <h3 id="current-station" class="text-2xl font-bold italic">Detectando ubicación...</h3>
+                
+                <div class="mt-8 flex justify-center">
+                    <div class="w-32 h-32 rounded-full border-4 border-slate-700 flex items-center justify-center relative">
+                        <div class="absolute inset-0 rounded-full border-4 border-l5 animate-ping opacity-20"></div>
+                        <span class="text-[10px] font-bold opacity-50 uppercase">Tracking On</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-slate-800/50 rounded-3xl p-6 border border-slate-700">
+                <h4 class="text-xs font-bold uppercase opacity-40 mb-4">Top Clanes Semanal</h4>
+                <div class="space-y-3">
+                    <div class="flex justify-between items-center"><span class="text-l5 font-bold">L5 Azul</span><span>12.4k</span></div>
+                    <div class="flex justify-between items-center opacity-50"><span class="text-l4 font-bold">L4 Amarilla</span><span>10.1k</span></div>
+                </div>
+            </div>
+        </main>
+
+        <nav class="bg-slate-800 border-t border-slate-700 flex justify-around p-4 pb-8">
+            <button onclick="showView('view-dashboard')" class="flex flex-col items-center gap-1">
+                <span class="text-xl">🏠</span>
+                <span class="text-[9px] uppercase font-bold">Home</span>
+            </button>
+            <button onclick="showView('view-map')" class="flex flex-col items-center gap-1 opacity-40">
+                <span class="text-xl">📍</span>
+                <span class="text-[9px] uppercase font-bold">Mapa</span>
+            </button>
+            <button class="flex flex-col items-center gap-1 opacity-40">
+                <span class="text-xl">🏆</span>
+                <span class="text-[9px] uppercase font-bold">Ranking</span>
+            </button>
+        </nav>
+    </section>
+
+    <section id="view-map" class="hidden h-screen w-full flex flex-col bg-slate-900">
+        <div class="p-6 flex-1 flex flex-col items-center justify-center">
+            <h2 class="text-xl font-bold mb-4">Mapa de Influencia</h2>
+            <div class="w-full h-64 bg-slate-800 rounded-3xl border border-slate-700 flex items-center justify-center">
+              </div> </section>
 
     <script src="app.js"></script>
 </body>
