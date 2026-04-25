@@ -6,11 +6,10 @@ html, body {
     height: 100%;
     overflow: hidden; 
     position: fixed;
-    /* Tipografia TMB */
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-    /* Vermell TMB Oficial */
-    background-color: #ED1C24 !important; 
+    background-color: #ED1C24;
     color: white;
+    transition: background-color 0.8s ease;
 }
 
 section {
@@ -22,18 +21,34 @@ section {
     flex-direction: column;
 }
 
-/* Efecte polsació */
+/* Millora de resposta del botó */
+button {
+    touch-action: none; 
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    pointer-events: auto !important;
+}
+
 .btn-active:active {
-    transform: scale(0.96);
-    transition: transform 0.1s;
+    transform: scale(0.95);
+    filter: brightness(0.9);
 }
 
 .hidden { display: none !important; }
 
-/* Radar */
 @keyframes ping {
-    75%, 100% { transform: scale(2); opacity: 0; }
+    75%, 100% { transform: scale(2.2); opacity: 0; }
 }
 .animate-ping {
-    animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+    animation: ping 1.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+#message-overlay:not(.hidden) > div {
+    animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes modalPop {
+    0% { opacity: 0; transform: scale(0.85); }
+    100% { opacity: 1; transform: scale(1); }
 }

@@ -1,4 +1,3 @@
-// ESTAT DEL JOC
 const state = {
     currentQuestion: 0,
     scores: { L1:0, L2:0, L3:0, L4:0, L5:0, L7:0, L9sud:0 },
@@ -20,22 +19,44 @@ const questions = [
 
 document.addEventListener("DOMContentLoaded", () => {
     if (state.clan) {
+        updateAppColor();
         finishQuiz(); 
     } else {
         loadQuestion();
     }
 });
 
+function showMessage(title, body, icon = "🏆") {
+    const overlay = document.getElementById('message-overlay');
+    document.getElementById('message-title').innerText = title;
+    document.getElementById('message-body').innerText = body;
+    document.getElementById('message-icon').innerText = icon;
+    if (state.clan) {
+        const clanColors = { L1:'#ED1C24', L2:'#93278F', L3:'#00A651', L4:'#FDB913', L5:'#005596', L7:'#B97D05', L9sud:'#F37021' };
+        document.getElementById('message-btn').style.backgroundColor = clanColors[state.clan];
+    }
+    overlay.classList.remove('hidden');
+}
+
+function closeMessage() {
+    document.getElementById('message-overlay').classList.add('hidden');
+}
+
+function updateAppColor() {
+    const clanColors = { L1:'#ED1C24', L2:'#93278F', L3:'#00A651', L4:'#FDB913', L5:'#005596', L7:'#B97D05', L9sud:'#F37021' };
+    const color = clanColors[state.clan] || '#ED1C24';
+    document.body.style.backgroundColor = color;
+}
+
 function loadQuestion() {
     const q = questions[state.currentQuestion];
     document.querySelector("h2").textContent = q.text;
     const container = document.querySelector(".grid");
     container.innerHTML = "";
-
     Object.entries(q.answers).forEach(([key, value]) => {
         const btn = document.createElement("button");
-        btn.className = "w-full p-4 bg-slate-800 hover:bg-slate-700 rounded-2xl text-left btn-active transition-all";
-        btn.innerHTML = `<span class="font-bold mr-2 text-white">${key.toUpperCase()}</span> ${value.text}`;
+        btn.className = "w-full p-4 bg-black/20 rounded-2xl text-left border border-white/10 text-white";
+        btn.innerHTML = `<span class="font-bold mr-2">${key.toUpperCase()}</span> ${value.text}`;
         btn.onclick = () => selectAnswer(value.clan);
         container.appendChild(btn);
     });
@@ -55,13 +76,12 @@ function finishQuiz() {
     if (!state.clan) {
         state.clan = Object.keys(state.scores).reduce((a, b) => state.scores[a] > state.scores[b] ? a : b);
         localStorage.setItem('userClan', state.clan);
+        showMessage("CONGRATULATIONS!", `You belong to Line ${state.clan}. Welcome to the faction!`, "🚇");
     }
+    updateAppColor();
     document.getElementById("clan-indicator").textContent = state.clan;
     document.getElementById("score-display").textContent = state.totalPoints;
-    
-    // El cercle del clan serà negre/fosc per destacar sobre el vermell
-    document.getElementById("clan-indicator").className = `w-16 h-16 rounded-full border-4 border-white bg-black/30 flex items-center justify-center text-2xl font-black`;
-
+    document.getElementById("clan-indicator").className = `w-16 h-16 rounded-full border-4 border-white bg-black/20 flex items-center justify-center text-2xl font-black shadow-lg`;
     showView("view-dashboard");
 }
 
@@ -70,42 +90,77 @@ function showView(id) {
     document.getElementById(id).classList.remove("hidden");
 }
 
-function startJourney() {
-    const btn = document.getElementById('btn-main-action');
+// --- LOGICA DE TRACKING REVISADA ---
+function handleMainAction(event) {
+    // Evitem comportaments estranys del navegador
+    if(event) event.preventDefault();
     
-    // SI JA ESTÀ TRACKEJANT -> PARA EL COMPTADOR
     if (state.isTracking) {
-        autoFinishJourney();
-        return;
+        stopJourney();
+    } else {
+        startJourney();
     }
+}
 
+function startJourney() {
     state.isTracking = true;
     state.sessionPoints = 0;
+    state.consecutiveLowSpeed = 0;
 
-    // UI Activa: Botó Negre sobre fons vermell
+    const btn = document.getElementById('btn-main-action');
     btn.innerText = "STOP & SAVE TRIP";
-    btn.className = "btn-active w-full py-5 rounded-2xl bg-black text-white font-black text-sm uppercase tracking-widest shadow-lg";
+    btn.style.backgroundColor = "black";
+    btn.style.color = "white";
     
     document.getElementById('radar-ping').classList.remove('hidden');
     document.getElementById('live-data').classList.remove('opacity-20');
     document.getElementById('tracking-status').innerText = "TRACKING ACTIVE";
 
+    // Iniciem el bucle
     runAutoDetectionLoop();
 }
 
+function stopJourney() {
+    // KILL SWITCH: Aturem l'interval el PRIMER de tot
+    if (state.trackingInterval) {
+        clearInterval(state.trackingInterval);
+        state.trackingInterval = null;
+    }
+    
+    state.isTracking = false;
+    
+    // Guardem dades
+    state.totalPoints += state.sessionPoints;
+    localStorage.setItem('totalPoints', state.totalPoints);
+    document.getElementById('score-display').innerText = state.totalPoints;
+
+    showMessage("TRIP FINISHED", `Success! You earned ${state.sessionPoints} points.`, "🏁");
+    
+    resetUI();
+}
+
 function runAutoDetectionLoop() {
-    const stations = ["Diagonal", "Fontana", "Lesseps", "Vallcarca"];
+    const stations = ["Catalunya", "Passeig de Gràcia", "Diagonal", "Fontana"];
     let stationIdx = 0;
 
     state.trackingInterval = setInterval(() => {
-        let speed = 20 + Math.floor(Math.random() * 20);
-        if (state.sessionPoints > 40 && Math.random() > 0.8) speed = 2;
+        // Si per algun motiu s'ha parat externament, matem l'interval
+        if (!state.isTracking) {
+            clearInterval(state.trackingInterval);
+            return;
+        }
+
+        let speed = 15 + Math.floor(Math.random() * 25);
+        
+        // Simulació de parada automàtica
+        if (state.sessionPoints > 35 && Math.random() > 0.92) speed = 2;
 
         state.sessionPoints += 1;
         document.getElementById('big-points').innerText = state.sessionPoints;
         document.getElementById('speed-display').innerText = speed + " km/h";
         document.getElementById('current-station').innerText = speed > 5 ? stations[stationIdx % 4] : "Station / Stopped";
-        if(speed > 5 && state.sessionPoints % 8 === 0) stationIdx++;
+        
+        if(speed > 5 && state.sessionPoints % 10 === 0) stationIdx++;
 
         if (speed < 5) {
             state.consecutiveLowSpeed++;
@@ -113,25 +168,18 @@ function runAutoDetectionLoop() {
             state.consecutiveLowSpeed = 0;
         }
 
-        if (state.consecutiveLowSpeed >= 4) {
-            autoFinishJourney();
+        // Auto-stop si detecta parada llarga
+        if (state.consecutiveLowSpeed >= 5) {
+            stopJourney();
         }
-    }, 1500);
+    }, 1000); 
 }
 
-function autoFinishJourney() {
-    clearInterval(state.trackingInterval);
-    state.isTracking = false;
-    state.totalPoints += state.sessionPoints;
-    localStorage.setItem('totalPoints', state.totalPoints);
-    
-    document.getElementById('score-display').innerText = state.totalPoints;
-    alert(`Journey Finished! You earned ${state.sessionPoints} points.`);
-    
-    // Reset UI manualment
+function resetUI() {
     const btn = document.getElementById('btn-main-action');
     btn.innerText = "START JOURNEY SCAN";
-    btn.className = "btn-active w-full py-5 rounded-2xl bg-white text-red-600 font-black text-sm uppercase tracking-widest shadow-lg";
+    btn.style.backgroundColor = "white";
+    btn.style.color = "black";
     
     document.getElementById('radar-ping').classList.add('hidden');
     document.getElementById('live-data').classList.add('opacity-20');
@@ -139,6 +187,4 @@ function autoFinishJourney() {
     document.getElementById('big-points').innerText = "0";
     document.getElementById('speed-display').innerText = "0 km/h";
     document.getElementById('current-station').innerText = "---";
-    state.sessionPoints = 0;
-    state.consecutiveLowSpeed = 0;
 }
