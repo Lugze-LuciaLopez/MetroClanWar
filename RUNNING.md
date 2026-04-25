@@ -107,10 +107,13 @@ Tots els nodes guarden la seva informació a `~/.metro-clan-war/`:
 
 Per reiniciar des de zero: `rm -rf ~/.metro-clan-war/`
 
+cd Desktop/MetroClanWar
+
 node peer-node/start.js --role=replica
 node peer-node/start.js --role=validator
 
 node peer-node/start.js --role=player --simulate
 node peer-node/start.js --role=player --simulate --identity=~/.metro-clan-war/player2.json
 
-node peer-node/start.js --role=validator --compute-results   |   --week-offset=1
+node peer-node/start.js --role=validator --compute-results
+node peer-node/start.js --role=validator --compute-results --week-offset=1

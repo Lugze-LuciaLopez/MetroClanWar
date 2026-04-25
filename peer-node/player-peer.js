@@ -14,9 +14,22 @@ import { weekId } from '../core/weekly-engine/week-utils.js'
 
 const IDENTITY_PATH = join(homedir(), '.metro-clan-war', 'identity.json')
 
+let activePromptAbort = null
+
 function promptUser(question) {
   const rl = createInterface({ input: process.stdin, output: process.stdout })
-  return new Promise(resolve => rl.question(question, ans => { rl.close(); resolve(ans.trim()) }))
+  return new Promise((resolve, reject) => {
+    activePromptAbort = () => {
+      activePromptAbort = null
+      rl.close()
+      reject(new Error('PROMPT_ABORTED'))
+    }
+    rl.question(question, ans => {
+      activePromptAbort = null
+      rl.close()
+      resolve(ans.trim())
+    })
+  })
 }
 
 export async function startPlayer({
@@ -56,7 +69,7 @@ export async function startPlayer({
   let latestWeeklyResult = null
   const results = []
   const seenEventIds = new Set()
-  let skipNextIntro = false
+  let lastIntroWeek = null
 
   const { swarm } = createSwarm({ server: false, client: true })
 
@@ -130,11 +143,16 @@ export async function startPlayer({
     if (ev.weekId !== weekId(nowSecs())) return
     const currentOffsetWeeks = getWeekOffset() / (7 * 86400)
     setWeekOffset(currentOffsetWeeks + 1)
-    if (verbose) {
-      console.log(`[clock] auto-advance → ${weekId(nowSecs())} (offset=${currentOffsetWeeks + 1})`)
-      printWeekIntro(ev, identity.clanId)
-      skipNextIntro = true
-    }
+    if (verbose) console.log(`[clock] auto-advance → ${weekId(nowSecs())} (offset=${currentOffsetWeeks + 1})`)
+    printIntroIfNewWeek()
+    if (activePromptAbort) activePromptAbort()
+  }
+
+  function printIntroIfNewWeek() {
+    const wid = weekId(nowSecs())
+    if (wid === lastIntroWeek) return
+    lastIntroWeek = wid
+    if (verbose) printWeekIntro(latestWeeklyResult, identity.clanId)
   }
 
   function updateLatestWeeklyResult(ev) {
@@ -150,8 +168,13 @@ export async function startPlayer({
     // Wait for SYNC_RESPONSE to arrive before starting simulation
     await new Promise(r => setTimeout(r, 1500))
     while (true) {
-      await runSimulation(identity, latestWeeklyResult, pid, swarm, verbose, skipNextIntro)
-      skipNextIntro = false
+      printIntroIfNewWeek()
+      try {
+        await runSimulation(identity, keypair, pid, swarm, verbose)
+      } catch (e) {
+        if (e.message !== 'PROMPT_ABORTED') throw e
+        // auto-advance aborted the round; loop iterates with new week
+      }
     }
   }
 
@@ -168,29 +191,12 @@ function broadcastEvent(swarm, event) {
   for (const conn of swarm.connections) conn.write(msg)
 }
 
-async function runSimulation(identity, latestWeeklyResult, pid, swarm, verbose, skipIntro = false) {
+async function runSimulation(identity, keypair, pid, swarm, verbose) {
   const { createFakePlayer } = await import('../simulator/fake-player.js')
   const { simulateSession } = await import('../simulator/fake-route.js')
   const lines = JSON.parse(await readFile(new URL('../data/lines.json', import.meta.url), 'utf8'))
 
-  // Interactive week offset (testing): set absolute or relative
-  const currentOffsetWeeks = getWeekOffset() / (7 * 86400)
-  console.log(`\n[clock] setmana actual: ${weekId(nowSecs())} (offset=${currentOffsetWeeks})`)
-  const offsetAns = await promptUser(`Canvi d'offset? (Enter=mantenir, +N/-N=relatiu, N=absolut): `)
-  if (offsetAns) {
-    let newOffset = currentOffsetWeeks
-    if (offsetAns.startsWith('+')) newOffset = currentOffsetWeeks + Number(offsetAns.slice(1))
-    else if (offsetAns.startsWith('-')) newOffset = currentOffsetWeeks - Number(offsetAns.slice(1))
-    else newOffset = Number(offsetAns)
-    if (!Number.isNaN(newOffset)) {
-      setWeekOffset(newOffset)
-      console.log(`[clock] nova setmana: ${weekId(nowSecs())} (offset=${newOffset})`)
-    }
-  }
-
   const clanId = identity.clanId
-  if (!skipIntro) printWeekIntro(latestWeeklyResult, clanId)
-
   console.log(`Línies disponibles: ${Object.keys(lines).join(', ')}`)
 
   let chosenLine
@@ -222,7 +228,7 @@ async function runSimulation(identity, latestWeeklyResult, pid, swarm, verbose, 
     }
   } while (isNaN(numSessions) || numSessions < 1 || numSessions > 10)
 
-  const player = createFakePlayer(clanId, `player-${pid.slice(0, 8)}`)
+  const player = createFakePlayer(clanId, `player-${pid.slice(0, 8)}`, keypair)
   if (verbose) console.log(`\n[player] simulant ${numSessions} sessions — clan ${clanId} a línia ${chosenLine} (${stationCount} estacions)...`)
 
   const caps = { dailyTotal: 0, weeklyTotal: 0 }
