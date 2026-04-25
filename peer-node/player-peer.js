@@ -8,6 +8,7 @@ import { homedir } from 'os'
 import { join } from 'path'
 import { mkdir } from 'fs/promises'
 import { readFile } from 'fs/promises'
+import { createInterface } from 'readline'
 
 const IDENTITY_PATH = join(homedir(), '.metro-clan-war', 'identity.json')
 
@@ -86,45 +87,75 @@ function broadcastEvent(swarm, event) {
   }
 }
 
+function promptUser(question) {
+  const rl = createInterface({ input: process.stdin, output: process.stdout })
+  return new Promise(resolve => rl.question(question, ans => { rl.close(); resolve(ans.trim()) }))
+}
+
 async function runSimulation(keypair, pid, swarm, verbose) {
   const { createFakePlayer } = await import('../simulator/fake-player.js')
   const { simulateSession } = await import('../simulator/fake-route.js')
   const lines = JSON.parse(await readFile(new URL('../data/lines.json', import.meta.url), 'utf8'))
 
-  // Use L3 clan as demo
-  const clanId = 'L3'
-  const player = createFakePlayer(clanId, `player-${pid.slice(0, 8)}`)
-  const lineStations = lines[clanId]?.stations ?? []
+  const lineIds = Object.keys(lines)
+  console.log(`\nLínies disponibles: ${lineIds.join(', ')}`)
 
-  if (verbose) console.log(`[player] simulating 3 sessions on ${clanId}...`)
+  let clanId
+  do {
+    clanId = await promptUser('Escull una línia (ex: L3): ')
+    if (!lines[clanId]) console.log(`  Línia "${clanId}" no existeix.`)
+  } while (!lines[clanId])
+
+  const lineStations = lines[clanId]?.stations ?? []
+  const maxStations = lineStations.length
+
+  let stationCount = 0
+  do {
+    const raw = await promptUser(`Quantes estacions per sessió? (3–${maxStations}): `)
+    stationCount = parseInt(raw)
+    if (isNaN(stationCount) || stationCount < 3 || stationCount > maxStations) {
+      console.log(`  Ha de ser un número entre 3 i ${maxStations}.`)
+    }
+  } while (isNaN(stationCount) || stationCount < 3 || stationCount > maxStations)
+
+  let numSessions = 0
+  do {
+    const raw = await promptUser('Quantes sessions? (1–10): ')
+    numSessions = parseInt(raw)
+    if (isNaN(numSessions) || numSessions < 1 || numSessions > 10) {
+      console.log('  Ha de ser un número entre 1 i 10.')
+    }
+  } while (isNaN(numSessions) || numSessions < 1 || numSessions > 10)
+
+  const player = createFakePlayer(clanId, `player-${pid.slice(0, 8)}`)
+  if (verbose) console.log(`\n[player] simulant ${numSessions} sessions a ${clanId} (${stationCount} estacions)...`)
 
   const caps = { dailyTotal: 0, weeklyTotal: 0 }
   const now = Math.floor(Date.now() / 1000)
 
-  for (let i = 0; i < 3; i++) {
-    const startIdx = Math.floor(Math.random() * Math.max(1, lineStations.length - 8))
+  for (let i = 0; i < numSessions; i++) {
+    const startIdx = Math.floor(Math.random() * Math.max(1, lineStations.length - stationCount))
     const result = simulateSession({
       player,
       lineId: clanId,
       lineStations,
       startIdx,
-      stationCount: 5 + i,
-      startTimestamp: now - (3 - i) * 3600,
+      stationCount,
+      startTimestamp: now - (numSessions - i) * 3600,
       linesData: lines,
       caps
     })
     caps.dailyTotal = result.newCaps.dailyTotal
     caps.weeklyTotal = result.newCaps.weeklyTotal
 
-    // Send both the session confirmation and the score event
     broadcastEvent(swarm, result.confirmed)
     broadcastEvent(swarm, result.score)
 
-    if (verbose) console.log(`[player] sent session ${i + 1} (${result.points} pts)`)
+    if (verbose) console.log(`[player] sessió ${i + 1}/${numSessions} enviada (${result.points} pts)`)
     await new Promise(r => setTimeout(r, 300))
   }
 
-  if (verbose) console.log('[player] simulation complete. Waiting for WEEKLY_RESULT...')
+  if (verbose) console.log('[player] simulació completa. Esperant WEEKLY_RESULT...')
 }
 
 function printWeeklyResult(result) {
