@@ -5,8 +5,8 @@ import { generateKeypair, playerId } from '../core/crypto/identity.js'
 import { signEvent } from '../core/events/event-signer.js'
 import { weekId } from '../core/weekly-engine/week-utils.js'
 
-export function createFakePlayer(clanId, name = null) {
-  const keypair = generateKeypair()
+export function createFakePlayer(clanId, name = null, existingKeypair = null) {
+  const keypair = existingKeypair ?? generateKeypair()
   const pid = playerId(keypair.publicKey)
   const displayName = name ?? `player-${pid.slice(0, 8)}`
   let sequence = 0
