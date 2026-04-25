@@ -6,8 +6,9 @@ html, body {
     height: 100%;
     overflow: hidden; 
     position: fixed;
+    /* Tipografia Helvetica/Arial estil TMB */
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-    background-color: #ED1C24;
+    background-color: #ED1C24; /* Color base L1 */
     color: white;
     transition: background-color 0.8s ease;
 }
@@ -21,7 +22,6 @@ section {
     flex-direction: column;
 }
 
-/* Millora de resposta del botó */
 button {
     touch-action: none; 
     cursor: pointer;
@@ -37,6 +37,7 @@ button {
 
 .hidden { display: none !important; }
 
+/* Radar */
 @keyframes ping {
     75%, 100% { transform: scale(2.2); opacity: 0; }
 }
@@ -44,6 +45,7 @@ button {
     animation: ping 1.2s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
+/* --- AJUSTOS PEL MISSATGE --- */
 #message-overlay:not(.hidden) > div {
     animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -51,4 +53,19 @@ button {
 @keyframes modalPop {
     0% { opacity: 0; transform: scale(0.85); }
     100% { opacity: 1; transform: scale(1); }
+}
+
+/* Forcem que el títol encaixi */
+#message-title {
+    /* Mida més petita que abans perquè encaixi "CONGRATULATIONS!" */
+    font-size: 1.25rem !important; /* Aproximadament text-xl */
+    line-height: 1.1 !important;
+    letter-spacing: -0.05em !important; /* Espaiat estret */
+    white-space: nowrap !important; /* Evita que es trenqui en dues línies */
+}
+
+@media (min-width: 380px) {
+    #message-title {
+        font-size: 1.5rem !important; /* text-2xl per a pantalles una mica més grans */
+    }
 }

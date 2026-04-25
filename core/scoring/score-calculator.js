@@ -62,3 +62,31 @@ export function applyScoreCaps(rawPoints, { dailyTotal = 0, weeklyTotal = 0 } = 
     newWeeklyTotal: weeklyTotal + points
   }
 }
+
+//LINDA!! Addicio per funcionalitat geolocalitzacio
+// core/scoring.js
+export function validateMetroSession(path) {
+    if (path.length < 2) return { valid: false, reason: 'Short trip' };
+
+    const first = path[0];
+    const last = path[path.length - 1];
+    
+    const durationMs = last.timestamp - first.timestamp;
+    const durationHours = durationMs / (1000 * 60 * 60);
+
+    // Distància estimada basada en el vostre metro-graph.json
+    // Si no voleu calcular el camí real, useu una aproximació de 1.2km per estació
+    const estimatedKm = (path.length - 1) * 1.2;
+    const avgSpeed = estimatedKm / durationHours;
+
+    // REGLES: Mitjana 26km/h, Max 45km/h
+    if (avgSpeed > 45) {
+        return { valid: false, reason: 'Too fast (Not a metro)', speed: avgSpeed };
+    }
+    
+    if (avgSpeed < 10 && durationMs > 60000) {
+        return { valid: false, reason: 'Too slow (Walking?)', speed: avgSpeed };
+    }
+
+    return { valid: true, speed: avgSpeed, points: path.length * 10 };
+}

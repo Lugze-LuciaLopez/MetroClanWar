@@ -13,11 +13,11 @@
 
 <section id="view-quiz" class="h-screen flex flex-col p-6">
   <header class="py-6 text-center">
-    <h1 class="text-3xl font-black italic tracking-tighter uppercase">Metro Clan War</h1>
+    <h1 class="text-3xl font-black italic tracking-tighter uppercase text-white">Metro Clan War</h1>
   </header>
   <div id="quiz-container" class="flex-1 flex flex-col justify-center">
     <div class="bg-black/20 p-6 rounded-3xl border border-white/10 shadow-xl">
-      <h2 class="text-xl font-bold italic">Loading...</h2>
+      <h2 class="text-xl font-bold italic text-white">Loading...</h2>
       <div class="grid gap-3 mt-6"></div>
     </div>
   </div>
@@ -35,17 +35,17 @@
       <div class="relative flex justify-center items-center mb-8 mt-4">
         <div id="radar-ping" class="hidden absolute w-48 h-48 rounded-full border-2 border-white animate-ping opacity-40"></div>
         <div class="w-36 h-36 rounded-full border-2 border-white/20 flex items-center justify-center bg-black/10">
-            <span id="big-points" class="text-4xl font-black">0</span>
+            <span id="big-points" class="text-4xl font-black text-white">0</span>
         </div>
       </div>
-      <p id="tracking-status" class="text-[10px] uppercase font-bold mb-6 opacity-50">Scanner Ready</p>
+      <p id="tracking-status" class="text-[10px] uppercase font-bold mb-6 opacity-50 text-white">Scanner Ready</p>
       
       <button onmousedown="handleMainAction(event)" id="btn-main-action" class="btn-active w-full py-5 rounded-2xl bg-white text-black font-black text-sm uppercase tracking-widest shadow-lg">
         Start Journey Scan
       </button>
     </div>
     
-    <div id="live-data" class="grid grid-cols-2 gap-4 opacity-20 text-center italic">
+    <div id="live-data" class="grid grid-cols-2 gap-4 opacity-20 text-center italic text-white">
         <div class="bg-black/10 p-4 rounded-3xl border border-white/10">
             <p id="current-station" class="text-xs font-bold truncate">---</p>
         </div>
@@ -58,10 +58,10 @@
 
 <div id="message-overlay" class="hidden fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/80 backdrop-blur-sm">
   <div class="bg-white rounded-[2.5rem] p-8 w-full max-w-sm text-center shadow-2xl">
-    <div id="message-icon" class="text-5xl mb-4">🏆</div>
-    <h2 id="message-title" class="text-2xl font-black text-slate-900 mb-2 uppercase"></h2>
-    <p id="message-body" class="text-slate-600 mb-8 font-medium leading-tight"></p>
-    <button onclick="closeMessage()" id="message-btn" class="w-full py-4 bg-slate-900 text-white font-black rounded-2xl uppercase tracking-widest">Continue</button>
+    <div id="message-icon" class="text-5xl mb-4">🚇</div>
+    <h2 id="message-title" class="font-black text-slate-900 uppercase"></h2>
+    <p id="message-body" class="text-slate-600 mb-8 mt-2 font-medium leading-tight text-sm"></p>
+    <button onclick="closeMessage()" id="message-btn" class="w-full py-4 bg-slate-900 text-white font-black rounded-2xl uppercase tracking-widest active:scale-95 transition-transform">Continue</button>
   </div>
 </div>
 

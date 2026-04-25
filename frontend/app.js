@@ -1,3 +1,4 @@
+// ESTAT DEL JOC
 const state = {
     currentQuestion: 0,
     scores: { L1:0, L2:0, L3:0, L4:0, L5:0, L7:0, L9sud:0 },
@@ -5,10 +6,13 @@ const state = {
     totalPoints: parseInt(localStorage.getItem('totalPoints')) || 0,
     sessionPoints: 0,
     isTracking: false,
-    consecutiveLowSpeed: 0,
-    trackingInterval: null
+    trackingInterval: null // Aquí guardarem el ID de watchPosition
 };
 
+let geofencesData = []; 
+let tripPath = [];      
+
+// PREGUNTES DEL QUIZ
 const questions = [
     { text: "What is your love language?", answers: { a: { text: "Physical touch", clan: "L1" }, b: { text: "Gift giving", clan: "L7" }, c: { text: "Words of affirmation", clan: "L9sud" }, d: { text: "Acts of service", clan: "L5" }, e: { text: "Quality time", clan: "L4" }, f: { text: "Emotional connection", clan: "L2" }, g: { text: "Personal growth support", clan: "L3" } } },
     { text: "What is your favorite type of pasta?", answers: { a: { text: "Spaghetti", clan: "L5" }, b: { text: "Tortellini", clan: "L2" }, c: { text: "Fettuccine", clan: "L7" }, d: { text: "Penne", clan: "L3" }, e: { text: "Ravioli", clan: "L1" }, f: { text: "Rigatoni", clan: "L4" }, g: { text: "Farfalle", clan: "L9sud" } } },
@@ -17,7 +21,16 @@ const questions = [
     { text: "Among these, which is your favorite metro line?", answers: { a: { text: "L1", clan: "L3" }, b: { text: "L2", clan: "L5" }, c: { text: "L3", clan: "L1" }, d: { text: "L4", clan: "L2" }, e: { text: "L5", clan: "L9sud" }, f: { text: "L7", clan: "L7" }, g: { text: "L9 Sud", clan: "L4" } } }
 ];
 
-document.addEventListener("DOMContentLoaded", () => {
+// INICIALITZACIÓ
+document.addEventListener("DOMContentLoaded", async () => {
+    try {
+        const response = await fetch('../data/geofences.json');
+        geofencesData = await response.json();
+        console.log("✅ Geofences carregats:", geofencesData.length);
+    } catch (e) {
+        console.error("❌ Error carregant geofences:", e);
+    }
+
     if (state.clan) {
         updateAppColor();
         finishQuiz(); 
@@ -26,15 +39,29 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+// CÀLCUL DE DISTÀNCIA
+function calculateDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371; 
+    const dLat = (lat2 - lat1) * Math.PI / 180;
+    const dLon = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+              Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) * Math.sin(dLon/2) * Math.sin(dLon/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    return R * c;
+}
+
+// GESTIÓ DE LA UI
+function updateAppColor() {
+    const clanColors = { L1:'#ED1C24', L2:'#93278F', L3:'#00A651', L4:'#FDB913', L5:'#005596', L7:'#B97D05', L9sud:'#F37021' };
+    const color = clanColors[state.clan] || '#ED1C24';
+    document.body.style.backgroundColor = color;
+}
+
 function showMessage(title, body, icon = "🏆") {
     const overlay = document.getElementById('message-overlay');
     document.getElementById('message-title').innerText = title;
     document.getElementById('message-body').innerText = body;
     document.getElementById('message-icon').innerText = icon;
-    if (state.clan) {
-        const clanColors = { L1:'#ED1C24', L2:'#93278F', L3:'#00A651', L4:'#FDB913', L5:'#005596', L7:'#B97D05', L9sud:'#F37021' };
-        document.getElementById('message-btn').style.backgroundColor = clanColors[state.clan];
-    }
     overlay.classList.remove('hidden');
 }
 
@@ -42,12 +69,12 @@ function closeMessage() {
     document.getElementById('message-overlay').classList.add('hidden');
 }
 
-function updateAppColor() {
-    const clanColors = { L1:'#ED1C24', L2:'#93278F', L3:'#00A651', L4:'#FDB913', L5:'#005596', L7:'#B97D05', L9sud:'#F37021' };
-    const color = clanColors[state.clan] || '#ED1C24';
-    document.body.style.backgroundColor = color;
+function showView(id) {
+    document.querySelectorAll("section").forEach(s => s.classList.add("hidden"));
+    document.getElementById(id).classList.remove("hidden");
 }
 
+// LÒGICA DEL QUIZ
 function loadQuestion() {
     const q = questions[state.currentQuestion];
     document.querySelector("h2").textContent = q.text;
@@ -85,16 +112,9 @@ function finishQuiz() {
     showView("view-dashboard");
 }
 
-function showView(id) {
-    document.querySelectorAll("section").forEach(s => s.classList.add("hidden"));
-    document.getElementById(id).classList.remove("hidden");
-}
-
-// --- LOGICA DE TRACKING REVISADA ---
+// --- EL "CORE" DEL GEOTRACKING ---
 function handleMainAction(event) {
-    // Evitem comportaments estranys del navegador
     if(event) event.preventDefault();
-    
     if (state.isTracking) {
         stopJourney();
     } else {
@@ -103,76 +123,100 @@ function handleMainAction(event) {
 }
 
 function startJourney() {
+    if (geofencesData.length === 0) {
+        alert("Error: Geofences no carregats.");
+        return;
+    }
+
     state.isTracking = true;
-    state.sessionPoints = 0;
-    state.consecutiveLowSpeed = 0;
+    tripPath = []; 
 
     const btn = document.getElementById('btn-main-action');
     btn.innerText = "STOP & SAVE TRIP";
     btn.style.backgroundColor = "black";
-    btn.style.color = "white";
     
     document.getElementById('radar-ping').classList.remove('hidden');
     document.getElementById('live-data').classList.remove('opacity-20');
     document.getElementById('tracking-status').innerText = "TRACKING ACTIVE";
 
-    // Iniciem el bucle
-    runAutoDetectionLoop();
+    state.trackingInterval = navigator.geolocation.watchPosition((pos) => {
+        const { latitude, longitude } = pos.coords;
+        console.log(`📍 Posició actual: ${latitude}, ${longitude}`);
+
+        geofencesData.forEach(gf => {
+            // Adaptem les claus a la teva estructura exacta:
+            const name = gf.stationId; // Fem servir l'ID com a nom (ex: "CATALUNYA")
+            const radius = gf.radiusMeters; // Aquí estava l'error, ara és radiusMeters
+            
+            const dist = calculateDistance(latitude, longitude, gf.lat, gf.lon);
+            const distMetres = Math.round(dist * 1000);
+
+            // Log de depuració per veure a quina distància estàs de cada parada al log
+            if (dist < 1.5) { 
+                console.log(`📏 Distància a ${name}: ${distMetres}m (Límit: ${radius}m)`);
+            }
+            
+            // Validació de l'entrada al geofence
+            if (distMetres <= radius) {
+                const lastStation = tripPath[tripPath.length - 1];
+                
+                if (!lastStation || lastStation.stationId !== gf.stationId) {
+                    tripPath.push({
+                        stationId: gf.stationId,
+                        name: name,
+                        timestamp: Date.now()
+                    });
+                    
+                    // Actualització visual
+                    document.getElementById('current-station').innerText = name;
+                    document.getElementById('big-points').innerText = tripPath.length * 10;
+                    console.log(`✅ ESTACIÓ DETECTADA: ${name}`);
+                }
+            }
+        });
+
+        // Actualitzem la velocitat (26 km/h per defecte si el simulador no n'envia)
+        const currentSpeed = pos.coords.speed ? Math.round(pos.coords.speed * 3.6) : 26;
+        document.getElementById('speed-display').innerText = currentSpeed + " km/h";
+
+    }, (err) => {
+        if (err.code === 2) console.log("⌛ Esperant senyal del simulador...");
+    }, {
+        enableHighAccuracy: true,
+        maximumAge: 0,
+        timeout: 10000 
+    });
 }
 
 function stopJourney() {
-    // KILL SWITCH: Aturem l'interval el PRIMER de tot
-    if (state.trackingInterval) {
-        clearInterval(state.trackingInterval);
+    // Matem el watchPosition quan premem STOP
+    if (state.trackingInterval !== null) {
+        navigator.geolocation.clearWatch(state.trackingInterval);
         state.trackingInterval = null;
     }
     
     state.isTracking = false;
-    
-    // Guardem dades
-    state.totalPoints += state.sessionPoints;
-    localStorage.setItem('totalPoints', state.totalPoints);
-    document.getElementById('score-display').innerText = state.totalPoints;
 
-    showMessage("TRIP FINISHED", `Success! You earned ${state.sessionPoints} points.`, "🏁");
-    
-    resetUI();
-}
+    if (tripPath.length < 2) {
+        showMessage("TRIP TOO SHORT", "You need at least 2 stations.", "⚠️");
+    } else {
+        const first = tripPath[0];
+        const last = tripPath[tripPath.length - 1];
+        const durationHours = (last.timestamp - first.timestamp) / 3600000;
+        const distance = (tripPath.length - 1) * 1.1; 
+        const avgSpeed = distance / durationHours;
 
-function runAutoDetectionLoop() {
-    const stations = ["Catalunya", "Passeig de Gràcia", "Diagonal", "Fontana"];
-    let stationIdx = 0;
-
-    state.trackingInterval = setInterval(() => {
-        // Si per algun motiu s'ha parat externament, matem l'interval
-        if (!state.isTracking) {
-            clearInterval(state.trackingInterval);
-            return;
-        }
-
-        let speed = 15 + Math.floor(Math.random() * 25);
-        
-        // Simulació de parada automàtica
-        if (state.sessionPoints > 35 && Math.random() > 0.92) speed = 2;
-
-        state.sessionPoints += 1;
-        document.getElementById('big-points').innerText = state.sessionPoints;
-        document.getElementById('speed-display').innerText = speed + " km/h";
-        document.getElementById('current-station').innerText = speed > 5 ? stations[stationIdx % 4] : "Station / Stopped";
-        
-        if(speed > 5 && state.sessionPoints % 10 === 0) stationIdx++;
-
-        if (speed < 5) {
-            state.consecutiveLowSpeed++;
+        if (avgSpeed > 45) {
+            showMessage("INVALID SPEED", `Avg speed (${Math.round(avgSpeed)}km/h) too high!`, "🚫");
         } else {
-            state.consecutiveLowSpeed = 0;
+            const earnedPoints = tripPath.length * 10;
+            state.totalPoints += earnedPoints;
+            localStorage.setItem('totalPoints', state.totalPoints);
+            document.getElementById('score-display').innerText = state.totalPoints;
+            showMessage("TRIP FINISHED", `Earned ${earnedPoints} points!`, "🏁");
         }
-
-        // Auto-stop si detecta parada llarga
-        if (state.consecutiveLowSpeed >= 5) {
-            stopJourney();
-        }
-    }, 1000); 
+    }
+    resetUI();
 }
 
 function resetUI() {
@@ -180,7 +224,6 @@ function resetUI() {
     btn.innerText = "START JOURNEY SCAN";
     btn.style.backgroundColor = "white";
     btn.style.color = "black";
-    
     document.getElementById('radar-ping').classList.add('hidden');
     document.getElementById('live-data').classList.add('opacity-20');
     document.getElementById('tracking-status').innerText = "SCANNER READY";
