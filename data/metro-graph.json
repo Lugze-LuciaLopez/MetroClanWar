@@ -1,0 +1,2876 @@
+{
+  "nodes": {
+    "HOSPITAL_DE_BELLVITGE": {
+      "lat": 41.344677452264776,
+      "lon": 2.1072421350644093,
+      "lineIds": [
+        "L1"
+      ],
+      "name": "Hospital de Bellvitge"
+    },
+    "BELLVITGE": {
+      "lat": 41.35097352459213,
+      "lon": 2.1109182897923735,
+      "lineIds": [
+        "L1"
+      ],
+      "name": "Bellvitge"
+    },
+    "AV_CARRILET": {
+      "lat": 41.35852162448053,
+      "lon": 2.1026452939747284,
+      "lineIds": [
+        "L1"
+      ],
+      "name": "Av. Carrilet"
+    },
+    "RAMBLA_JUST_OLIVERAS": {
+      "lat": 41.3640899130925,
+      "lon": 2.0997493392175293,
+      "lineIds": [
+        "L1"
+      ],
+      "name": "Rambla Just Oliveras"
+    },
+    "CAN_SERRA": {
+      "lat": 41.36769339471756,
+      "lon": 2.10275470564125,
+      "lineIds": [
+        "L1"
+      ],
+      "name": "Can Serra"
+    },
+    "FLORIDA": {
+      "lat": 41.36831605180378,
+      "lon": 2.1100273658989885,
+      "lineIds": [
+        "L1"
+      ],
+      "name": "Florida"
+    },
+    "TORRASSA": {
+      "lat": 41.36826071279739,
+      "lon": 2.1160894327460174,
+      "lineIds": [
+        "L1",
+        "L9S",
+        "L10S"
+      ],
+      "name": "Torrassa"
+    },
+    "SANTA_EULALIA": {
+      "lat": 41.36881637467315,
+      "lon": 2.1286172553621183,
+      "lineIds": [
+        "L1"
+      ],
+      "name": "Santa Eulàlia"
+    },
+    "MERCAT_NOU": {
+      "lat": 41.373002700088556,
+      "lon": 2.133535784694404,
+      "lineIds": [
+        "L1"
+      ],
+      "name": "Mercat Nou"
+    },
+    "PLACA_DE_SANTS": {
+      "lat": 41.3755322522621,
+      "lon": 2.135575555495535,
+      "lineIds": [
+        "L1",
+        "L5"
+      ],
+      "name": "Plaça de Sants"
+    },
+    "HOSTAFRANCS": {
+      "lat": 41.37525362810128,
+      "lon": 2.1432912673316498,
+      "lineIds": [
+        "L1"
+      ],
+      "name": "Hostafrancs"
+    },
+    "ESPANYA": {
+      "lat": 41.37545911098498,
+      "lon": 2.1493870030135134,
+      "lineIds": [
+        "L1",
+        "L3"
+      ],
+      "name": "Espanya"
+    },
+    "ROCAFORT": {
+      "lat": 41.37923215305268,
+      "lon": 2.154562483439547,
+      "lineIds": [
+        "L1"
+      ],
+      "name": "Rocafort"
+    },
+    "URGELL": {
+      "lat": 41.38248740020102,
+      "lon": 2.1588909108500465,
+      "lineIds": [
+        "L1"
+      ],
+      "name": "Urgell"
+    },
+    "UNIVERSITAT": {
+      "lat": 41.385587897267456,
+      "lon": 2.1640585462441195,
+      "lineIds": [
+        "L1",
+        "L2"
+      ],
+      "name": "Universitat"
+    },
+    "CATALUNYA": {
+      "lat": 41.38771322435357,
+      "lon": 2.1697167625790152,
+      "lineIds": [
+        "L1",
+        "L3"
+      ],
+      "name": "Catalunya"
+    },
+    "URQUINAONA": {
+      "lat": 41.38884688371719,
+      "lon": 2.173667761230702,
+      "lineIds": [
+        "L1",
+        "L4"
+      ],
+      "name": "Urquinaona"
+    },
+    "ARC_DE_TRIOMF": {
+      "lat": 41.392336659636584,
+      "lon": 2.181164673248104,
+      "lineIds": [
+        "L1"
+      ],
+      "name": "Arc de Triomf"
+    },
+    "MARINA": {
+      "lat": 41.39472528791244,
+      "lon": 2.1858010331425235,
+      "lineIds": [
+        "L1"
+      ],
+      "name": "Marina"
+    },
+    "GLORIES": {
+      "lat": 41.4022772166665,
+      "lon": 2.187537470950601,
+      "lineIds": [
+        "L1"
+      ],
+      "name": "Glòries"
+    },
+    "CLOT": {
+      "lat": 41.41051171434685,
+      "lon": 2.186978119157032,
+      "lineIds": [
+        "L1",
+        "L2"
+      ],
+      "name": "Clot"
+    },
+    "NAVAS": {
+      "lat": 41.41618670887784,
+      "lon": 2.1870567842653172,
+      "lineIds": [
+        "L1"
+      ],
+      "name": "Navas"
+    },
+    "LA_SAGRERA": {
+      "lat": 41.420695942446166,
+      "lon": 2.1868113297846263,
+      "lineIds": [
+        "L1",
+        "L5",
+        "L9N",
+        "L10N"
+      ],
+      "name": "La Sagrera"
+    },
+    "FABRA_I_PUIG": {
+      "lat": 41.42963259534842,
+      "lon": 2.183661431503222,
+      "lineIds": [
+        "L1"
+      ],
+      "name": "Fabra i Puig"
+    },
+    "SANT_ANDREU": {
+      "lat": 41.436610370679226,
+      "lon": 2.1911883955920586,
+      "lineIds": [
+        "L1"
+      ],
+      "name": "Sant Andreu"
+    },
+    "TORRAS_I_BAGES": {
+      "lat": 41.44322471120022,
+      "lon": 2.190670630058029,
+      "lineIds": [
+        "L1"
+      ],
+      "name": "Torras i Bages"
+    },
+    "TRINITAT_VELLA": {
+      "lat": 41.448956491210204,
+      "lon": 2.19383728111338,
+      "lineIds": [
+        "L1"
+      ],
+      "name": "Trinitat Vella"
+    },
+    "BARO_DE_VIVER": {
+      "lat": 41.449935998152824,
+      "lon": 2.1995630177315273,
+      "lineIds": [
+        "L1"
+      ],
+      "name": "Baró de Viver"
+    },
+    "SANTA_COLOMA": {
+      "lat": 41.451067345464494,
+      "lon": 2.2079694594622845,
+      "lineIds": [
+        "L1"
+      ],
+      "name": "Santa Coloma"
+    },
+    "FONDO": {
+      "lat": 41.45168718673928,
+      "lon": 2.2185381152902193,
+      "lineIds": [
+        "L1",
+        "L9N"
+      ],
+      "name": "Fondo"
+    },
+    "PARALLEL": {
+      "lat": 41.37458125876583,
+      "lon": 2.169029367599338,
+      "lineIds": [
+        "L2",
+        "L3"
+      ],
+      "name": "Paral·lel"
+    },
+    "SANT_ANTONI": {
+      "lat": 41.37983283932031,
+      "lon": 2.1632411382555055,
+      "lineIds": [
+        "L2"
+      ],
+      "name": "Sant Antoni"
+    },
+    "PASSEIG_DE_GRACIA": {
+      "lat": 41.390106323828306,
+      "lon": 2.16735100565212,
+      "lineIds": [
+        "L2",
+        "L3",
+        "L4"
+      ],
+      "name": "Passeig de Gràcia"
+    },
+    "TETUAN": {
+      "lat": 41.394887450597096,
+      "lon": 2.175559181787991,
+      "lineIds": [
+        "L2"
+      ],
+      "name": "Tetuan"
+    },
+    "MONUMENTAL": {
+      "lat": 41.40052374172786,
+      "lon": 2.1794616714099684,
+      "lineIds": [
+        "L2"
+      ],
+      "name": "Monumental"
+    },
+    "SAGRADA_FAMILIA": {
+      "lat": 41.4044190945986,
+      "lon": 2.1744904092907813,
+      "lineIds": [
+        "L2",
+        "L5"
+      ],
+      "name": "Sagrada Família"
+    },
+    "ENCANTS": {
+      "lat": 41.40723597843338,
+      "lon": 2.182700370252568,
+      "lineIds": [
+        "L2"
+      ],
+      "name": "Encants"
+    },
+    "BAC_DE_RODA": {
+      "lat": 41.41516206251577,
+      "lon": 2.1955032531185723,
+      "lineIds": [
+        "L2"
+      ],
+      "name": "Bac de Roda"
+    },
+    "SANT_MARTI": {
+      "lat": 41.419063621458996,
+      "lon": 2.2007239139818875,
+      "lineIds": [
+        "L2"
+      ],
+      "name": "Sant Martí"
+    },
+    "LA_PAU": {
+      "lat": 41.42325111713883,
+      "lon": 2.2058782008215694,
+      "lineIds": [
+        "L2",
+        "L4"
+      ],
+      "name": "La Pau"
+    },
+    "VERNEDA": {
+      "lat": 41.43000446400387,
+      "lon": 2.209883422365895,
+      "lineIds": [
+        "L2"
+      ],
+      "name": "Verneda"
+    },
+    "ARTIGUES_SANT_ADRIA": {
+      "lat": 41.43384822541837,
+      "lon": 2.217771760065826,
+      "lineIds": [
+        "L2"
+      ],
+      "name": "Artigues | Sant Adrià"
+    },
+    "SANT_ROC": {
+      "lat": 41.43583082252647,
+      "lon": 2.22860617965681,
+      "lineIds": [
+        "L2"
+      ],
+      "name": "Sant Roc"
+    },
+    "GORG": {
+      "lat": 41.440259861510704,
+      "lon": 2.2338070592317414,
+      "lineIds": [
+        "L2",
+        "L10N"
+      ],
+      "name": "Gorg"
+    },
+    "PEP_VENTURA": {
+      "lat": 41.4439045741019,
+      "lon": 2.237959375095989,
+      "lineIds": [
+        "L2"
+      ],
+      "name": "Pep Ventura"
+    },
+    "BADALONA_POMPEU_FABRA": {
+      "lat": 41.449052604746285,
+      "lon": 2.244099157218408,
+      "lineIds": [
+        "L2"
+      ],
+      "name": "Badalona Pompeu Fabra"
+    },
+    "ZONA_UNIVERSITARIA": {
+      "lat": 41.38400257249017,
+      "lon": 2.111388924148772,
+      "lineIds": [
+        "L3",
+        "L9S"
+      ],
+      "name": "Zona Universitària"
+    },
+    "PALAU_REIAL": {
+      "lat": 41.385980056620134,
+      "lon": 2.118538181084618,
+      "lineIds": [
+        "L3"
+      ],
+      "name": "Palau Reial"
+    },
+    "MARIA_CRISTINA": {
+      "lat": 41.38781569227959,
+      "lon": 2.125791232923749,
+      "lineIds": [
+        "L3"
+      ],
+      "name": "Maria Cristina"
+    },
+    "LES_CORTS": {
+      "lat": 41.384119684361195,
+      "lon": 2.1308710146162624,
+      "lineIds": [
+        "L3"
+      ],
+      "name": "Les Corts"
+    },
+    "PLACA_DEL_CENTRE": {
+      "lat": 41.38192170670766,
+      "lon": 2.1358837134051947,
+      "lineIds": [
+        "L3"
+      ],
+      "name": "Plaça del Centre"
+    },
+    "SANTS_ESTACIO": {
+      "lat": 41.380961180119144,
+      "lon": 2.141892378878913,
+      "lineIds": [
+        "L3",
+        "L5"
+      ],
+      "name": "Sants Estació"
+    },
+    "TARRAGONA": {
+      "lat": 41.378493002424634,
+      "lon": 2.1453357748823865,
+      "lineIds": [
+        "L3"
+      ],
+      "name": "Tarragona"
+    },
+    "POBLE_SEC": {
+      "lat": 41.374996204246344,
+      "lon": 2.1602448223915327,
+      "lineIds": [
+        "L3"
+      ],
+      "name": "Poble Sec"
+    },
+    "DRASSANES": {
+      "lat": 41.37653760970823,
+      "lon": 2.1756641701931962,
+      "lineIds": [
+        "L3"
+      ],
+      "name": "Drassanes"
+    },
+    "LICEU": {
+      "lat": 41.3814454250764,
+      "lon": 2.1730302773575945,
+      "lineIds": [
+        "L3"
+      ],
+      "name": "Liceu"
+    },
+    "DIAGONAL": {
+      "lat": 41.395676604785294,
+      "lon": 2.160443763922243,
+      "lineIds": [
+        "L3",
+        "L5"
+      ],
+      "name": "Diagonal"
+    },
+    "FONTANA": {
+      "lat": 41.40200887904024,
+      "lon": 2.1530224404295164,
+      "lineIds": [
+        "L3"
+      ],
+      "name": "Fontana"
+    },
+    "LESSEPS": {
+      "lat": 41.405738025515355,
+      "lon": 2.1504071221317904,
+      "lineIds": [
+        "L3"
+      ],
+      "name": "Lesseps"
+    },
+    "VALLCARCA": {
+      "lat": 41.411974951406016,
+      "lon": 2.144337309169914,
+      "lineIds": [
+        "L3"
+      ],
+      "name": "Vallcarca"
+    },
+    "PENITENTS": {
+      "lat": 41.41827911730064,
+      "lon": 2.140971786114312,
+      "lineIds": [
+        "L3"
+      ],
+      "name": "Penitents"
+    },
+    "VALL_D_HEBRON": {
+      "lat": 41.425123138465146,
+      "lon": 2.1425147148937467,
+      "lineIds": [
+        "L3",
+        "L5"
+      ],
+      "name": "Vall d'Hebron"
+    },
+    "MONTBAU": {
+      "lat": 41.43062015567553,
+      "lon": 2.145039277808795,
+      "lineIds": [
+        "L3"
+      ],
+      "name": "Montbau"
+    },
+    "MUNDET": {
+      "lat": 41.435645266968535,
+      "lon": 2.1484718023518736,
+      "lineIds": [
+        "L3"
+      ],
+      "name": "Mundet"
+    },
+    "VALLDAURA": {
+      "lat": 41.437996077035756,
+      "lon": 2.1568778304495613,
+      "lineIds": [
+        "L3"
+      ],
+      "name": "Valldaura"
+    },
+    "CANYELLES": {
+      "lat": 41.44175372856857,
+      "lon": 2.166387551719736,
+      "lineIds": [
+        "L3"
+      ],
+      "name": "Canyelles"
+    },
+    "ROQUETES": {
+      "lat": 41.44766967770127,
+      "lon": 2.1760976903706806,
+      "lineIds": [
+        "L3"
+      ],
+      "name": "Roquetes"
+    },
+    "TRINITAT_NOVA": {
+      "lat": 41.449762105902664,
+      "lon": 2.1828552069968574,
+      "lineIds": [
+        "L3",
+        "L4",
+        "L11"
+      ],
+      "name": "Trinitat Nova"
+    },
+    "BESOS": {
+      "lat": 41.419835530278384,
+      "lon": 2.210301299420953,
+      "lineIds": [
+        "L4"
+      ],
+      "name": "Besòs"
+    },
+    "BESOS_MAR": {
+      "lat": 41.415098995619424,
+      "lon": 2.216081591411872,
+      "lineIds": [
+        "L4"
+      ],
+      "name": "Besòs Mar"
+    },
+    "EL_MARESME_FORUM": {
+      "lat": 41.411685717467044,
+      "lon": 2.216548081875298,
+      "lineIds": [
+        "L4"
+      ],
+      "name": "El Maresme | Fòrum"
+    },
+    "SELVA_DE_MAR": {
+      "lat": 41.40800151156723,
+      "lon": 2.209122498871073,
+      "lineIds": [
+        "L4"
+      ],
+      "name": "Selva de Mar"
+    },
+    "POBLENOU": {
+      "lat": 41.40371611757544,
+      "lon": 2.2033712341158838,
+      "lineIds": [
+        "L4"
+      ],
+      "name": "Poblenou"
+    },
+    "LLACUNA": {
+      "lat": 41.39942503860002,
+      "lon": 2.197711708647738,
+      "lineIds": [
+        "L4"
+      ],
+      "name": "Llacuna"
+    },
+    "BOGATELL": {
+      "lat": 41.395107503840855,
+      "lon": 2.192012401533471,
+      "lineIds": [
+        "L4"
+      ],
+      "name": "Bogatell"
+    },
+    "CIUTADELLA_VILA_OLIMPICA": {
+      "lat": 41.38664023480152,
+      "lon": 2.192963138448486,
+      "lineIds": [
+        "L4"
+      ],
+      "name": "Ciutadella | Vila Olímpica"
+    },
+    "BARCELONETA": {
+      "lat": 41.381810977055316,
+      "lon": 2.184786783641099,
+      "lineIds": [
+        "L4"
+      ],
+      "name": "Barceloneta"
+    },
+    "JAUME_I": {
+      "lat": 41.384126274544364,
+      "lon": 2.178531464537553,
+      "lineIds": [
+        "L4"
+      ],
+      "name": "Jaume I"
+    },
+    "GIRONA": {
+      "lat": 41.394920347488814,
+      "lon": 2.17082483204024,
+      "lineIds": [
+        "L4"
+      ],
+      "name": "Girona"
+    },
+    "VERDAGUER": {
+      "lat": 41.39996847675383,
+      "lon": 2.168312882339719,
+      "lineIds": [
+        "L4",
+        "L5"
+      ],
+      "name": "Verdaguer"
+    },
+    "JOANIC": {
+      "lat": 41.40642689565163,
+      "lon": 2.16322502517123,
+      "lineIds": [
+        "L4"
+      ],
+      "name": "Joanic"
+    },
+    "ALFONS_X": {
+      "lat": 41.412415682383845,
+      "lon": 2.166511957375424,
+      "lineIds": [
+        "L4"
+      ],
+      "name": "Alfons X"
+    },
+    "GUINARDO_HOSPITAL_DE_SANT_PAU": {
+      "lat": 41.415962196795135,
+      "lon": 2.1739890445261802,
+      "lineIds": [
+        "L4"
+      ],
+      "name": "Guinardó | Hospital de Sant Pau"
+    },
+    "MARAGALL": {
+      "lat": 41.42412908114067,
+      "lon": 2.177412716857448,
+      "lineIds": [
+        "L4",
+        "L5"
+      ],
+      "name": "Maragall"
+    },
+    "LLUCMAJOR": {
+      "lat": 41.43698464869135,
+      "lon": 2.173343398047292,
+      "lineIds": [
+        "L4"
+      ],
+      "name": "Llucmajor"
+    },
+    "VIA_JULIA": {
+      "lat": 41.443730234715765,
+      "lon": 2.178549960776955,
+      "lineIds": [
+        "L4"
+      ],
+      "name": "Via Júlia"
+    },
+    "CORNELLA_CENTRE": {
+      "lat": 41.35728982068586,
+      "lon": 2.0704280856264488,
+      "lineIds": [
+        "L5"
+      ],
+      "name": "Cornellà Centre"
+    },
+    "GAVARRA": {
+      "lat": 41.357994934130915,
+      "lon": 2.0792727787982708,
+      "lineIds": [
+        "L5"
+      ],
+      "name": "Gavarra"
+    },
+    "SANT_ILDEFONS": {
+      "lat": 41.363381080148336,
+      "lon": 2.084392786677159,
+      "lineIds": [
+        "L5"
+      ],
+      "name": "Sant Ildefons"
+    },
+    "CAN_BOIXERES": {
+      "lat": 41.366570750436026,
+      "lon": 2.0915060884648176,
+      "lineIds": [
+        "L5"
+      ],
+      "name": "Can Boixeres"
+    },
+    "CAN_VIDALET": {
+      "lat": 41.37127879519907,
+      "lon": 2.099445030163751,
+      "lineIds": [
+        "L5"
+      ],
+      "name": "Can Vidalet"
+    },
+    "PUBILLA_CASES": {
+      "lat": 41.373837586750604,
+      "lon": 2.1072090599014683,
+      "lineIds": [
+        "L5"
+      ],
+      "name": "Pubilla Cases"
+    },
+    "COLLBLANC": {
+      "lat": 41.37583966750611,
+      "lon": 2.1185256293277304,
+      "lineIds": [
+        "L5",
+        "L9S",
+        "L10S"
+      ],
+      "name": "Collblanc"
+    },
+    "BADAL": {
+      "lat": 41.37558063118747,
+      "lon": 2.127402112543491,
+      "lineIds": [
+        "L5"
+      ],
+      "name": "Badal"
+    },
+    "ENTENCA": {
+      "lat": 41.38446685535986,
+      "lon": 2.145618590090013,
+      "lineIds": [
+        "L5"
+      ],
+      "name": "Entença"
+    },
+    "HOSPITAL_CLINIC": {
+      "lat": 41.388607764469285,
+      "lon": 2.151081070999777,
+      "lineIds": [
+        "L5"
+      ],
+      "name": "Hospital Clínic"
+    },
+    "SANT_PAU_DOS_DE_MAIG": {
+      "lat": 41.41075327997014,
+      "lon": 2.1760160280003675,
+      "lineIds": [
+        "L5"
+      ],
+      "name": "Sant Pau | Dos de Maig"
+    },
+    "CAMP_DE_L_ARPA": {
+      "lat": 41.41505960638405,
+      "lon": 2.181497212109148,
+      "lineIds": [
+        "L5"
+      ],
+      "name": "Camp de l'Arpa"
+    },
+    "CONGRES": {
+      "lat": 41.42344042865811,
+      "lon": 2.181186224264109,
+      "lineIds": [
+        "L5"
+      ],
+      "name": "Congrés"
+    },
+    "VIRREI_AMAT": {
+      "lat": 41.42970333896579,
+      "lon": 2.174913058009734,
+      "lineIds": [
+        "L5"
+      ],
+      "name": "Virrei Amat"
+    },
+    "VILAPICINA": {
+      "lat": 41.430465066864016,
+      "lon": 2.167619083986825,
+      "lineIds": [
+        "L5"
+      ],
+      "name": "Vilapicina"
+    },
+    "HORTA": {
+      "lat": 41.429692524411095,
+      "lon": 2.159974396439855,
+      "lineIds": [
+        "L5"
+      ],
+      "name": "Horta"
+    },
+    "EL_CARMEL": {
+      "lat": 41.424449773703074,
+      "lon": 2.1550989391746174,
+      "lineIds": [
+        "L5"
+      ],
+      "name": "El Carmel"
+    },
+    "EL_COLL_LA_TEIXONERA": {
+      "lat": 41.4219971367312,
+      "lon": 2.1483484951724954,
+      "lineIds": [
+        "L5"
+      ],
+      "name": "El Coll | La Teixonera"
+    },
+    "ERNEST_LLUCH": {
+      "lat": 41.37589760693972,
+      "lon": 2.112027311053149,
+      "lineIds": [
+        "L5"
+      ],
+      "name": "Ernest Lluch"
+    },
+    "AEROPORT_T1": {
+      "lat": 41.28829483589318,
+      "lon": 2.07115199121738,
+      "lineIds": [
+        "L9S"
+      ],
+      "name": "Aeroport T1"
+    },
+    "AEROPORT_T2": {
+      "lat": 41.30382333421845,
+      "lon": 2.0731133341366688,
+      "lineIds": [
+        "L9S"
+      ],
+      "name": "Aeroport T2"
+    },
+    "MAS_BLAU": {
+      "lat": 41.311225361691974,
+      "lon": 2.0734710574676423,
+      "lineIds": [
+        "L9S"
+      ],
+      "name": "Mas Blau"
+    },
+    "PARC_NOU": {
+      "lat": 41.316628454057685,
+      "lon": 2.0879294280214027,
+      "lineIds": [
+        "L9S"
+      ],
+      "name": "Parc Nou"
+    },
+    "CENTRIC": {
+      "lat": 41.322250016313035,
+      "lon": 2.0934632422362887,
+      "lineIds": [
+        "L9S"
+      ],
+      "name": "Cèntric"
+    },
+    "EL_PRAT_ESTACIO": {
+      "lat": 41.33199264221667,
+      "lon": 2.0899271044508416,
+      "lineIds": [
+        "L9S"
+      ],
+      "name": "El Prat Estació"
+    },
+    "LES_MORERES": {
+      "lat": 41.329118641471766,
+      "lon": 2.103073086929979,
+      "lineIds": [
+        "L9S"
+      ],
+      "name": "Les Moreres"
+    },
+    "MERCABARNA": {
+      "lat": 41.33350192178616,
+      "lon": 2.1112571611632744,
+      "lineIds": [
+        "L9S"
+      ],
+      "name": "Mercabarna"
+    },
+    "PARC_LOGISTIC": {
+      "lat": 41.341663546077285,
+      "lon": 2.127401250786491,
+      "lineIds": [
+        "L9S"
+      ],
+      "name": "Parc Logístic"
+    },
+    "FIRA": {
+      "lat": 41.35198805477054,
+      "lon": 2.130451504489052,
+      "lineIds": [
+        "L9S"
+      ],
+      "name": "Fira"
+    },
+    "EUROPA_FIRA": {
+      "lat": 41.35756042682608,
+      "lon": 2.1259237814712875,
+      "lineIds": [
+        "L9S"
+      ],
+      "name": "Europa | Fira"
+    },
+    "CAN_TRIES_GORNAL": {
+      "lat": 41.36089363267124,
+      "lon": 2.117992580878504,
+      "lineIds": [
+        "L9S",
+        "L10S"
+      ],
+      "name": "Can Tries | Gornal"
+    },
+    "ONZE_DE_SETEMBRE": {
+      "lat": 41.429617492467266,
+      "lon": 2.1936102147938596,
+      "lineIds": [
+        "L9N",
+        "L10N"
+      ],
+      "name": "Onze de Setembre"
+    },
+    "BON_PASTOR": {
+      "lat": 41.436162697479354,
+      "lon": 2.205240266717371,
+      "lineIds": [
+        "L9N",
+        "L10N"
+      ],
+      "name": "Bon Pastor"
+    },
+    "LLEFIA": {
+      "lat": 41.441359580549786,
+      "lon": 2.216906383705608,
+      "lineIds": [
+        "L10N"
+      ],
+      "name": "Llefià"
+    },
+    "LA_SALUT": {
+      "lat": 41.442817097125406,
+      "lon": 2.224737073931071,
+      "lineIds": [
+        "L10N"
+      ],
+      "name": "La Salut"
+    },
+    "CAN_PEIXAUET": {
+      "lat": 41.44398590815181,
+      "lon": 2.2100273277790428,
+      "lineIds": [
+        "L9N"
+      ],
+      "name": "Can Peixauet"
+    },
+    "SANTA_ROSA": {
+      "lat": 41.44685031178436,
+      "lon": 2.2158089802865106,
+      "lineIds": [
+        "L9N"
+      ],
+      "name": "Santa Rosa"
+    },
+    "ESGLESIA_MAJOR": {
+      "lat": 41.454797043178395,
+      "lon": 2.212176867433306,
+      "lineIds": [
+        "L9N"
+      ],
+      "name": "Església Major"
+    },
+    "SINGUERLIN": {
+      "lat": 41.45941351575915,
+      "lon": 2.2054288460907183,
+      "lineIds": [
+        "L9N"
+      ],
+      "name": "Singuerlín"
+    },
+    "CAN_ZAM": {
+      "lat": 41.456666111515304,
+      "lon": 2.1985694162738683,
+      "lineIds": [
+        "L9N"
+      ],
+      "name": "Can Zam"
+    },
+    "ZAL_RIU_VELL": {
+      "lat": 41.323705867524254,
+      "lon": 2.1330954281444714,
+      "lineIds": [
+        "L10S"
+      ],
+      "name": "ZAL | Riu Vell"
+    },
+    "ECOPARC": {
+      "lat": 41.33015871130138,
+      "lon": 2.1370711814490084,
+      "lineIds": [
+        "L10S"
+      ],
+      "name": "Ecoparc"
+    },
+    "PORT_COMERCIAL_LA_FACTORIA": {
+      "lat": 41.335983045353615,
+      "lon": 2.1406572348295043,
+      "lineIds": [
+        "L10S"
+      ],
+      "name": "Port Comercial | La Factoria"
+    },
+    "ZONA_FRANCA": {
+      "lat": 41.34297610170164,
+      "lon": 2.144964431606467,
+      "lineIds": [
+        "L10S"
+      ],
+      "name": "Zona Franca"
+    },
+    "FOC": {
+      "lat": 41.35616086809139,
+      "lon": 2.1418043174739214,
+      "lineIds": [
+        "L10S"
+      ],
+      "name": "Foc"
+    },
+    "FONERIA": {
+      "lat": 41.3610992396304,
+      "lon": 2.1382289088556874,
+      "lineIds": [
+        "L10S"
+      ],
+      "name": "Foneria"
+    },
+    "CIUTAT_DE_LA_JUSTICIA": {
+      "lat": 41.36313727354129,
+      "lon": 2.1323149668540133,
+      "lineIds": [
+        "L10S"
+      ],
+      "name": "Ciutat de la Justícia"
+    },
+    "PROVENCANA": {
+      "lat": 41.36135378238542,
+      "lon": 2.124099793279222,
+      "lineIds": [
+        "L10S"
+      ],
+      "name": "Provençana"
+    },
+    "CASA_DE_L_AIGUA": {
+      "lat": 41.451277844017426,
+      "lon": 2.1848396459573656,
+      "lineIds": [
+        "L11"
+      ],
+      "name": "Casa de l'Aigua"
+    },
+    "TORRE_BARO_VALLBONA": {
+      "lat": 41.45919574810995,
+      "lon": 2.1798835778205032,
+      "lineIds": [
+        "L11"
+      ],
+      "name": "Torre Baró | Vallbona"
+    },
+    "CIUTAT_MERIDIANA": {
+      "lat": 41.46080820561607,
+      "lon": 2.174649879224937,
+      "lineIds": [
+        "L11"
+      ],
+      "name": "Ciutat Meridiana"
+    },
+    "CAN_CUIAS": {
+      "lat": 41.46241309910048,
+      "lon": 2.173059363097836,
+      "lineIds": [
+        "L11"
+      ],
+      "name": "Can Cuiàs"
+    }
+  },
+  "edges": [
+    {
+      "from": "HOSPITAL_DE_BELLVITGE",
+      "to": "BELLVITGE",
+      "lineId": "L1",
+      "distanceMeters": 764,
+      "expectedMinSeconds": 69,
+      "expectedMaxSeconds": 183,
+      "type": "line"
+    },
+    {
+      "from": "BELLVITGE",
+      "to": "AV_CARRILET",
+      "lineId": "L1",
+      "distanceMeters": 1087,
+      "expectedMinSeconds": 98,
+      "expectedMaxSeconds": 261,
+      "type": "line"
+    },
+    {
+      "from": "AV_CARRILET",
+      "to": "RAMBLA_JUST_OLIVERAS",
+      "lineId": "L1",
+      "distanceMeters": 665,
+      "expectedMinSeconds": 60,
+      "expectedMaxSeconds": 160,
+      "type": "line"
+    },
+    {
+      "from": "RAMBLA_JUST_OLIVERAS",
+      "to": "CAN_SERRA",
+      "lineId": "L1",
+      "distanceMeters": 473,
+      "expectedMinSeconds": 43,
+      "expectedMaxSeconds": 113,
+      "type": "line"
+    },
+    {
+      "from": "CAN_SERRA",
+      "to": "FLORIDA",
+      "lineId": "L1",
+      "distanceMeters": 611,
+      "expectedMinSeconds": 55,
+      "expectedMaxSeconds": 147,
+      "type": "line"
+    },
+    {
+      "from": "FLORIDA",
+      "to": "TORRASSA",
+      "lineId": "L1",
+      "distanceMeters": 506,
+      "expectedMinSeconds": 46,
+      "expectedMaxSeconds": 121,
+      "type": "line"
+    },
+    {
+      "from": "TORRASSA",
+      "to": "SANTA_EULALIA",
+      "lineId": "L1",
+      "distanceMeters": 1047,
+      "expectedMinSeconds": 94,
+      "expectedMaxSeconds": 251,
+      "type": "line"
+    },
+    {
+      "from": "SANTA_EULALIA",
+      "to": "MERCAT_NOU",
+      "lineId": "L1",
+      "distanceMeters": 621,
+      "expectedMinSeconds": 56,
+      "expectedMaxSeconds": 149,
+      "type": "line"
+    },
+    {
+      "from": "MERCAT_NOU",
+      "to": "PLACA_DE_SANTS",
+      "lineId": "L1",
+      "distanceMeters": 329,
+      "expectedMinSeconds": 30,
+      "expectedMaxSeconds": 79,
+      "type": "line"
+    },
+    {
+      "from": "PLACA_DE_SANTS",
+      "to": "HOSTAFRANCS",
+      "lineId": "L1",
+      "distanceMeters": 645,
+      "expectedMinSeconds": 58,
+      "expectedMaxSeconds": 155,
+      "type": "line"
+    },
+    {
+      "from": "HOSTAFRANCS",
+      "to": "ESPANYA",
+      "lineId": "L1",
+      "distanceMeters": 509,
+      "expectedMinSeconds": 46,
+      "expectedMaxSeconds": 122,
+      "type": "line"
+    },
+    {
+      "from": "ESPANYA",
+      "to": "ROCAFORT",
+      "lineId": "L1",
+      "distanceMeters": 602,
+      "expectedMinSeconds": 54,
+      "expectedMaxSeconds": 144,
+      "type": "line"
+    },
+    {
+      "from": "ROCAFORT",
+      "to": "URGELL",
+      "lineId": "L1",
+      "distanceMeters": 511,
+      "expectedMinSeconds": 46,
+      "expectedMaxSeconds": 123,
+      "type": "line"
+    },
+    {
+      "from": "URGELL",
+      "to": "UNIVERSITAT",
+      "lineId": "L1",
+      "distanceMeters": 552,
+      "expectedMinSeconds": 50,
+      "expectedMaxSeconds": 132,
+      "type": "line"
+    },
+    {
+      "from": "UNIVERSITAT",
+      "to": "CATALUNYA",
+      "lineId": "L1",
+      "distanceMeters": 528,
+      "expectedMinSeconds": 48,
+      "expectedMaxSeconds": 127,
+      "type": "line"
+    },
+    {
+      "from": "CATALUNYA",
+      "to": "URQUINAONA",
+      "lineId": "L1",
+      "distanceMeters": 353,
+      "expectedMinSeconds": 32,
+      "expectedMaxSeconds": 85,
+      "type": "line"
+    },
+    {
+      "from": "URQUINAONA",
+      "to": "ARC_DE_TRIOMF",
+      "lineId": "L1",
+      "distanceMeters": 736,
+      "expectedMinSeconds": 66,
+      "expectedMaxSeconds": 177,
+      "type": "line"
+    },
+    {
+      "from": "ARC_DE_TRIOMF",
+      "to": "MARINA",
+      "lineId": "L1",
+      "distanceMeters": 469,
+      "expectedMinSeconds": 42,
+      "expectedMaxSeconds": 113,
+      "type": "line"
+    },
+    {
+      "from": "MARINA",
+      "to": "GLORIES",
+      "lineId": "L1",
+      "distanceMeters": 852,
+      "expectedMinSeconds": 77,
+      "expectedMaxSeconds": 205,
+      "type": "line"
+    },
+    {
+      "from": "GLORIES",
+      "to": "CLOT",
+      "lineId": "L1",
+      "distanceMeters": 917,
+      "expectedMinSeconds": 83,
+      "expectedMaxSeconds": 220,
+      "type": "line"
+    },
+    {
+      "from": "CLOT",
+      "to": "NAVAS",
+      "lineId": "L1",
+      "distanceMeters": 631,
+      "expectedMinSeconds": 57,
+      "expectedMaxSeconds": 151,
+      "type": "line"
+    },
+    {
+      "from": "NAVAS",
+      "to": "LA_SAGRERA",
+      "lineId": "L1",
+      "distanceMeters": 502,
+      "expectedMinSeconds": 45,
+      "expectedMaxSeconds": 120,
+      "type": "line"
+    },
+    {
+      "from": "LA_SAGRERA",
+      "to": "FABRA_I_PUIG",
+      "lineId": "L1",
+      "distanceMeters": 1028,
+      "expectedMinSeconds": 93,
+      "expectedMaxSeconds": 247,
+      "type": "line"
+    },
+    {
+      "from": "FABRA_I_PUIG",
+      "to": "SANT_ANDREU",
+      "lineId": "L1",
+      "distanceMeters": 998,
+      "expectedMinSeconds": 90,
+      "expectedMaxSeconds": 239,
+      "type": "line"
+    },
+    {
+      "from": "SANT_ANDREU",
+      "to": "TORRAS_I_BAGES",
+      "lineId": "L1",
+      "distanceMeters": 737,
+      "expectedMinSeconds": 66,
+      "expectedMaxSeconds": 177,
+      "type": "line"
+    },
+    {
+      "from": "TORRAS_I_BAGES",
+      "to": "TRINITAT_VELLA",
+      "lineId": "L1",
+      "distanceMeters": 690,
+      "expectedMinSeconds": 62,
+      "expectedMaxSeconds": 166,
+      "type": "line"
+    },
+    {
+      "from": "TRINITAT_VELLA",
+      "to": "BARO_DE_VIVER",
+      "lineId": "L1",
+      "distanceMeters": 489,
+      "expectedMinSeconds": 44,
+      "expectedMaxSeconds": 117,
+      "type": "line"
+    },
+    {
+      "from": "BARO_DE_VIVER",
+      "to": "SANTA_COLOMA",
+      "lineId": "L1",
+      "distanceMeters": 712,
+      "expectedMinSeconds": 64,
+      "expectedMaxSeconds": 171,
+      "type": "line"
+    },
+    {
+      "from": "SANTA_COLOMA",
+      "to": "FONDO",
+      "lineId": "L1",
+      "distanceMeters": 884,
+      "expectedMinSeconds": 80,
+      "expectedMaxSeconds": 212,
+      "type": "line"
+    },
+    {
+      "from": "PARALLEL",
+      "to": "SANT_ANTONI",
+      "lineId": "L2",
+      "distanceMeters": 758,
+      "expectedMinSeconds": 68,
+      "expectedMaxSeconds": 182,
+      "type": "line"
+    },
+    {
+      "from": "SANT_ANTONI",
+      "to": "UNIVERSITAT",
+      "lineId": "L2",
+      "distanceMeters": 644,
+      "expectedMinSeconds": 58,
+      "expectedMaxSeconds": 154,
+      "type": "line"
+    },
+    {
+      "from": "UNIVERSITAT",
+      "to": "PASSEIG_DE_GRACIA",
+      "lineId": "L2",
+      "distanceMeters": 573,
+      "expectedMinSeconds": 52,
+      "expectedMaxSeconds": 137,
+      "type": "line"
+    },
+    {
+      "from": "PASSEIG_DE_GRACIA",
+      "to": "TETUAN",
+      "lineId": "L2",
+      "distanceMeters": 867,
+      "expectedMinSeconds": 78,
+      "expectedMaxSeconds": 208,
+      "type": "line"
+    },
+    {
+      "from": "TETUAN",
+      "to": "MONUMENTAL",
+      "lineId": "L2",
+      "distanceMeters": 706,
+      "expectedMinSeconds": 64,
+      "expectedMaxSeconds": 169,
+      "type": "line"
+    },
+    {
+      "from": "MONUMENTAL",
+      "to": "SAGRADA_FAMILIA",
+      "lineId": "L2",
+      "distanceMeters": 600,
+      "expectedMinSeconds": 54,
+      "expectedMaxSeconds": 144,
+      "type": "line"
+    },
+    {
+      "from": "SAGRADA_FAMILIA",
+      "to": "ENCANTS",
+      "lineId": "L2",
+      "distanceMeters": 753,
+      "expectedMinSeconds": 68,
+      "expectedMaxSeconds": 181,
+      "type": "line"
+    },
+    {
+      "from": "ENCANTS",
+      "to": "CLOT",
+      "lineId": "L2",
+      "distanceMeters": 510,
+      "expectedMinSeconds": 46,
+      "expectedMaxSeconds": 122,
+      "type": "line"
+    },
+    {
+      "from": "CLOT",
+      "to": "BAC_DE_RODA",
+      "lineId": "L2",
+      "distanceMeters": 879,
+      "expectedMinSeconds": 79,
+      "expectedMaxSeconds": 211,
+      "type": "line"
+    },
+    {
+      "from": "BAC_DE_RODA",
+      "to": "SANT_MARTI",
+      "lineId": "L2",
+      "distanceMeters": 615,
+      "expectedMinSeconds": 55,
+      "expectedMaxSeconds": 148,
+      "type": "line"
+    },
+    {
+      "from": "SANT_MARTI",
+      "to": "LA_PAU",
+      "lineId": "L2",
+      "distanceMeters": 634,
+      "expectedMinSeconds": 57,
+      "expectedMaxSeconds": 152,
+      "type": "line"
+    },
+    {
+      "from": "LA_PAU",
+      "to": "VERNEDA",
+      "lineId": "L2",
+      "distanceMeters": 822,
+      "expectedMinSeconds": 74,
+      "expectedMaxSeconds": 197,
+      "type": "line"
+    },
+    {
+      "from": "VERNEDA",
+      "to": "ARTIGUES_SANT_ADRIA",
+      "lineId": "L2",
+      "distanceMeters": 784,
+      "expectedMinSeconds": 71,
+      "expectedMaxSeconds": 188,
+      "type": "line"
+    },
+    {
+      "from": "ARTIGUES_SANT_ADRIA",
+      "to": "SANT_ROC",
+      "lineId": "L2",
+      "distanceMeters": 930,
+      "expectedMinSeconds": 84,
+      "expectedMaxSeconds": 223,
+      "type": "line"
+    },
+    {
+      "from": "SANT_ROC",
+      "to": "GORG",
+      "lineId": "L2",
+      "distanceMeters": 656,
+      "expectedMinSeconds": 59,
+      "expectedMaxSeconds": 157,
+      "type": "line"
+    },
+    {
+      "from": "GORG",
+      "to": "PEP_VENTURA",
+      "lineId": "L2",
+      "distanceMeters": 533,
+      "expectedMinSeconds": 48,
+      "expectedMaxSeconds": 128,
+      "type": "line"
+    },
+    {
+      "from": "PEP_VENTURA",
+      "to": "BADALONA_POMPEU_FABRA",
+      "lineId": "L2",
+      "distanceMeters": 768,
+      "expectedMinSeconds": 69,
+      "expectedMaxSeconds": 184,
+      "type": "line"
+    },
+    {
+      "from": "ZONA_UNIVERSITARIA",
+      "to": "PALAU_REIAL",
+      "lineId": "L3",
+      "distanceMeters": 636,
+      "expectedMinSeconds": 57,
+      "expectedMaxSeconds": 153,
+      "type": "line"
+    },
+    {
+      "from": "PALAU_REIAL",
+      "to": "MARIA_CRISTINA",
+      "lineId": "L3",
+      "distanceMeters": 639,
+      "expectedMinSeconds": 57,
+      "expectedMaxSeconds": 153,
+      "type": "line"
+    },
+    {
+      "from": "MARIA_CRISTINA",
+      "to": "LES_CORTS",
+      "lineId": "L3",
+      "distanceMeters": 590,
+      "expectedMinSeconds": 53,
+      "expectedMaxSeconds": 142,
+      "type": "line"
+    },
+    {
+      "from": "LES_CORTS",
+      "to": "PLACA_DEL_CENTRE",
+      "lineId": "L3",
+      "distanceMeters": 484,
+      "expectedMinSeconds": 44,
+      "expectedMaxSeconds": 116,
+      "type": "line"
+    },
+    {
+      "from": "PLACA_DEL_CENTRE",
+      "to": "SANTS_ESTACIO",
+      "lineId": "L3",
+      "distanceMeters": 513,
+      "expectedMinSeconds": 46,
+      "expectedMaxSeconds": 123,
+      "type": "line"
+    },
+    {
+      "from": "SANTS_ESTACIO",
+      "to": "TARRAGONA",
+      "lineId": "L3",
+      "distanceMeters": 397,
+      "expectedMinSeconds": 36,
+      "expectedMaxSeconds": 95,
+      "type": "line"
+    },
+    {
+      "from": "TARRAGONA",
+      "to": "ESPANYA",
+      "lineId": "L3",
+      "distanceMeters": 478,
+      "expectedMinSeconds": 43,
+      "expectedMaxSeconds": 115,
+      "type": "line"
+    },
+    {
+      "from": "ESPANYA",
+      "to": "POBLE_SEC",
+      "lineId": "L3",
+      "distanceMeters": 907,
+      "expectedMinSeconds": 82,
+      "expectedMaxSeconds": 218,
+      "type": "line"
+    },
+    {
+      "from": "POBLE_SEC",
+      "to": "PARALLEL",
+      "lineId": "L3",
+      "distanceMeters": 734,
+      "expectedMinSeconds": 66,
+      "expectedMaxSeconds": 176,
+      "type": "line"
+    },
+    {
+      "from": "PARALLEL",
+      "to": "DRASSANES",
+      "lineId": "L3",
+      "distanceMeters": 595,
+      "expectedMinSeconds": 54,
+      "expectedMaxSeconds": 143,
+      "type": "line"
+    },
+    {
+      "from": "DRASSANES",
+      "to": "LICEU",
+      "lineId": "L3",
+      "distanceMeters": 588,
+      "expectedMinSeconds": 53,
+      "expectedMaxSeconds": 141,
+      "type": "line"
+    },
+    {
+      "from": "LICEU",
+      "to": "CATALUNYA",
+      "lineId": "L3",
+      "distanceMeters": 750,
+      "expectedMinSeconds": 67,
+      "expectedMaxSeconds": 180,
+      "type": "line"
+    },
+    {
+      "from": "CATALUNYA",
+      "to": "PASSEIG_DE_GRACIA",
+      "lineId": "L3",
+      "distanceMeters": 331,
+      "expectedMinSeconds": 30,
+      "expectedMaxSeconds": 80,
+      "type": "line"
+    },
+    {
+      "from": "PASSEIG_DE_GRACIA",
+      "to": "DIAGONAL",
+      "lineId": "L3",
+      "distanceMeters": 846,
+      "expectedMinSeconds": 76,
+      "expectedMaxSeconds": 203,
+      "type": "line"
+    },
+    {
+      "from": "DIAGONAL",
+      "to": "FONTANA",
+      "lineId": "L3",
+      "distanceMeters": 938,
+      "expectedMinSeconds": 84,
+      "expectedMaxSeconds": 225,
+      "type": "line"
+    },
+    {
+      "from": "FONTANA",
+      "to": "LESSEPS",
+      "lineId": "L3",
+      "distanceMeters": 469,
+      "expectedMinSeconds": 42,
+      "expectedMaxSeconds": 112,
+      "type": "line"
+    },
+    {
+      "from": "LESSEPS",
+      "to": "VALLCARCA",
+      "lineId": "L3",
+      "distanceMeters": 859,
+      "expectedMinSeconds": 77,
+      "expectedMaxSeconds": 206,
+      "type": "line"
+    },
+    {
+      "from": "VALLCARCA",
+      "to": "PENITENTS",
+      "lineId": "L3",
+      "distanceMeters": 755,
+      "expectedMinSeconds": 68,
+      "expectedMaxSeconds": 181,
+      "type": "line"
+    },
+    {
+      "from": "PENITENTS",
+      "to": "VALL_D_HEBRON",
+      "lineId": "L3",
+      "distanceMeters": 772,
+      "expectedMinSeconds": 69,
+      "expectedMaxSeconds": 185,
+      "type": "line"
+    },
+    {
+      "from": "VALL_D_HEBRON",
+      "to": "MONTBAU",
+      "lineId": "L3",
+      "distanceMeters": 646,
+      "expectedMinSeconds": 58,
+      "expectedMaxSeconds": 155,
+      "type": "line"
+    },
+    {
+      "from": "MONTBAU",
+      "to": "MUNDET",
+      "lineId": "L3",
+      "distanceMeters": 628,
+      "expectedMinSeconds": 57,
+      "expectedMaxSeconds": 151,
+      "type": "line"
+    },
+    {
+      "from": "MUNDET",
+      "to": "VALLDAURA",
+      "lineId": "L3",
+      "distanceMeters": 748,
+      "expectedMinSeconds": 67,
+      "expectedMaxSeconds": 179,
+      "type": "line"
+    },
+    {
+      "from": "VALLDAURA",
+      "to": "CANYELLES",
+      "lineId": "L3",
+      "distanceMeters": 896,
+      "expectedMinSeconds": 81,
+      "expectedMaxSeconds": 215,
+      "type": "line"
+    },
+    {
+      "from": "CANYELLES",
+      "to": "ROQUETES",
+      "lineId": "L3",
+      "distanceMeters": 1043,
+      "expectedMinSeconds": 94,
+      "expectedMaxSeconds": 250,
+      "type": "line"
+    },
+    {
+      "from": "ROQUETES",
+      "to": "TRINITAT_NOVA",
+      "lineId": "L3",
+      "distanceMeters": 609,
+      "expectedMinSeconds": 55,
+      "expectedMaxSeconds": 146,
+      "type": "line"
+    },
+    {
+      "from": "LA_PAU",
+      "to": "BESOS",
+      "lineId": "L4",
+      "distanceMeters": 529,
+      "expectedMinSeconds": 48,
+      "expectedMaxSeconds": 127,
+      "type": "line"
+    },
+    {
+      "from": "BESOS",
+      "to": "BESOS_MAR",
+      "lineId": "L4",
+      "distanceMeters": 714,
+      "expectedMinSeconds": 64,
+      "expectedMaxSeconds": 171,
+      "type": "line"
+    },
+    {
+      "from": "BESOS_MAR",
+      "to": "EL_MARESME_FORUM",
+      "lineId": "L4",
+      "distanceMeters": 382,
+      "expectedMinSeconds": 34,
+      "expectedMaxSeconds": 92,
+      "type": "line"
+    },
+    {
+      "from": "EL_MARESME_FORUM",
+      "to": "SELVA_DE_MAR",
+      "lineId": "L4",
+      "distanceMeters": 743,
+      "expectedMinSeconds": 67,
+      "expectedMaxSeconds": 178,
+      "type": "line"
+    },
+    {
+      "from": "SELVA_DE_MAR",
+      "to": "POBLENOU",
+      "lineId": "L4",
+      "distanceMeters": 676,
+      "expectedMinSeconds": 61,
+      "expectedMaxSeconds": 162,
+      "type": "line"
+    },
+    {
+      "from": "POBLENOU",
+      "to": "LLACUNA",
+      "lineId": "L4",
+      "distanceMeters": 671,
+      "expectedMinSeconds": 60,
+      "expectedMaxSeconds": 161,
+      "type": "line"
+    },
+    {
+      "from": "LLACUNA",
+      "to": "BOGATELL",
+      "lineId": "L4",
+      "distanceMeters": 676,
+      "expectedMinSeconds": 61,
+      "expectedMaxSeconds": 162,
+      "type": "line"
+    },
+    {
+      "from": "BOGATELL",
+      "to": "CIUTADELLA_VILA_OLIMPICA",
+      "lineId": "L4",
+      "distanceMeters": 945,
+      "expectedMinSeconds": 85,
+      "expectedMaxSeconds": 227,
+      "type": "line"
+    },
+    {
+      "from": "CIUTADELLA_VILA_OLIMPICA",
+      "to": "BARCELONETA",
+      "lineId": "L4",
+      "distanceMeters": 868,
+      "expectedMinSeconds": 78,
+      "expectedMaxSeconds": 208,
+      "type": "line"
+    },
+    {
+      "from": "BARCELONETA",
+      "to": "JAUME_I",
+      "lineId": "L4",
+      "distanceMeters": 582,
+      "expectedMinSeconds": 52,
+      "expectedMaxSeconds": 140,
+      "type": "line"
+    },
+    {
+      "from": "JAUME_I",
+      "to": "URQUINAONA",
+      "lineId": "L4",
+      "distanceMeters": 663,
+      "expectedMinSeconds": 60,
+      "expectedMaxSeconds": 159,
+      "type": "line"
+    },
+    {
+      "from": "URQUINAONA",
+      "to": "PASSEIG_DE_GRACIA",
+      "lineId": "L4",
+      "distanceMeters": 545,
+      "expectedMinSeconds": 49,
+      "expectedMaxSeconds": 131,
+      "type": "line"
+    },
+    {
+      "from": "PASSEIG_DE_GRACIA",
+      "to": "GIRONA",
+      "lineId": "L4",
+      "distanceMeters": 609,
+      "expectedMinSeconds": 55,
+      "expectedMaxSeconds": 146,
+      "type": "line"
+    },
+    {
+      "from": "GIRONA",
+      "to": "VERDAGUER",
+      "lineId": "L4",
+      "distanceMeters": 599,
+      "expectedMinSeconds": 54,
+      "expectedMaxSeconds": 144,
+      "type": "line"
+    },
+    {
+      "from": "VERDAGUER",
+      "to": "JOANIC",
+      "lineId": "L4",
+      "distanceMeters": 834,
+      "expectedMinSeconds": 75,
+      "expectedMaxSeconds": 200,
+      "type": "line"
+    },
+    {
+      "from": "JOANIC",
+      "to": "ALFONS_X",
+      "lineId": "L4",
+      "distanceMeters": 720,
+      "expectedMinSeconds": 65,
+      "expectedMaxSeconds": 173,
+      "type": "line"
+    },
+    {
+      "from": "ALFONS_X",
+      "to": "GUINARDO_HOSPITAL_DE_SANT_PAU",
+      "lineId": "L4",
+      "distanceMeters": 738,
+      "expectedMinSeconds": 66,
+      "expectedMaxSeconds": 177,
+      "type": "line"
+    },
+    {
+      "from": "GUINARDO_HOSPITAL_DE_SANT_PAU",
+      "to": "MARAGALL",
+      "lineId": "L4",
+      "distanceMeters": 952,
+      "expectedMinSeconds": 86,
+      "expectedMaxSeconds": 228,
+      "type": "line"
+    },
+    {
+      "from": "MARAGALL",
+      "to": "LLUCMAJOR",
+      "lineId": "L4",
+      "distanceMeters": 1469,
+      "expectedMinSeconds": 132,
+      "expectedMaxSeconds": 353,
+      "type": "line"
+    },
+    {
+      "from": "LLUCMAJOR",
+      "to": "VIA_JULIA",
+      "lineId": "L4",
+      "distanceMeters": 867,
+      "expectedMinSeconds": 78,
+      "expectedMaxSeconds": 208,
+      "type": "line"
+    },
+    {
+      "from": "VIA_JULIA",
+      "to": "TRINITAT_NOVA",
+      "lineId": "L4",
+      "distanceMeters": 761,
+      "expectedMinSeconds": 68,
+      "expectedMaxSeconds": 183,
+      "type": "line"
+    },
+    {
+      "from": "CORNELLA_CENTRE",
+      "to": "GAVARRA",
+      "lineId": "L5",
+      "distanceMeters": 742,
+      "expectedMinSeconds": 67,
+      "expectedMaxSeconds": 178,
+      "type": "line"
+    },
+    {
+      "from": "GAVARRA",
+      "to": "SANT_ILDEFONS",
+      "lineId": "L5",
+      "distanceMeters": 736,
+      "expectedMinSeconds": 66,
+      "expectedMaxSeconds": 177,
+      "type": "line"
+    },
+    {
+      "from": "SANT_ILDEFONS",
+      "to": "CAN_BOIXERES",
+      "lineId": "L5",
+      "distanceMeters": 692,
+      "expectedMinSeconds": 62,
+      "expectedMaxSeconds": 166,
+      "type": "line"
+    },
+    {
+      "from": "CAN_BOIXERES",
+      "to": "CAN_VIDALET",
+      "lineId": "L5",
+      "distanceMeters": 844,
+      "expectedMinSeconds": 76,
+      "expectedMaxSeconds": 203,
+      "type": "line"
+    },
+    {
+      "from": "CAN_VIDALET",
+      "to": "PUBILLA_CASES",
+      "lineId": "L5",
+      "distanceMeters": 708,
+      "expectedMinSeconds": 64,
+      "expectedMaxSeconds": 170,
+      "type": "line"
+    },
+    {
+      "from": "PUBILLA_CASES",
+      "to": "ERNEST_LLUCH",
+      "lineId": "L5",
+      "distanceMeters": 463,
+      "expectedMinSeconds": 42,
+      "expectedMaxSeconds": 111,
+      "type": "line"
+    },
+    {
+      "from": "ERNEST_LLUCH",
+      "to": "COLLBLANC",
+      "lineId": "L5",
+      "distanceMeters": 542,
+      "expectedMinSeconds": 49,
+      "expectedMaxSeconds": 130,
+      "type": "line"
+    },
+    {
+      "from": "COLLBLANC",
+      "to": "BADAL",
+      "lineId": "L5",
+      "distanceMeters": 741,
+      "expectedMinSeconds": 67,
+      "expectedMaxSeconds": 178,
+      "type": "line"
+    },
+    {
+      "from": "BADAL",
+      "to": "PLACA_DE_SANTS",
+      "lineId": "L5",
+      "distanceMeters": 682,
+      "expectedMinSeconds": 61,
+      "expectedMaxSeconds": 164,
+      "type": "line"
+    },
+    {
+      "from": "PLACA_DE_SANTS",
+      "to": "SANTS_ESTACIO",
+      "lineId": "L5",
+      "distanceMeters": 801,
+      "expectedMinSeconds": 72,
+      "expectedMaxSeconds": 192,
+      "type": "line"
+    },
+    {
+      "from": "SANTS_ESTACIO",
+      "to": "ENTENCA",
+      "lineId": "L5",
+      "distanceMeters": 499,
+      "expectedMinSeconds": 45,
+      "expectedMaxSeconds": 120,
+      "type": "line"
+    },
+    {
+      "from": "ENTENCA",
+      "to": "HOSPITAL_CLINIC",
+      "lineId": "L5",
+      "distanceMeters": 648,
+      "expectedMinSeconds": 58,
+      "expectedMaxSeconds": 155,
+      "type": "line"
+    },
+    {
+      "from": "HOSPITAL_CLINIC",
+      "to": "DIAGONAL",
+      "lineId": "L5",
+      "distanceMeters": 1108,
+      "expectedMinSeconds": 100,
+      "expectedMaxSeconds": 266,
+      "type": "line"
+    },
+    {
+      "from": "DIAGONAL",
+      "to": "VERDAGUER",
+      "lineId": "L5",
+      "distanceMeters": 812,
+      "expectedMinSeconds": 73,
+      "expectedMaxSeconds": 195,
+      "type": "line"
+    },
+    {
+      "from": "VERDAGUER",
+      "to": "SAGRADA_FAMILIA",
+      "lineId": "L5",
+      "distanceMeters": 714,
+      "expectedMinSeconds": 64,
+      "expectedMaxSeconds": 171,
+      "type": "line"
+    },
+    {
+      "from": "SAGRADA_FAMILIA",
+      "to": "SANT_PAU_DOS_DE_MAIG",
+      "lineId": "L5",
+      "distanceMeters": 716,
+      "expectedMinSeconds": 64,
+      "expectedMaxSeconds": 172,
+      "type": "line"
+    },
+    {
+      "from": "SANT_PAU_DOS_DE_MAIG",
+      "to": "CAMP_DE_L_ARPA",
+      "lineId": "L5",
+      "distanceMeters": 662,
+      "expectedMinSeconds": 60,
+      "expectedMaxSeconds": 159,
+      "type": "line"
+    },
+    {
+      "from": "CAMP_DE_L_ARPA",
+      "to": "LA_SAGRERA",
+      "lineId": "L5",
+      "distanceMeters": 768,
+      "expectedMinSeconds": 69,
+      "expectedMaxSeconds": 184,
+      "type": "line"
+    },
+    {
+      "from": "LA_SAGRERA",
+      "to": "CONGRES",
+      "lineId": "L5",
+      "distanceMeters": 560,
+      "expectedMinSeconds": 50,
+      "expectedMaxSeconds": 134,
+      "type": "line"
+    },
+    {
+      "from": "CONGRES",
+      "to": "MARAGALL",
+      "lineId": "L5",
+      "distanceMeters": 324,
+      "expectedMinSeconds": 29,
+      "expectedMaxSeconds": 78,
+      "type": "line"
+    },
+    {
+      "from": "MARAGALL",
+      "to": "VIRREI_AMAT",
+      "lineId": "L5",
+      "distanceMeters": 654,
+      "expectedMinSeconds": 59,
+      "expectedMaxSeconds": 157,
+      "type": "line"
+    },
+    {
+      "from": "VIRREI_AMAT",
+      "to": "VILAPICINA",
+      "lineId": "L5",
+      "distanceMeters": 614,
+      "expectedMinSeconds": 55,
+      "expectedMaxSeconds": 147,
+      "type": "line"
+    },
+    {
+      "from": "VILAPICINA",
+      "to": "HORTA",
+      "lineId": "L5",
+      "distanceMeters": 643,
+      "expectedMinSeconds": 58,
+      "expectedMaxSeconds": 154,
+      "type": "line"
+    },
+    {
+      "from": "HORTA",
+      "to": "EL_CARMEL",
+      "lineId": "L5",
+      "distanceMeters": 711,
+      "expectedMinSeconds": 64,
+      "expectedMaxSeconds": 171,
+      "type": "line"
+    },
+    {
+      "from": "EL_CARMEL",
+      "to": "EL_COLL_LA_TEIXONERA",
+      "lineId": "L5",
+      "distanceMeters": 625,
+      "expectedMinSeconds": 56,
+      "expectedMaxSeconds": 150,
+      "type": "line"
+    },
+    {
+      "from": "EL_COLL_LA_TEIXONERA",
+      "to": "VALL_D_HEBRON",
+      "lineId": "L5",
+      "distanceMeters": 598,
+      "expectedMinSeconds": 54,
+      "expectedMaxSeconds": 143,
+      "type": "line"
+    },
+    {
+      "from": "LA_SAGRERA",
+      "to": "ONZE_DE_SETEMBRE",
+      "lineId": "L9N",
+      "distanceMeters": 1143,
+      "expectedMinSeconds": 103,
+      "expectedMaxSeconds": 274,
+      "type": "line"
+    },
+    {
+      "from": "ONZE_DE_SETEMBRE",
+      "to": "BON_PASTOR",
+      "lineId": "L9N",
+      "distanceMeters": 1212,
+      "expectedMinSeconds": 109,
+      "expectedMaxSeconds": 291,
+      "type": "line"
+    },
+    {
+      "from": "BON_PASTOR",
+      "to": "CAN_PEIXAUET",
+      "lineId": "L9N",
+      "distanceMeters": 957,
+      "expectedMinSeconds": 86,
+      "expectedMaxSeconds": 230,
+      "type": "line"
+    },
+    {
+      "from": "CAN_PEIXAUET",
+      "to": "SANTA_ROSA",
+      "lineId": "L9N",
+      "distanceMeters": 578,
+      "expectedMinSeconds": 52,
+      "expectedMaxSeconds": 139,
+      "type": "line"
+    },
+    {
+      "from": "SANTA_ROSA",
+      "to": "FONDO",
+      "lineId": "L9N",
+      "distanceMeters": 584,
+      "expectedMinSeconds": 53,
+      "expectedMaxSeconds": 140,
+      "type": "line"
+    },
+    {
+      "from": "FONDO",
+      "to": "ESGLESIA_MAJOR",
+      "lineId": "L9N",
+      "distanceMeters": 633,
+      "expectedMinSeconds": 57,
+      "expectedMaxSeconds": 152,
+      "type": "line"
+    },
+    {
+      "from": "ESGLESIA_MAJOR",
+      "to": "SINGUERLIN",
+      "lineId": "L9N",
+      "distanceMeters": 761,
+      "expectedMinSeconds": 69,
+      "expectedMaxSeconds": 183,
+      "type": "line"
+    },
+    {
+      "from": "SINGUERLIN",
+      "to": "CAN_ZAM",
+      "lineId": "L9N",
+      "distanceMeters": 648,
+      "expectedMinSeconds": 58,
+      "expectedMaxSeconds": 156,
+      "type": "line"
+    },
+    {
+      "from": "AEROPORT_T1",
+      "to": "AEROPORT_T2",
+      "lineId": "L9S",
+      "distanceMeters": 1734,
+      "expectedMinSeconds": 156,
+      "expectedMaxSeconds": 416,
+      "type": "line"
+    },
+    {
+      "from": "AEROPORT_T2",
+      "to": "MAS_BLAU",
+      "lineId": "L9S",
+      "distanceMeters": 824,
+      "expectedMinSeconds": 74,
+      "expectedMaxSeconds": 198,
+      "type": "line"
+    },
+    {
+      "from": "MAS_BLAU",
+      "to": "PARC_NOU",
+      "lineId": "L9S",
+      "distanceMeters": 1349,
+      "expectedMinSeconds": 121,
+      "expectedMaxSeconds": 324,
+      "type": "line"
+    },
+    {
+      "from": "PARC_NOU",
+      "to": "CENTRIC",
+      "lineId": "L9S",
+      "distanceMeters": 777,
+      "expectedMinSeconds": 70,
+      "expectedMaxSeconds": 187,
+      "type": "line"
+    },
+    {
+      "from": "CENTRIC",
+      "to": "EL_PRAT_ESTACIO",
+      "lineId": "L9S",
+      "distanceMeters": 1123,
+      "expectedMinSeconds": 101,
+      "expectedMaxSeconds": 269,
+      "type": "line"
+    },
+    {
+      "from": "EL_PRAT_ESTACIO",
+      "to": "LES_MORERES",
+      "lineId": "L9S",
+      "distanceMeters": 1143,
+      "expectedMinSeconds": 103,
+      "expectedMaxSeconds": 274,
+      "type": "line"
+    },
+    {
+      "from": "LES_MORERES",
+      "to": "MERCABARNA",
+      "lineId": "L9S",
+      "distanceMeters": 839,
+      "expectedMinSeconds": 76,
+      "expectedMaxSeconds": 201,
+      "type": "line"
+    },
+    {
+      "from": "MERCABARNA",
+      "to": "PARC_LOGISTIC",
+      "lineId": "L9S",
+      "distanceMeters": 1625,
+      "expectedMinSeconds": 146,
+      "expectedMaxSeconds": 390,
+      "type": "line"
+    },
+    {
+      "from": "PARC_LOGISTIC",
+      "to": "FIRA",
+      "lineId": "L9S",
+      "distanceMeters": 1176,
+      "expectedMinSeconds": 106,
+      "expectedMaxSeconds": 282,
+      "type": "line"
+    },
+    {
+      "from": "FIRA",
+      "to": "EUROPA_FIRA",
+      "lineId": "L9S",
+      "distanceMeters": 726,
+      "expectedMinSeconds": 65,
+      "expectedMaxSeconds": 174,
+      "type": "line"
+    },
+    {
+      "from": "EUROPA_FIRA",
+      "to": "CAN_TRIES_GORNAL",
+      "lineId": "L9S",
+      "distanceMeters": 759,
+      "expectedMinSeconds": 68,
+      "expectedMaxSeconds": 182,
+      "type": "line"
+    },
+    {
+      "from": "CAN_TRIES_GORNAL",
+      "to": "TORRASSA",
+      "lineId": "L9S",
+      "distanceMeters": 834,
+      "expectedMinSeconds": 75,
+      "expectedMaxSeconds": 200,
+      "type": "line"
+    },
+    {
+      "from": "TORRASSA",
+      "to": "COLLBLANC",
+      "lineId": "L9S",
+      "distanceMeters": 867,
+      "expectedMinSeconds": 78,
+      "expectedMaxSeconds": 208,
+      "type": "line"
+    },
+    {
+      "from": "COLLBLANC",
+      "to": "ZONA_UNIVERSITARIA",
+      "lineId": "L9S",
+      "distanceMeters": 1086,
+      "expectedMinSeconds": 98,
+      "expectedMaxSeconds": 261,
+      "type": "line"
+    },
+    {
+      "from": "LA_SAGRERA",
+      "to": "ONZE_DE_SETEMBRE",
+      "lineId": "L10N",
+      "distanceMeters": 1143,
+      "expectedMinSeconds": 103,
+      "expectedMaxSeconds": 274,
+      "type": "line"
+    },
+    {
+      "from": "ONZE_DE_SETEMBRE",
+      "to": "BON_PASTOR",
+      "lineId": "L10N",
+      "distanceMeters": 1212,
+      "expectedMinSeconds": 109,
+      "expectedMaxSeconds": 291,
+      "type": "line"
+    },
+    {
+      "from": "BON_PASTOR",
+      "to": "LLEFIA",
+      "lineId": "L10N",
+      "distanceMeters": 1131,
+      "expectedMinSeconds": 102,
+      "expectedMaxSeconds": 271,
+      "type": "line"
+    },
+    {
+      "from": "LLEFIA",
+      "to": "LA_SALUT",
+      "lineId": "L10N",
+      "distanceMeters": 673,
+      "expectedMinSeconds": 61,
+      "expectedMaxSeconds": 161,
+      "type": "line"
+    },
+    {
+      "from": "LA_SALUT",
+      "to": "GORG",
+      "lineId": "L10N",
+      "distanceMeters": 808,
+      "expectedMinSeconds": 73,
+      "expectedMaxSeconds": 194,
+      "type": "line"
+    },
+    {
+      "from": "ZAL_RIU_VELL",
+      "to": "ECOPARC",
+      "lineId": "L10S",
+      "distanceMeters": 791,
+      "expectedMinSeconds": 71,
+      "expectedMaxSeconds": 190,
+      "type": "line"
+    },
+    {
+      "from": "ECOPARC",
+      "to": "PORT_COMERCIAL_LA_FACTORIA",
+      "lineId": "L10S",
+      "distanceMeters": 714,
+      "expectedMinSeconds": 64,
+      "expectedMaxSeconds": 171,
+      "type": "line"
+    },
+    {
+      "from": "PORT_COMERCIAL_LA_FACTORIA",
+      "to": "ZONA_FRANCA",
+      "lineId": "L10S",
+      "distanceMeters": 857,
+      "expectedMinSeconds": 77,
+      "expectedMaxSeconds": 206,
+      "type": "line"
+    },
+    {
+      "from": "ZONA_FRANCA",
+      "to": "FOC",
+      "lineId": "L10S",
+      "distanceMeters": 1490,
+      "expectedMinSeconds": 134,
+      "expectedMaxSeconds": 358,
+      "type": "line"
+    },
+    {
+      "from": "FOC",
+      "to": "FONERIA",
+      "lineId": "L10S",
+      "distanceMeters": 625,
+      "expectedMinSeconds": 56,
+      "expectedMaxSeconds": 150,
+      "type": "line"
+    },
+    {
+      "from": "FONERIA",
+      "to": "CIUTAT_DE_LA_JUSTICIA",
+      "lineId": "L10S",
+      "distanceMeters": 543,
+      "expectedMinSeconds": 49,
+      "expectedMaxSeconds": 130,
+      "type": "line"
+    },
+    {
+      "from": "CIUTAT_DE_LA_JUSTICIA",
+      "to": "PROVENCANA",
+      "lineId": "L10S",
+      "distanceMeters": 714,
+      "expectedMinSeconds": 64,
+      "expectedMaxSeconds": 171,
+      "type": "line"
+    },
+    {
+      "from": "PROVENCANA",
+      "to": "CAN_TRIES_GORNAL",
+      "lineId": "L10S",
+      "distanceMeters": 512,
+      "expectedMinSeconds": 46,
+      "expectedMaxSeconds": 123,
+      "type": "line"
+    },
+    {
+      "from": "CAN_TRIES_GORNAL",
+      "to": "TORRASSA",
+      "lineId": "L10S",
+      "distanceMeters": 834,
+      "expectedMinSeconds": 75,
+      "expectedMaxSeconds": 200,
+      "type": "line"
+    },
+    {
+      "from": "TORRASSA",
+      "to": "COLLBLANC",
+      "lineId": "L10S",
+      "distanceMeters": 867,
+      "expectedMinSeconds": 78,
+      "expectedMaxSeconds": 208,
+      "type": "line"
+    },
+    {
+      "from": "TRINITAT_NOVA",
+      "to": "CASA_DE_L_AIGUA",
+      "lineId": "L11",
+      "distanceMeters": 236,
+      "expectedMinSeconds": 21,
+      "expectedMaxSeconds": 57,
+      "type": "line"
+    },
+    {
+      "from": "CASA_DE_L_AIGUA",
+      "to": "TORRE_BARO_VALLBONA",
+      "lineId": "L11",
+      "distanceMeters": 972,
+      "expectedMinSeconds": 88,
+      "expectedMaxSeconds": 233,
+      "type": "line"
+    },
+    {
+      "from": "TORRE_BARO_VALLBONA",
+      "to": "CIUTAT_MERIDIANA",
+      "lineId": "L11",
+      "distanceMeters": 472,
+      "expectedMinSeconds": 42,
+      "expectedMaxSeconds": 113,
+      "type": "line"
+    },
+    {
+      "from": "CIUTAT_MERIDIANA",
+      "to": "CAN_CUIAS",
+      "lineId": "L11",
+      "distanceMeters": 222,
+      "expectedMinSeconds": 20,
+      "expectedMaxSeconds": 53,
+      "type": "line"
+    },
+    {
+      "from": "TORRASSA",
+      "to": "TORRASSA",
+      "fromLine": "L1",
+      "toLine": "L9S",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "TORRASSA",
+      "to": "TORRASSA",
+      "fromLine": "L1",
+      "toLine": "L10S",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "TORRASSA",
+      "to": "TORRASSA",
+      "fromLine": "L9S",
+      "toLine": "L10S",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "PLACA_DE_SANTS",
+      "to": "PLACA_DE_SANTS",
+      "fromLine": "L1",
+      "toLine": "L5",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "ESPANYA",
+      "to": "ESPANYA",
+      "fromLine": "L1",
+      "toLine": "L3",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "UNIVERSITAT",
+      "to": "UNIVERSITAT",
+      "fromLine": "L1",
+      "toLine": "L2",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "CATALUNYA",
+      "to": "CATALUNYA",
+      "fromLine": "L1",
+      "toLine": "L3",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "URQUINAONA",
+      "to": "URQUINAONA",
+      "fromLine": "L1",
+      "toLine": "L4",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "CLOT",
+      "to": "CLOT",
+      "fromLine": "L1",
+      "toLine": "L2",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "LA_SAGRERA",
+      "to": "LA_SAGRERA",
+      "fromLine": "L1",
+      "toLine": "L5",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "LA_SAGRERA",
+      "to": "LA_SAGRERA",
+      "fromLine": "L1",
+      "toLine": "L9N",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "LA_SAGRERA",
+      "to": "LA_SAGRERA",
+      "fromLine": "L1",
+      "toLine": "L10N",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "LA_SAGRERA",
+      "to": "LA_SAGRERA",
+      "fromLine": "L5",
+      "toLine": "L9N",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "LA_SAGRERA",
+      "to": "LA_SAGRERA",
+      "fromLine": "L5",
+      "toLine": "L10N",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "LA_SAGRERA",
+      "to": "LA_SAGRERA",
+      "fromLine": "L9N",
+      "toLine": "L10N",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "FONDO",
+      "to": "FONDO",
+      "fromLine": "L1",
+      "toLine": "L9N",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "PARALLEL",
+      "to": "PARALLEL",
+      "fromLine": "L2",
+      "toLine": "L3",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "PASSEIG_DE_GRACIA",
+      "to": "PASSEIG_DE_GRACIA",
+      "fromLine": "L2",
+      "toLine": "L3",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "PASSEIG_DE_GRACIA",
+      "to": "PASSEIG_DE_GRACIA",
+      "fromLine": "L2",
+      "toLine": "L4",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "PASSEIG_DE_GRACIA",
+      "to": "PASSEIG_DE_GRACIA",
+      "fromLine": "L3",
+      "toLine": "L4",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "SAGRADA_FAMILIA",
+      "to": "SAGRADA_FAMILIA",
+      "fromLine": "L2",
+      "toLine": "L5",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "LA_PAU",
+      "to": "LA_PAU",
+      "fromLine": "L2",
+      "toLine": "L4",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "GORG",
+      "to": "GORG",
+      "fromLine": "L2",
+      "toLine": "L10N",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "ZONA_UNIVERSITARIA",
+      "to": "ZONA_UNIVERSITARIA",
+      "fromLine": "L3",
+      "toLine": "L9S",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "SANTS_ESTACIO",
+      "to": "SANTS_ESTACIO",
+      "fromLine": "L3",
+      "toLine": "L5",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "DIAGONAL",
+      "to": "DIAGONAL",
+      "fromLine": "L3",
+      "toLine": "L5",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "VALL_D_HEBRON",
+      "to": "VALL_D_HEBRON",
+      "fromLine": "L3",
+      "toLine": "L5",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "TRINITAT_NOVA",
+      "to": "TRINITAT_NOVA",
+      "fromLine": "L3",
+      "toLine": "L4",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "TRINITAT_NOVA",
+      "to": "TRINITAT_NOVA",
+      "fromLine": "L3",
+      "toLine": "L11",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "TRINITAT_NOVA",
+      "to": "TRINITAT_NOVA",
+      "fromLine": "L4",
+      "toLine": "L11",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "VERDAGUER",
+      "to": "VERDAGUER",
+      "fromLine": "L4",
+      "toLine": "L5",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "MARAGALL",
+      "to": "MARAGALL",
+      "fromLine": "L4",
+      "toLine": "L5",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "COLLBLANC",
+      "to": "COLLBLANC",
+      "fromLine": "L5",
+      "toLine": "L9S",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "COLLBLANC",
+      "to": "COLLBLANC",
+      "fromLine": "L5",
+      "toLine": "L10S",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "COLLBLANC",
+      "to": "COLLBLANC",
+      "fromLine": "L9S",
+      "toLine": "L10S",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "CAN_TRIES_GORNAL",
+      "to": "CAN_TRIES_GORNAL",
+      "fromLine": "L9S",
+      "toLine": "L10S",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "ONZE_DE_SETEMBRE",
+      "to": "ONZE_DE_SETEMBRE",
+      "fromLine": "L9N",
+      "toLine": "L10N",
+      "type": "transfer",
+      "transferSeconds": 120
+    },
+    {
+      "from": "BON_PASTOR",
+      "to": "BON_PASTOR",
+      "fromLine": "L9N",
+      "toLine": "L10N",
+      "type": "transfer",
+      "transferSeconds": 120
+    }
+  ]
+}

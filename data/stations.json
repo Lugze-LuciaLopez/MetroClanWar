@@ -1,0 +1,1551 @@
+[
+  {
+    "stationId": "HOSPITAL_DE_BELLVITGE",
+    "name": "Hospital de Bellvitge",
+    "lat": 41.344677452264776,
+    "lon": 2.1072421350644093,
+    "lineIds": [
+      "L1"
+    ],
+    "codiGrup": 6660111,
+    "originalId": 111
+  },
+  {
+    "stationId": "BELLVITGE",
+    "name": "Bellvitge",
+    "lat": 41.35097352459213,
+    "lon": 2.1109182897923735,
+    "lineIds": [
+      "L1"
+    ],
+    "codiGrup": 6660112,
+    "originalId": 112
+  },
+  {
+    "stationId": "AV_CARRILET",
+    "name": "Av. Carrilet",
+    "lat": 41.35852162448053,
+    "lon": 2.1026452939747284,
+    "lineIds": [
+      "L1"
+    ],
+    "codiGrup": 6660113,
+    "originalId": 113
+  },
+  {
+    "stationId": "RAMBLA_JUST_OLIVERAS",
+    "name": "Rambla Just Oliveras",
+    "lat": 41.3640899130925,
+    "lon": 2.0997493392175293,
+    "lineIds": [
+      "L1"
+    ],
+    "codiGrup": 6660114,
+    "originalId": 114
+  },
+  {
+    "stationId": "CAN_SERRA",
+    "name": "Can Serra",
+    "lat": 41.36769339471756,
+    "lon": 2.10275470564125,
+    "lineIds": [
+      "L1"
+    ],
+    "codiGrup": 6660115,
+    "originalId": 115
+  },
+  {
+    "stationId": "FLORIDA",
+    "name": "Florida",
+    "lat": 41.36831605180378,
+    "lon": 2.1100273658989885,
+    "lineIds": [
+      "L1"
+    ],
+    "codiGrup": 6660116,
+    "originalId": 116
+  },
+  {
+    "stationId": "TORRASSA",
+    "name": "Torrassa",
+    "lat": 41.36826071279739,
+    "lon": 2.1160894327460174,
+    "lineIds": [
+      "L1",
+      "L9S",
+      "L10S"
+    ],
+    "codiGrup": 6660117,
+    "originalId": 117
+  },
+  {
+    "stationId": "SANTA_EULALIA",
+    "name": "Santa Eulàlia",
+    "lat": 41.36881637467315,
+    "lon": 2.1286172553621183,
+    "lineIds": [
+      "L1"
+    ],
+    "codiGrup": 6660118,
+    "originalId": 118
+  },
+  {
+    "stationId": "MERCAT_NOU",
+    "name": "Mercat Nou",
+    "lat": 41.373002700088556,
+    "lon": 2.133535784694404,
+    "lineIds": [
+      "L1"
+    ],
+    "codiGrup": 6660119,
+    "originalId": 119
+  },
+  {
+    "stationId": "PLACA_DE_SANTS",
+    "name": "Plaça de Sants",
+    "lat": 41.3755322522621,
+    "lon": 2.135575555495535,
+    "lineIds": [
+      "L1",
+      "L5"
+    ],
+    "codiGrup": 6660120,
+    "originalId": 120
+  },
+  {
+    "stationId": "HOSTAFRANCS",
+    "name": "Hostafrancs",
+    "lat": 41.37525362810128,
+    "lon": 2.1432912673316498,
+    "lineIds": [
+      "L1"
+    ],
+    "codiGrup": 6660121,
+    "originalId": 121
+  },
+  {
+    "stationId": "ESPANYA",
+    "name": "Espanya",
+    "lat": 41.37545911098498,
+    "lon": 2.1493870030135134,
+    "lineIds": [
+      "L1",
+      "L3"
+    ],
+    "codiGrup": 6660122,
+    "originalId": 122
+  },
+  {
+    "stationId": "ROCAFORT",
+    "name": "Rocafort",
+    "lat": 41.37923215305268,
+    "lon": 2.154562483439547,
+    "lineIds": [
+      "L1"
+    ],
+    "codiGrup": 6660123,
+    "originalId": 123
+  },
+  {
+    "stationId": "URGELL",
+    "name": "Urgell",
+    "lat": 41.38248740020102,
+    "lon": 2.1588909108500465,
+    "lineIds": [
+      "L1"
+    ],
+    "codiGrup": 6660124,
+    "originalId": 124
+  },
+  {
+    "stationId": "UNIVERSITAT",
+    "name": "Universitat",
+    "lat": 41.385587897267456,
+    "lon": 2.1640585462441195,
+    "lineIds": [
+      "L1",
+      "L2"
+    ],
+    "codiGrup": 6660125,
+    "originalId": 125
+  },
+  {
+    "stationId": "CATALUNYA",
+    "name": "Catalunya",
+    "lat": 41.38771322435357,
+    "lon": 2.1697167625790152,
+    "lineIds": [
+      "L1",
+      "L3"
+    ],
+    "codiGrup": 6660126,
+    "originalId": 126
+  },
+  {
+    "stationId": "URQUINAONA",
+    "name": "Urquinaona",
+    "lat": 41.38884688371719,
+    "lon": 2.173667761230702,
+    "lineIds": [
+      "L1",
+      "L4"
+    ],
+    "codiGrup": 6660127,
+    "originalId": 127
+  },
+  {
+    "stationId": "ARC_DE_TRIOMF",
+    "name": "Arc de Triomf",
+    "lat": 41.392336659636584,
+    "lon": 2.181164673248104,
+    "lineIds": [
+      "L1"
+    ],
+    "codiGrup": 6660128,
+    "originalId": 128
+  },
+  {
+    "stationId": "MARINA",
+    "name": "Marina",
+    "lat": 41.39472528791244,
+    "lon": 2.1858010331425235,
+    "lineIds": [
+      "L1"
+    ],
+    "codiGrup": 6660129,
+    "originalId": 129
+  },
+  {
+    "stationId": "GLORIES",
+    "name": "Glòries",
+    "lat": 41.4022772166665,
+    "lon": 2.187537470950601,
+    "lineIds": [
+      "L1"
+    ],
+    "codiGrup": 6660130,
+    "originalId": 130
+  },
+  {
+    "stationId": "CLOT",
+    "name": "Clot",
+    "lat": 41.41051171434685,
+    "lon": 2.186978119157032,
+    "lineIds": [
+      "L1",
+      "L2"
+    ],
+    "codiGrup": 6660131,
+    "originalId": 131
+  },
+  {
+    "stationId": "NAVAS",
+    "name": "Navas",
+    "lat": 41.41618670887784,
+    "lon": 2.1870567842653172,
+    "lineIds": [
+      "L1"
+    ],
+    "codiGrup": 6660132,
+    "originalId": 132
+  },
+  {
+    "stationId": "LA_SAGRERA",
+    "name": "La Sagrera",
+    "lat": 41.420695942446166,
+    "lon": 2.1868113297846263,
+    "lineIds": [
+      "L1",
+      "L5",
+      "L9N",
+      "L10N"
+    ],
+    "codiGrup": 6660133,
+    "originalId": 133
+  },
+  {
+    "stationId": "FABRA_I_PUIG",
+    "name": "Fabra i Puig",
+    "lat": 41.42963259534842,
+    "lon": 2.183661431503222,
+    "lineIds": [
+      "L1"
+    ],
+    "codiGrup": 6660134,
+    "originalId": 134
+  },
+  {
+    "stationId": "SANT_ANDREU",
+    "name": "Sant Andreu",
+    "lat": 41.436610370679226,
+    "lon": 2.1911883955920586,
+    "lineIds": [
+      "L1"
+    ],
+    "codiGrup": 6660135,
+    "originalId": 135
+  },
+  {
+    "stationId": "TORRAS_I_BAGES",
+    "name": "Torras i Bages",
+    "lat": 41.44322471120022,
+    "lon": 2.190670630058029,
+    "lineIds": [
+      "L1"
+    ],
+    "codiGrup": 6660136,
+    "originalId": 136
+  },
+  {
+    "stationId": "TRINITAT_VELLA",
+    "name": "Trinitat Vella",
+    "lat": 41.448956491210204,
+    "lon": 2.19383728111338,
+    "lineIds": [
+      "L1"
+    ],
+    "codiGrup": 6660137,
+    "originalId": 137
+  },
+  {
+    "stationId": "BARO_DE_VIVER",
+    "name": "Baró de Viver",
+    "lat": 41.449935998152824,
+    "lon": 2.1995630177315273,
+    "lineIds": [
+      "L1"
+    ],
+    "codiGrup": 6660138,
+    "originalId": 138
+  },
+  {
+    "stationId": "SANTA_COLOMA",
+    "name": "Santa Coloma",
+    "lat": 41.451067345464494,
+    "lon": 2.2079694594622845,
+    "lineIds": [
+      "L1"
+    ],
+    "codiGrup": 6660139,
+    "originalId": 139
+  },
+  {
+    "stationId": "FONDO",
+    "name": "Fondo",
+    "lat": 41.45168718673928,
+    "lon": 2.2185381152902193,
+    "lineIds": [
+      "L1",
+      "L9N"
+    ],
+    "codiGrup": 6660140,
+    "originalId": 140
+  },
+  {
+    "stationId": "PARALLEL",
+    "name": "Paral·lel",
+    "lat": 41.37458125876583,
+    "lon": 2.169029367599338,
+    "lineIds": [
+      "L2",
+      "L3"
+    ],
+    "codiGrup": 6660210,
+    "originalId": 210
+  },
+  {
+    "stationId": "SANT_ANTONI",
+    "name": "Sant Antoni",
+    "lat": 41.37983283932031,
+    "lon": 2.1632411382555055,
+    "lineIds": [
+      "L2"
+    ],
+    "codiGrup": 6660211,
+    "originalId": 211
+  },
+  {
+    "stationId": "PASSEIG_DE_GRACIA",
+    "name": "Passeig de Gràcia",
+    "lat": 41.390106323828306,
+    "lon": 2.16735100565212,
+    "lineIds": [
+      "L2",
+      "L3",
+      "L4"
+    ],
+    "codiGrup": 6660213,
+    "originalId": 213
+  },
+  {
+    "stationId": "TETUAN",
+    "name": "Tetuan",
+    "lat": 41.394887450597096,
+    "lon": 2.175559181787991,
+    "lineIds": [
+      "L2"
+    ],
+    "codiGrup": 6660214,
+    "originalId": 214
+  },
+  {
+    "stationId": "MONUMENTAL",
+    "name": "Monumental",
+    "lat": 41.40052374172786,
+    "lon": 2.1794616714099684,
+    "lineIds": [
+      "L2"
+    ],
+    "codiGrup": 6660215,
+    "originalId": 215
+  },
+  {
+    "stationId": "SAGRADA_FAMILIA",
+    "name": "Sagrada Família",
+    "lat": 41.4044190945986,
+    "lon": 2.1744904092907813,
+    "lineIds": [
+      "L2",
+      "L5"
+    ],
+    "codiGrup": 6660216,
+    "originalId": 216
+  },
+  {
+    "stationId": "ENCANTS",
+    "name": "Encants",
+    "lat": 41.40723597843338,
+    "lon": 2.182700370252568,
+    "lineIds": [
+      "L2"
+    ],
+    "codiGrup": 6660217,
+    "originalId": 217
+  },
+  {
+    "stationId": "BAC_DE_RODA",
+    "name": "Bac de Roda",
+    "lat": 41.41516206251577,
+    "lon": 2.1955032531185723,
+    "lineIds": [
+      "L2"
+    ],
+    "codiGrup": 6660219,
+    "originalId": 219
+  },
+  {
+    "stationId": "SANT_MARTI",
+    "name": "Sant Martí",
+    "lat": 41.419063621458996,
+    "lon": 2.2007239139818875,
+    "lineIds": [
+      "L2"
+    ],
+    "codiGrup": 6660220,
+    "originalId": 220
+  },
+  {
+    "stationId": "LA_PAU",
+    "name": "La Pau",
+    "lat": 41.42325111713883,
+    "lon": 2.2058782008215694,
+    "lineIds": [
+      "L2",
+      "L4"
+    ],
+    "codiGrup": 6660221,
+    "originalId": 221
+  },
+  {
+    "stationId": "VERNEDA",
+    "name": "Verneda",
+    "lat": 41.43000446400387,
+    "lon": 2.209883422365895,
+    "lineIds": [
+      "L2"
+    ],
+    "codiGrup": 6660222,
+    "originalId": 222
+  },
+  {
+    "stationId": "ARTIGUES_SANT_ADRIA",
+    "name": "Artigues | Sant Adrià",
+    "lat": 41.43384822541837,
+    "lon": 2.217771760065826,
+    "lineIds": [
+      "L2"
+    ],
+    "codiGrup": 6660223,
+    "originalId": 223
+  },
+  {
+    "stationId": "SANT_ROC",
+    "name": "Sant Roc",
+    "lat": 41.43583082252647,
+    "lon": 2.22860617965681,
+    "lineIds": [
+      "L2"
+    ],
+    "codiGrup": 6660224,
+    "originalId": 224
+  },
+  {
+    "stationId": "GORG",
+    "name": "Gorg",
+    "lat": 41.440259861510704,
+    "lon": 2.2338070592317414,
+    "lineIds": [
+      "L2",
+      "L10N"
+    ],
+    "codiGrup": 6660225,
+    "originalId": 225
+  },
+  {
+    "stationId": "PEP_VENTURA",
+    "name": "Pep Ventura",
+    "lat": 41.4439045741019,
+    "lon": 2.237959375095989,
+    "lineIds": [
+      "L2"
+    ],
+    "codiGrup": 6660226,
+    "originalId": 226
+  },
+  {
+    "stationId": "BADALONA_POMPEU_FABRA",
+    "name": "Badalona Pompeu Fabra",
+    "lat": 41.449052604746285,
+    "lon": 2.244099157218408,
+    "lineIds": [
+      "L2"
+    ],
+    "codiGrup": 6660227,
+    "originalId": 227
+  },
+  {
+    "stationId": "ZONA_UNIVERSITARIA",
+    "name": "Zona Universitària",
+    "lat": 41.38400257249017,
+    "lon": 2.111388924148772,
+    "lineIds": [
+      "L3",
+      "L9S"
+    ],
+    "codiGrup": 6660314,
+    "originalId": 314
+  },
+  {
+    "stationId": "PALAU_REIAL",
+    "name": "Palau Reial",
+    "lat": 41.385980056620134,
+    "lon": 2.118538181084618,
+    "lineIds": [
+      "L3"
+    ],
+    "codiGrup": 6660315,
+    "originalId": 315
+  },
+  {
+    "stationId": "MARIA_CRISTINA",
+    "name": "Maria Cristina",
+    "lat": 41.38781569227959,
+    "lon": 2.125791232923749,
+    "lineIds": [
+      "L3"
+    ],
+    "codiGrup": 6660316,
+    "originalId": 316
+  },
+  {
+    "stationId": "LES_CORTS",
+    "name": "Les Corts",
+    "lat": 41.384119684361195,
+    "lon": 2.1308710146162624,
+    "lineIds": [
+      "L3"
+    ],
+    "codiGrup": 6660317,
+    "originalId": 317
+  },
+  {
+    "stationId": "PLACA_DEL_CENTRE",
+    "name": "Plaça del Centre",
+    "lat": 41.38192170670766,
+    "lon": 2.1358837134051947,
+    "lineIds": [
+      "L3"
+    ],
+    "codiGrup": 6660318,
+    "originalId": 318
+  },
+  {
+    "stationId": "SANTS_ESTACIO",
+    "name": "Sants Estació",
+    "lat": 41.380961180119144,
+    "lon": 2.141892378878913,
+    "lineIds": [
+      "L3",
+      "L5"
+    ],
+    "codiGrup": 6660319,
+    "originalId": 319
+  },
+  {
+    "stationId": "TARRAGONA",
+    "name": "Tarragona",
+    "lat": 41.378493002424634,
+    "lon": 2.1453357748823865,
+    "lineIds": [
+      "L3"
+    ],
+    "codiGrup": 6660320,
+    "originalId": 320
+  },
+  {
+    "stationId": "POBLE_SEC",
+    "name": "Poble Sec",
+    "lat": 41.374996204246344,
+    "lon": 2.1602448223915327,
+    "lineIds": [
+      "L3"
+    ],
+    "codiGrup": 6660322,
+    "originalId": 322
+  },
+  {
+    "stationId": "DRASSANES",
+    "name": "Drassanes",
+    "lat": 41.37653760970823,
+    "lon": 2.1756641701931962,
+    "lineIds": [
+      "L3"
+    ],
+    "codiGrup": 6660324,
+    "originalId": 324
+  },
+  {
+    "stationId": "LICEU",
+    "name": "Liceu",
+    "lat": 41.3814454250764,
+    "lon": 2.1730302773575945,
+    "lineIds": [
+      "L3"
+    ],
+    "codiGrup": 6660325,
+    "originalId": 325
+  },
+  {
+    "stationId": "DIAGONAL",
+    "name": "Diagonal",
+    "lat": 41.395676604785294,
+    "lon": 2.160443763922243,
+    "lineIds": [
+      "L3",
+      "L5"
+    ],
+    "codiGrup": 6660328,
+    "originalId": 328
+  },
+  {
+    "stationId": "FONTANA",
+    "name": "Fontana",
+    "lat": 41.40200887904024,
+    "lon": 2.1530224404295164,
+    "lineIds": [
+      "L3"
+    ],
+    "codiGrup": 6660329,
+    "originalId": 329
+  },
+  {
+    "stationId": "LESSEPS",
+    "name": "Lesseps",
+    "lat": 41.405738025515355,
+    "lon": 2.1504071221317904,
+    "lineIds": [
+      "L3"
+    ],
+    "codiGrup": 6660330,
+    "originalId": 330
+  },
+  {
+    "stationId": "VALLCARCA",
+    "name": "Vallcarca",
+    "lat": 41.411974951406016,
+    "lon": 2.144337309169914,
+    "lineIds": [
+      "L3"
+    ],
+    "codiGrup": 6660331,
+    "originalId": 331
+  },
+  {
+    "stationId": "PENITENTS",
+    "name": "Penitents",
+    "lat": 41.41827911730064,
+    "lon": 2.140971786114312,
+    "lineIds": [
+      "L3"
+    ],
+    "codiGrup": 6660332,
+    "originalId": 332
+  },
+  {
+    "stationId": "VALL_D_HEBRON",
+    "name": "Vall d'Hebron",
+    "lat": 41.425123138465146,
+    "lon": 2.1425147148937467,
+    "lineIds": [
+      "L3",
+      "L5"
+    ],
+    "codiGrup": 6660333,
+    "originalId": 333
+  },
+  {
+    "stationId": "MONTBAU",
+    "name": "Montbau",
+    "lat": 41.43062015567553,
+    "lon": 2.145039277808795,
+    "lineIds": [
+      "L3"
+    ],
+    "codiGrup": 6660334,
+    "originalId": 334
+  },
+  {
+    "stationId": "MUNDET",
+    "name": "Mundet",
+    "lat": 41.435645266968535,
+    "lon": 2.1484718023518736,
+    "lineIds": [
+      "L3"
+    ],
+    "codiGrup": 6660335,
+    "originalId": 335
+  },
+  {
+    "stationId": "VALLDAURA",
+    "name": "Valldaura",
+    "lat": 41.437996077035756,
+    "lon": 2.1568778304495613,
+    "lineIds": [
+      "L3"
+    ],
+    "codiGrup": 6660336,
+    "originalId": 336
+  },
+  {
+    "stationId": "CANYELLES",
+    "name": "Canyelles",
+    "lat": 41.44175372856857,
+    "lon": 2.166387551719736,
+    "lineIds": [
+      "L3"
+    ],
+    "codiGrup": 6660337,
+    "originalId": 337
+  },
+  {
+    "stationId": "ROQUETES",
+    "name": "Roquetes",
+    "lat": 41.44766967770127,
+    "lon": 2.1760976903706806,
+    "lineIds": [
+      "L3"
+    ],
+    "codiGrup": 6660338,
+    "originalId": 338
+  },
+  {
+    "stationId": "TRINITAT_NOVA",
+    "name": "Trinitat Nova",
+    "lat": 41.449762105902664,
+    "lon": 2.1828552069968574,
+    "lineIds": [
+      "L3",
+      "L4",
+      "L11"
+    ],
+    "codiGrup": 6660339,
+    "originalId": 339
+  },
+  {
+    "stationId": "BESOS",
+    "name": "Besòs",
+    "lat": 41.419835530278384,
+    "lon": 2.210301299420953,
+    "lineIds": [
+      "L4"
+    ],
+    "codiGrup": 6660414,
+    "originalId": 414
+  },
+  {
+    "stationId": "BESOS_MAR",
+    "name": "Besòs Mar",
+    "lat": 41.415098995619424,
+    "lon": 2.216081591411872,
+    "lineIds": [
+      "L4"
+    ],
+    "codiGrup": 6660415,
+    "originalId": 415
+  },
+  {
+    "stationId": "EL_MARESME_FORUM",
+    "name": "El Maresme | Fòrum",
+    "lat": 41.411685717467044,
+    "lon": 2.216548081875298,
+    "lineIds": [
+      "L4"
+    ],
+    "codiGrup": 6660416,
+    "originalId": 416
+  },
+  {
+    "stationId": "SELVA_DE_MAR",
+    "name": "Selva de Mar",
+    "lat": 41.40800151156723,
+    "lon": 2.209122498871073,
+    "lineIds": [
+      "L4"
+    ],
+    "codiGrup": 6660417,
+    "originalId": 417
+  },
+  {
+    "stationId": "POBLENOU",
+    "name": "Poblenou",
+    "lat": 41.40371611757544,
+    "lon": 2.2033712341158838,
+    "lineIds": [
+      "L4"
+    ],
+    "codiGrup": 6660418,
+    "originalId": 418
+  },
+  {
+    "stationId": "LLACUNA",
+    "name": "Llacuna",
+    "lat": 41.39942503860002,
+    "lon": 2.197711708647738,
+    "lineIds": [
+      "L4"
+    ],
+    "codiGrup": 6660419,
+    "originalId": 419
+  },
+  {
+    "stationId": "BOGATELL",
+    "name": "Bogatell",
+    "lat": 41.395107503840855,
+    "lon": 2.192012401533471,
+    "lineIds": [
+      "L4"
+    ],
+    "codiGrup": 6660420,
+    "originalId": 420
+  },
+  {
+    "stationId": "CIUTADELLA_VILA_OLIMPICA",
+    "name": "Ciutadella | Vila Olímpica",
+    "lat": 41.38664023480152,
+    "lon": 2.192963138448486,
+    "lineIds": [
+      "L4"
+    ],
+    "codiGrup": 6660421,
+    "originalId": 421
+  },
+  {
+    "stationId": "BARCELONETA",
+    "name": "Barceloneta",
+    "lat": 41.381810977055316,
+    "lon": 2.184786783641099,
+    "lineIds": [
+      "L4"
+    ],
+    "codiGrup": 6660422,
+    "originalId": 422
+  },
+  {
+    "stationId": "JAUME_I",
+    "name": "Jaume I",
+    "lat": 41.384126274544364,
+    "lon": 2.178531464537553,
+    "lineIds": [
+      "L4"
+    ],
+    "codiGrup": 6660423,
+    "originalId": 423
+  },
+  {
+    "stationId": "GIRONA",
+    "name": "Girona",
+    "lat": 41.394920347488814,
+    "lon": 2.17082483204024,
+    "lineIds": [
+      "L4"
+    ],
+    "codiGrup": 6660426,
+    "originalId": 426
+  },
+  {
+    "stationId": "VERDAGUER",
+    "name": "Verdaguer",
+    "lat": 41.39996847675383,
+    "lon": 2.168312882339719,
+    "lineIds": [
+      "L4",
+      "L5"
+    ],
+    "codiGrup": 6660427,
+    "originalId": 427
+  },
+  {
+    "stationId": "JOANIC",
+    "name": "Joanic",
+    "lat": 41.40642689565163,
+    "lon": 2.16322502517123,
+    "lineIds": [
+      "L4"
+    ],
+    "codiGrup": 6660428,
+    "originalId": 428
+  },
+  {
+    "stationId": "ALFONS_X",
+    "name": "Alfons X",
+    "lat": 41.412415682383845,
+    "lon": 2.166511957375424,
+    "lineIds": [
+      "L4"
+    ],
+    "codiGrup": 6660429,
+    "originalId": 429
+  },
+  {
+    "stationId": "GUINARDO_HOSPITAL_DE_SANT_PAU",
+    "name": "Guinardó | Hospital de Sant Pau",
+    "lat": 41.415962196795135,
+    "lon": 2.1739890445261802,
+    "lineIds": [
+      "L4"
+    ],
+    "codiGrup": 6660430,
+    "originalId": 430
+  },
+  {
+    "stationId": "MARAGALL",
+    "name": "Maragall",
+    "lat": 41.42412908114067,
+    "lon": 2.177412716857448,
+    "lineIds": [
+      "L4",
+      "L5"
+    ],
+    "codiGrup": 6660431,
+    "originalId": 431
+  },
+  {
+    "stationId": "LLUCMAJOR",
+    "name": "Llucmajor",
+    "lat": 41.43698464869135,
+    "lon": 2.173343398047292,
+    "lineIds": [
+      "L4"
+    ],
+    "codiGrup": 6660432,
+    "originalId": 432
+  },
+  {
+    "stationId": "VIA_JULIA",
+    "name": "Via Júlia",
+    "lat": 41.443730234715765,
+    "lon": 2.178549960776955,
+    "lineIds": [
+      "L4"
+    ],
+    "codiGrup": 6660433,
+    "originalId": 433
+  },
+  {
+    "stationId": "CORNELLA_CENTRE",
+    "name": "Cornellà Centre",
+    "lat": 41.35728982068586,
+    "lon": 2.0704280856264488,
+    "lineIds": [
+      "L5"
+    ],
+    "codiGrup": 6660509,
+    "originalId": 509
+  },
+  {
+    "stationId": "GAVARRA",
+    "name": "Gavarra",
+    "lat": 41.357994934130915,
+    "lon": 2.0792727787982708,
+    "lineIds": [
+      "L5"
+    ],
+    "codiGrup": 6660510,
+    "originalId": 510
+  },
+  {
+    "stationId": "SANT_ILDEFONS",
+    "name": "Sant Ildefons",
+    "lat": 41.363381080148336,
+    "lon": 2.084392786677159,
+    "lineIds": [
+      "L5"
+    ],
+    "codiGrup": 6660511,
+    "originalId": 511
+  },
+  {
+    "stationId": "CAN_BOIXERES",
+    "name": "Can Boixeres",
+    "lat": 41.366570750436026,
+    "lon": 2.0915060884648176,
+    "lineIds": [
+      "L5"
+    ],
+    "codiGrup": 6660512,
+    "originalId": 512
+  },
+  {
+    "stationId": "CAN_VIDALET",
+    "name": "Can Vidalet",
+    "lat": 41.37127879519907,
+    "lon": 2.099445030163751,
+    "lineIds": [
+      "L5"
+    ],
+    "codiGrup": 6660513,
+    "originalId": 513
+  },
+  {
+    "stationId": "PUBILLA_CASES",
+    "name": "Pubilla Cases",
+    "lat": 41.373837586750604,
+    "lon": 2.1072090599014683,
+    "lineIds": [
+      "L5"
+    ],
+    "codiGrup": 6660514,
+    "originalId": 514
+  },
+  {
+    "stationId": "COLLBLANC",
+    "name": "Collblanc",
+    "lat": 41.37583966750611,
+    "lon": 2.1185256293277304,
+    "lineIds": [
+      "L5",
+      "L9S",
+      "L10S"
+    ],
+    "codiGrup": 6660515,
+    "originalId": 515
+  },
+  {
+    "stationId": "BADAL",
+    "name": "Badal",
+    "lat": 41.37558063118747,
+    "lon": 2.127402112543491,
+    "lineIds": [
+      "L5"
+    ],
+    "codiGrup": 6660516,
+    "originalId": 516
+  },
+  {
+    "stationId": "ENTENCA",
+    "name": "Entença",
+    "lat": 41.38446685535986,
+    "lon": 2.145618590090013,
+    "lineIds": [
+      "L5"
+    ],
+    "codiGrup": 6660519,
+    "originalId": 519
+  },
+  {
+    "stationId": "HOSPITAL_CLINIC",
+    "name": "Hospital Clínic",
+    "lat": 41.388607764469285,
+    "lon": 2.151081070999777,
+    "lineIds": [
+      "L5"
+    ],
+    "codiGrup": 6660520,
+    "originalId": 520
+  },
+  {
+    "stationId": "SANT_PAU_DOS_DE_MAIG",
+    "name": "Sant Pau | Dos de Maig",
+    "lat": 41.41075327997014,
+    "lon": 2.1760160280003675,
+    "lineIds": [
+      "L5"
+    ],
+    "codiGrup": 6660524,
+    "originalId": 524
+  },
+  {
+    "stationId": "CAMP_DE_L_ARPA",
+    "name": "Camp de l'Arpa",
+    "lat": 41.41505960638405,
+    "lon": 2.181497212109148,
+    "lineIds": [
+      "L5"
+    ],
+    "codiGrup": 6660525,
+    "originalId": 525
+  },
+  {
+    "stationId": "CONGRES",
+    "name": "Congrés",
+    "lat": 41.42344042865811,
+    "lon": 2.181186224264109,
+    "lineIds": [
+      "L5"
+    ],
+    "codiGrup": 6660527,
+    "originalId": 527
+  },
+  {
+    "stationId": "VIRREI_AMAT",
+    "name": "Virrei Amat",
+    "lat": 41.42970333896579,
+    "lon": 2.174913058009734,
+    "lineIds": [
+      "L5"
+    ],
+    "codiGrup": 6660529,
+    "originalId": 529
+  },
+  {
+    "stationId": "VILAPICINA",
+    "name": "Vilapicina",
+    "lat": 41.430465066864016,
+    "lon": 2.167619083986825,
+    "lineIds": [
+      "L5"
+    ],
+    "codiGrup": 6660530,
+    "originalId": 530
+  },
+  {
+    "stationId": "HORTA",
+    "name": "Horta",
+    "lat": 41.429692524411095,
+    "lon": 2.159974396439855,
+    "lineIds": [
+      "L5"
+    ],
+    "codiGrup": 6660531,
+    "originalId": 531
+  },
+  {
+    "stationId": "EL_CARMEL",
+    "name": "El Carmel",
+    "lat": 41.424449773703074,
+    "lon": 2.1550989391746174,
+    "lineIds": [
+      "L5"
+    ],
+    "codiGrup": 6660532,
+    "originalId": 532
+  },
+  {
+    "stationId": "EL_COLL_LA_TEIXONERA",
+    "name": "El Coll | La Teixonera",
+    "lat": 41.4219971367312,
+    "lon": 2.1483484951724954,
+    "lineIds": [
+      "L5"
+    ],
+    "codiGrup": 6660533,
+    "originalId": 533
+  },
+  {
+    "stationId": "ERNEST_LLUCH",
+    "name": "Ernest Lluch",
+    "lat": 41.37589760693972,
+    "lon": 2.112027311053149,
+    "lineIds": [
+      "L5"
+    ],
+    "codiGrup": 6660555,
+    "originalId": 555
+  },
+  {
+    "stationId": "AEROPORT_T1",
+    "name": "Aeroport T1",
+    "lat": 41.28829483589318,
+    "lon": 2.07115199121738,
+    "lineIds": [
+      "L9S"
+    ],
+    "codiGrup": 6660901,
+    "originalId": 901
+  },
+  {
+    "stationId": "AEROPORT_T2",
+    "name": "Aeroport T2",
+    "lat": 41.30382333421845,
+    "lon": 2.0731133341366688,
+    "lineIds": [
+      "L9S"
+    ],
+    "codiGrup": 6660903,
+    "originalId": 903
+  },
+  {
+    "stationId": "MAS_BLAU",
+    "name": "Mas Blau",
+    "lat": 41.311225361691974,
+    "lon": 2.0734710574676423,
+    "lineIds": [
+      "L9S"
+    ],
+    "codiGrup": 6660904,
+    "originalId": 904
+  },
+  {
+    "stationId": "PARC_NOU",
+    "name": "Parc Nou",
+    "lat": 41.316628454057685,
+    "lon": 2.0879294280214027,
+    "lineIds": [
+      "L9S"
+    ],
+    "codiGrup": 6660905,
+    "originalId": 905
+  },
+  {
+    "stationId": "CENTRIC",
+    "name": "Cèntric",
+    "lat": 41.322250016313035,
+    "lon": 2.0934632422362887,
+    "lineIds": [
+      "L9S"
+    ],
+    "codiGrup": 6660906,
+    "originalId": 906
+  },
+  {
+    "stationId": "EL_PRAT_ESTACIO",
+    "name": "El Prat Estació",
+    "lat": 41.33199264221667,
+    "lon": 2.0899271044508416,
+    "lineIds": [
+      "L9S"
+    ],
+    "codiGrup": 6660907,
+    "originalId": 907
+  },
+  {
+    "stationId": "LES_MORERES",
+    "name": "Les Moreres",
+    "lat": 41.329118641471766,
+    "lon": 2.103073086929979,
+    "lineIds": [
+      "L9S"
+    ],
+    "codiGrup": 6660909,
+    "originalId": 909
+  },
+  {
+    "stationId": "MERCABARNA",
+    "name": "Mercabarna",
+    "lat": 41.33350192178616,
+    "lon": 2.1112571611632744,
+    "lineIds": [
+      "L9S"
+    ],
+    "codiGrup": 6660910,
+    "originalId": 910
+  },
+  {
+    "stationId": "PARC_LOGISTIC",
+    "name": "Parc Logístic",
+    "lat": 41.341663546077285,
+    "lon": 2.127401250786491,
+    "lineIds": [
+      "L9S"
+    ],
+    "codiGrup": 6660911,
+    "originalId": 911
+  },
+  {
+    "stationId": "FIRA",
+    "name": "Fira",
+    "lat": 41.35198805477054,
+    "lon": 2.130451504489052,
+    "lineIds": [
+      "L9S"
+    ],
+    "codiGrup": 6660912,
+    "originalId": 912
+  },
+  {
+    "stationId": "EUROPA_FIRA",
+    "name": "Europa | Fira",
+    "lat": 41.35756042682608,
+    "lon": 2.1259237814712875,
+    "lineIds": [
+      "L9S"
+    ],
+    "codiGrup": 6660913,
+    "originalId": 913
+  },
+  {
+    "stationId": "CAN_TRIES_GORNAL",
+    "name": "Can Tries | Gornal",
+    "lat": 41.36089363267124,
+    "lon": 2.117992580878504,
+    "lineIds": [
+      "L9S",
+      "L10S"
+    ],
+    "codiGrup": 6660914,
+    "originalId": 914
+  },
+  {
+    "stationId": "ONZE_DE_SETEMBRE",
+    "name": "Onze de Setembre",
+    "lat": 41.429617492467266,
+    "lon": 2.1936102147938596,
+    "lineIds": [
+      "L9N",
+      "L10N"
+    ],
+    "codiGrup": 6660932,
+    "originalId": 932
+  },
+  {
+    "stationId": "BON_PASTOR",
+    "name": "Bon Pastor",
+    "lat": 41.436162697479354,
+    "lon": 2.205240266717371,
+    "lineIds": [
+      "L9N",
+      "L10N"
+    ],
+    "codiGrup": 6660933,
+    "originalId": 933
+  },
+  {
+    "stationId": "LLEFIA",
+    "name": "Llefià",
+    "lat": 41.441359580549786,
+    "lon": 2.216906383705608,
+    "lineIds": [
+      "L10N"
+    ],
+    "codiGrup": 6660934,
+    "originalId": 934
+  },
+  {
+    "stationId": "LA_SALUT",
+    "name": "La Salut",
+    "lat": 41.442817097125406,
+    "lon": 2.224737073931071,
+    "lineIds": [
+      "L10N"
+    ],
+    "codiGrup": 6660935,
+    "originalId": 935
+  },
+  {
+    "stationId": "CAN_PEIXAUET",
+    "name": "Can Peixauet",
+    "lat": 41.44398590815181,
+    "lon": 2.2100273277790428,
+    "lineIds": [
+      "L9N"
+    ],
+    "codiGrup": 6660940,
+    "originalId": 940
+  },
+  {
+    "stationId": "SANTA_ROSA",
+    "name": "Santa Rosa",
+    "lat": 41.44685031178436,
+    "lon": 2.2158089802865106,
+    "lineIds": [
+      "L9N"
+    ],
+    "codiGrup": 6660941,
+    "originalId": 941
+  },
+  {
+    "stationId": "ESGLESIA_MAJOR",
+    "name": "Església Major",
+    "lat": 41.454797043178395,
+    "lon": 2.212176867433306,
+    "lineIds": [
+      "L9N"
+    ],
+    "codiGrup": 6660943,
+    "originalId": 943
+  },
+  {
+    "stationId": "SINGUERLIN",
+    "name": "Singuerlín",
+    "lat": 41.45941351575915,
+    "lon": 2.2054288460907183,
+    "lineIds": [
+      "L9N"
+    ],
+    "codiGrup": 6660944,
+    "originalId": 944
+  },
+  {
+    "stationId": "CAN_ZAM",
+    "name": "Can Zam",
+    "lat": 41.456666111515304,
+    "lon": 2.1985694162738683,
+    "lineIds": [
+      "L9N"
+    ],
+    "codiGrup": 6660945,
+    "originalId": 945
+  },
+  {
+    "stationId": "ZAL_RIU_VELL",
+    "name": "ZAL | Riu Vell",
+    "lat": 41.323705867524254,
+    "lon": 2.1330954281444714,
+    "lineIds": [
+      "L10S"
+    ],
+    "codiGrup": 6660951,
+    "originalId": 951
+  },
+  {
+    "stationId": "ECOPARC",
+    "name": "Ecoparc",
+    "lat": 41.33015871130138,
+    "lon": 2.1370711814490084,
+    "lineIds": [
+      "L10S"
+    ],
+    "codiGrup": 6660952,
+    "originalId": 952
+  },
+  {
+    "stationId": "PORT_COMERCIAL_LA_FACTORIA",
+    "name": "Port Comercial | La Factoria",
+    "lat": 41.335983045353615,
+    "lon": 2.1406572348295043,
+    "lineIds": [
+      "L10S"
+    ],
+    "codiGrup": 6660953,
+    "originalId": 953
+  },
+  {
+    "stationId": "ZONA_FRANCA",
+    "name": "Zona Franca",
+    "lat": 41.34297610170164,
+    "lon": 2.144964431606467,
+    "lineIds": [
+      "L10S"
+    ],
+    "codiGrup": 6660954,
+    "originalId": 954
+  },
+  {
+    "stationId": "FOC",
+    "name": "Foc",
+    "lat": 41.35616086809139,
+    "lon": 2.1418043174739214,
+    "lineIds": [
+      "L10S"
+    ],
+    "codiGrup": 6660956,
+    "originalId": 956
+  },
+  {
+    "stationId": "FONERIA",
+    "name": "Foneria",
+    "lat": 41.3610992396304,
+    "lon": 2.1382289088556874,
+    "lineIds": [
+      "L10S"
+    ],
+    "codiGrup": 6660957,
+    "originalId": 957
+  },
+  {
+    "stationId": "CIUTAT_DE_LA_JUSTICIA",
+    "name": "Ciutat de la Justícia",
+    "lat": 41.36313727354129,
+    "lon": 2.1323149668540133,
+    "lineIds": [
+      "L10S"
+    ],
+    "codiGrup": 6660958,
+    "originalId": 958
+  },
+  {
+    "stationId": "PROVENCANA",
+    "name": "Provençana",
+    "lat": 41.36135378238542,
+    "lon": 2.124099793279222,
+    "lineIds": [
+      "L10S"
+    ],
+    "codiGrup": 6660959,
+    "originalId": 959
+  },
+  {
+    "stationId": "CASA_DE_L_AIGUA",
+    "name": "Casa de l'Aigua",
+    "lat": 41.451277844017426,
+    "lon": 2.1848396459573656,
+    "lineIds": [
+      "L11"
+    ],
+    "codiGrup": 6661137,
+    "originalId": 1137
+  },
+  {
+    "stationId": "TORRE_BARO_VALLBONA",
+    "name": "Torre Baró | Vallbona",
+    "lat": 41.45919574810995,
+    "lon": 2.1798835778205032,
+    "lineIds": [
+      "L11"
+    ],
+    "codiGrup": 6661138,
+    "originalId": 1138
+  },
+  {
+    "stationId": "CIUTAT_MERIDIANA",
+    "name": "Ciutat Meridiana",
+    "lat": 41.46080820561607,
+    "lon": 2.174649879224937,
+    "lineIds": [
+      "L11"
+    ],
+    "codiGrup": 6661139,
+    "originalId": 1139
+  },
+  {
+    "stationId": "CAN_CUIAS",
+    "name": "Can Cuiàs",
+    "lat": 41.46241309910048,
+    "lon": 2.173059363097836,
+    "lineIds": [
+      "L11"
+    ],
+    "codiGrup": 6661140,
+    "originalId": 1140
+  }
+]

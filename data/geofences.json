@@ -1,0 +1,1275 @@
+[
+  {
+    "stationId": "HOSPITAL_DE_BELLVITGE",
+    "lat": 41.344677452264776,
+    "lon": 2.1072421350644093,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L1"
+    ]
+  },
+  {
+    "stationId": "BELLVITGE",
+    "lat": 41.35097352459213,
+    "lon": 2.1109182897923735,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L1"
+    ]
+  },
+  {
+    "stationId": "AV_CARRILET",
+    "lat": 41.35852162448053,
+    "lon": 2.1026452939747284,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L1"
+    ]
+  },
+  {
+    "stationId": "RAMBLA_JUST_OLIVERAS",
+    "lat": 41.3640899130925,
+    "lon": 2.0997493392175293,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L1"
+    ]
+  },
+  {
+    "stationId": "CAN_SERRA",
+    "lat": 41.36769339471756,
+    "lon": 2.10275470564125,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L1"
+    ]
+  },
+  {
+    "stationId": "FLORIDA",
+    "lat": 41.36831605180378,
+    "lon": 2.1100273658989885,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L1"
+    ]
+  },
+  {
+    "stationId": "TORRASSA",
+    "lat": 41.36826071279739,
+    "lon": 2.1160894327460174,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L1",
+      "L9S",
+      "L10S"
+    ]
+  },
+  {
+    "stationId": "SANTA_EULALIA",
+    "lat": 41.36881637467315,
+    "lon": 2.1286172553621183,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L1"
+    ]
+  },
+  {
+    "stationId": "MERCAT_NOU",
+    "lat": 41.373002700088556,
+    "lon": 2.133535784694404,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L1"
+    ]
+  },
+  {
+    "stationId": "PLACA_DE_SANTS",
+    "lat": 41.3755322522621,
+    "lon": 2.135575555495535,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L1",
+      "L5"
+    ]
+  },
+  {
+    "stationId": "HOSTAFRANCS",
+    "lat": 41.37525362810128,
+    "lon": 2.1432912673316498,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L1"
+    ]
+  },
+  {
+    "stationId": "ESPANYA",
+    "lat": 41.37545911098498,
+    "lon": 2.1493870030135134,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L1",
+      "L3"
+    ]
+  },
+  {
+    "stationId": "ROCAFORT",
+    "lat": 41.37923215305268,
+    "lon": 2.154562483439547,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L1"
+    ]
+  },
+  {
+    "stationId": "URGELL",
+    "lat": 41.38248740020102,
+    "lon": 2.1588909108500465,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L1"
+    ]
+  },
+  {
+    "stationId": "UNIVERSITAT",
+    "lat": 41.385587897267456,
+    "lon": 2.1640585462441195,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L1",
+      "L2"
+    ]
+  },
+  {
+    "stationId": "CATALUNYA",
+    "lat": 41.38771322435357,
+    "lon": 2.1697167625790152,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L1",
+      "L3"
+    ]
+  },
+  {
+    "stationId": "URQUINAONA",
+    "lat": 41.38884688371719,
+    "lon": 2.173667761230702,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L1",
+      "L4"
+    ]
+  },
+  {
+    "stationId": "ARC_DE_TRIOMF",
+    "lat": 41.392336659636584,
+    "lon": 2.181164673248104,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L1"
+    ]
+  },
+  {
+    "stationId": "MARINA",
+    "lat": 41.39472528791244,
+    "lon": 2.1858010331425235,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L1"
+    ]
+  },
+  {
+    "stationId": "GLORIES",
+    "lat": 41.4022772166665,
+    "lon": 2.187537470950601,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L1"
+    ]
+  },
+  {
+    "stationId": "CLOT",
+    "lat": 41.41051171434685,
+    "lon": 2.186978119157032,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L1",
+      "L2"
+    ]
+  },
+  {
+    "stationId": "NAVAS",
+    "lat": 41.41618670887784,
+    "lon": 2.1870567842653172,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L1"
+    ]
+  },
+  {
+    "stationId": "LA_SAGRERA",
+    "lat": 41.420695942446166,
+    "lon": 2.1868113297846263,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L1",
+      "L5",
+      "L9N",
+      "L10N"
+    ]
+  },
+  {
+    "stationId": "FABRA_I_PUIG",
+    "lat": 41.42963259534842,
+    "lon": 2.183661431503222,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L1"
+    ]
+  },
+  {
+    "stationId": "SANT_ANDREU",
+    "lat": 41.436610370679226,
+    "lon": 2.1911883955920586,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L1"
+    ]
+  },
+  {
+    "stationId": "TORRAS_I_BAGES",
+    "lat": 41.44322471120022,
+    "lon": 2.190670630058029,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L1"
+    ]
+  },
+  {
+    "stationId": "TRINITAT_VELLA",
+    "lat": 41.448956491210204,
+    "lon": 2.19383728111338,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L1"
+    ]
+  },
+  {
+    "stationId": "BARO_DE_VIVER",
+    "lat": 41.449935998152824,
+    "lon": 2.1995630177315273,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L1"
+    ]
+  },
+  {
+    "stationId": "SANTA_COLOMA",
+    "lat": 41.451067345464494,
+    "lon": 2.2079694594622845,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L1"
+    ]
+  },
+  {
+    "stationId": "FONDO",
+    "lat": 41.45168718673928,
+    "lon": 2.2185381152902193,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L1",
+      "L9N"
+    ]
+  },
+  {
+    "stationId": "PARALLEL",
+    "lat": 41.37458125876583,
+    "lon": 2.169029367599338,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L2",
+      "L3"
+    ]
+  },
+  {
+    "stationId": "SANT_ANTONI",
+    "lat": 41.37983283932031,
+    "lon": 2.1632411382555055,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L2"
+    ]
+  },
+  {
+    "stationId": "PASSEIG_DE_GRACIA",
+    "lat": 41.390106323828306,
+    "lon": 2.16735100565212,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L2",
+      "L3",
+      "L4"
+    ]
+  },
+  {
+    "stationId": "TETUAN",
+    "lat": 41.394887450597096,
+    "lon": 2.175559181787991,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L2"
+    ]
+  },
+  {
+    "stationId": "MONUMENTAL",
+    "lat": 41.40052374172786,
+    "lon": 2.1794616714099684,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L2"
+    ]
+  },
+  {
+    "stationId": "SAGRADA_FAMILIA",
+    "lat": 41.4044190945986,
+    "lon": 2.1744904092907813,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L2",
+      "L5"
+    ]
+  },
+  {
+    "stationId": "ENCANTS",
+    "lat": 41.40723597843338,
+    "lon": 2.182700370252568,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L2"
+    ]
+  },
+  {
+    "stationId": "BAC_DE_RODA",
+    "lat": 41.41516206251577,
+    "lon": 2.1955032531185723,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L2"
+    ]
+  },
+  {
+    "stationId": "SANT_MARTI",
+    "lat": 41.419063621458996,
+    "lon": 2.2007239139818875,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L2"
+    ]
+  },
+  {
+    "stationId": "LA_PAU",
+    "lat": 41.42325111713883,
+    "lon": 2.2058782008215694,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L2",
+      "L4"
+    ]
+  },
+  {
+    "stationId": "VERNEDA",
+    "lat": 41.43000446400387,
+    "lon": 2.209883422365895,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L2"
+    ]
+  },
+  {
+    "stationId": "ARTIGUES_SANT_ADRIA",
+    "lat": 41.43384822541837,
+    "lon": 2.217771760065826,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L2"
+    ]
+  },
+  {
+    "stationId": "SANT_ROC",
+    "lat": 41.43583082252647,
+    "lon": 2.22860617965681,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L2"
+    ]
+  },
+  {
+    "stationId": "GORG",
+    "lat": 41.440259861510704,
+    "lon": 2.2338070592317414,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L2",
+      "L10N"
+    ]
+  },
+  {
+    "stationId": "PEP_VENTURA",
+    "lat": 41.4439045741019,
+    "lon": 2.237959375095989,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L2"
+    ]
+  },
+  {
+    "stationId": "BADALONA_POMPEU_FABRA",
+    "lat": 41.449052604746285,
+    "lon": 2.244099157218408,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L2"
+    ]
+  },
+  {
+    "stationId": "ZONA_UNIVERSITARIA",
+    "lat": 41.38400257249017,
+    "lon": 2.111388924148772,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L3",
+      "L9S"
+    ]
+  },
+  {
+    "stationId": "PALAU_REIAL",
+    "lat": 41.385980056620134,
+    "lon": 2.118538181084618,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L3"
+    ]
+  },
+  {
+    "stationId": "MARIA_CRISTINA",
+    "lat": 41.38781569227959,
+    "lon": 2.125791232923749,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L3"
+    ]
+  },
+  {
+    "stationId": "LES_CORTS",
+    "lat": 41.384119684361195,
+    "lon": 2.1308710146162624,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L3"
+    ]
+  },
+  {
+    "stationId": "PLACA_DEL_CENTRE",
+    "lat": 41.38192170670766,
+    "lon": 2.1358837134051947,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L3"
+    ]
+  },
+  {
+    "stationId": "SANTS_ESTACIO",
+    "lat": 41.380961180119144,
+    "lon": 2.141892378878913,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L3",
+      "L5"
+    ]
+  },
+  {
+    "stationId": "TARRAGONA",
+    "lat": 41.378493002424634,
+    "lon": 2.1453357748823865,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L3"
+    ]
+  },
+  {
+    "stationId": "POBLE_SEC",
+    "lat": 41.374996204246344,
+    "lon": 2.1602448223915327,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L3"
+    ]
+  },
+  {
+    "stationId": "DRASSANES",
+    "lat": 41.37653760970823,
+    "lon": 2.1756641701931962,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L3"
+    ]
+  },
+  {
+    "stationId": "LICEU",
+    "lat": 41.3814454250764,
+    "lon": 2.1730302773575945,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L3"
+    ]
+  },
+  {
+    "stationId": "DIAGONAL",
+    "lat": 41.395676604785294,
+    "lon": 2.160443763922243,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L3",
+      "L5"
+    ]
+  },
+  {
+    "stationId": "FONTANA",
+    "lat": 41.40200887904024,
+    "lon": 2.1530224404295164,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L3"
+    ]
+  },
+  {
+    "stationId": "LESSEPS",
+    "lat": 41.405738025515355,
+    "lon": 2.1504071221317904,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L3"
+    ]
+  },
+  {
+    "stationId": "VALLCARCA",
+    "lat": 41.411974951406016,
+    "lon": 2.144337309169914,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L3"
+    ]
+  },
+  {
+    "stationId": "PENITENTS",
+    "lat": 41.41827911730064,
+    "lon": 2.140971786114312,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L3"
+    ]
+  },
+  {
+    "stationId": "VALL_D_HEBRON",
+    "lat": 41.425123138465146,
+    "lon": 2.1425147148937467,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L3",
+      "L5"
+    ]
+  },
+  {
+    "stationId": "MONTBAU",
+    "lat": 41.43062015567553,
+    "lon": 2.145039277808795,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L3"
+    ]
+  },
+  {
+    "stationId": "MUNDET",
+    "lat": 41.435645266968535,
+    "lon": 2.1484718023518736,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L3"
+    ]
+  },
+  {
+    "stationId": "VALLDAURA",
+    "lat": 41.437996077035756,
+    "lon": 2.1568778304495613,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L3"
+    ]
+  },
+  {
+    "stationId": "CANYELLES",
+    "lat": 41.44175372856857,
+    "lon": 2.166387551719736,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L3"
+    ]
+  },
+  {
+    "stationId": "ROQUETES",
+    "lat": 41.44766967770127,
+    "lon": 2.1760976903706806,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L3"
+    ]
+  },
+  {
+    "stationId": "TRINITAT_NOVA",
+    "lat": 41.449762105902664,
+    "lon": 2.1828552069968574,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L3",
+      "L4",
+      "L11"
+    ]
+  },
+  {
+    "stationId": "BESOS",
+    "lat": 41.419835530278384,
+    "lon": 2.210301299420953,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L4"
+    ]
+  },
+  {
+    "stationId": "BESOS_MAR",
+    "lat": 41.415098995619424,
+    "lon": 2.216081591411872,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L4"
+    ]
+  },
+  {
+    "stationId": "EL_MARESME_FORUM",
+    "lat": 41.411685717467044,
+    "lon": 2.216548081875298,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L4"
+    ]
+  },
+  {
+    "stationId": "SELVA_DE_MAR",
+    "lat": 41.40800151156723,
+    "lon": 2.209122498871073,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L4"
+    ]
+  },
+  {
+    "stationId": "POBLENOU",
+    "lat": 41.40371611757544,
+    "lon": 2.2033712341158838,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L4"
+    ]
+  },
+  {
+    "stationId": "LLACUNA",
+    "lat": 41.39942503860002,
+    "lon": 2.197711708647738,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L4"
+    ]
+  },
+  {
+    "stationId": "BOGATELL",
+    "lat": 41.395107503840855,
+    "lon": 2.192012401533471,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L4"
+    ]
+  },
+  {
+    "stationId": "CIUTADELLA_VILA_OLIMPICA",
+    "lat": 41.38664023480152,
+    "lon": 2.192963138448486,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L4"
+    ]
+  },
+  {
+    "stationId": "BARCELONETA",
+    "lat": 41.381810977055316,
+    "lon": 2.184786783641099,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L4"
+    ]
+  },
+  {
+    "stationId": "JAUME_I",
+    "lat": 41.384126274544364,
+    "lon": 2.178531464537553,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L4"
+    ]
+  },
+  {
+    "stationId": "GIRONA",
+    "lat": 41.394920347488814,
+    "lon": 2.17082483204024,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L4"
+    ]
+  },
+  {
+    "stationId": "VERDAGUER",
+    "lat": 41.39996847675383,
+    "lon": 2.168312882339719,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L4",
+      "L5"
+    ]
+  },
+  {
+    "stationId": "JOANIC",
+    "lat": 41.40642689565163,
+    "lon": 2.16322502517123,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L4"
+    ]
+  },
+  {
+    "stationId": "ALFONS_X",
+    "lat": 41.412415682383845,
+    "lon": 2.166511957375424,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L4"
+    ]
+  },
+  {
+    "stationId": "GUINARDO_HOSPITAL_DE_SANT_PAU",
+    "lat": 41.415962196795135,
+    "lon": 2.1739890445261802,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L4"
+    ]
+  },
+  {
+    "stationId": "MARAGALL",
+    "lat": 41.42412908114067,
+    "lon": 2.177412716857448,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L4",
+      "L5"
+    ]
+  },
+  {
+    "stationId": "LLUCMAJOR",
+    "lat": 41.43698464869135,
+    "lon": 2.173343398047292,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L4"
+    ]
+  },
+  {
+    "stationId": "VIA_JULIA",
+    "lat": 41.443730234715765,
+    "lon": 2.178549960776955,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L4"
+    ]
+  },
+  {
+    "stationId": "CORNELLA_CENTRE",
+    "lat": 41.35728982068586,
+    "lon": 2.0704280856264488,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L5"
+    ]
+  },
+  {
+    "stationId": "GAVARRA",
+    "lat": 41.357994934130915,
+    "lon": 2.0792727787982708,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L5"
+    ]
+  },
+  {
+    "stationId": "SANT_ILDEFONS",
+    "lat": 41.363381080148336,
+    "lon": 2.084392786677159,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L5"
+    ]
+  },
+  {
+    "stationId": "CAN_BOIXERES",
+    "lat": 41.366570750436026,
+    "lon": 2.0915060884648176,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L5"
+    ]
+  },
+  {
+    "stationId": "CAN_VIDALET",
+    "lat": 41.37127879519907,
+    "lon": 2.099445030163751,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L5"
+    ]
+  },
+  {
+    "stationId": "PUBILLA_CASES",
+    "lat": 41.373837586750604,
+    "lon": 2.1072090599014683,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L5"
+    ]
+  },
+  {
+    "stationId": "COLLBLANC",
+    "lat": 41.37583966750611,
+    "lon": 2.1185256293277304,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L5",
+      "L9S",
+      "L10S"
+    ]
+  },
+  {
+    "stationId": "BADAL",
+    "lat": 41.37558063118747,
+    "lon": 2.127402112543491,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L5"
+    ]
+  },
+  {
+    "stationId": "ENTENCA",
+    "lat": 41.38446685535986,
+    "lon": 2.145618590090013,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L5"
+    ]
+  },
+  {
+    "stationId": "HOSPITAL_CLINIC",
+    "lat": 41.388607764469285,
+    "lon": 2.151081070999777,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L5"
+    ]
+  },
+  {
+    "stationId": "SANT_PAU_DOS_DE_MAIG",
+    "lat": 41.41075327997014,
+    "lon": 2.1760160280003675,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L5"
+    ]
+  },
+  {
+    "stationId": "CAMP_DE_L_ARPA",
+    "lat": 41.41505960638405,
+    "lon": 2.181497212109148,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L5"
+    ]
+  },
+  {
+    "stationId": "CONGRES",
+    "lat": 41.42344042865811,
+    "lon": 2.181186224264109,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L5"
+    ]
+  },
+  {
+    "stationId": "VIRREI_AMAT",
+    "lat": 41.42970333896579,
+    "lon": 2.174913058009734,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L5"
+    ]
+  },
+  {
+    "stationId": "VILAPICINA",
+    "lat": 41.430465066864016,
+    "lon": 2.167619083986825,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L5"
+    ]
+  },
+  {
+    "stationId": "HORTA",
+    "lat": 41.429692524411095,
+    "lon": 2.159974396439855,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L5"
+    ]
+  },
+  {
+    "stationId": "EL_CARMEL",
+    "lat": 41.424449773703074,
+    "lon": 2.1550989391746174,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L5"
+    ]
+  },
+  {
+    "stationId": "EL_COLL_LA_TEIXONERA",
+    "lat": 41.4219971367312,
+    "lon": 2.1483484951724954,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L5"
+    ]
+  },
+  {
+    "stationId": "ERNEST_LLUCH",
+    "lat": 41.37589760693972,
+    "lon": 2.112027311053149,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L5"
+    ]
+  },
+  {
+    "stationId": "AEROPORT_T1",
+    "lat": 41.28829483589318,
+    "lon": 2.07115199121738,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L9S"
+    ]
+  },
+  {
+    "stationId": "AEROPORT_T2",
+    "lat": 41.30382333421845,
+    "lon": 2.0731133341366688,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L9S"
+    ]
+  },
+  {
+    "stationId": "MAS_BLAU",
+    "lat": 41.311225361691974,
+    "lon": 2.0734710574676423,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L9S"
+    ]
+  },
+  {
+    "stationId": "PARC_NOU",
+    "lat": 41.316628454057685,
+    "lon": 2.0879294280214027,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L9S"
+    ]
+  },
+  {
+    "stationId": "CENTRIC",
+    "lat": 41.322250016313035,
+    "lon": 2.0934632422362887,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L9S"
+    ]
+  },
+  {
+    "stationId": "EL_PRAT_ESTACIO",
+    "lat": 41.33199264221667,
+    "lon": 2.0899271044508416,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L9S"
+    ]
+  },
+  {
+    "stationId": "LES_MORERES",
+    "lat": 41.329118641471766,
+    "lon": 2.103073086929979,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L9S"
+    ]
+  },
+  {
+    "stationId": "MERCABARNA",
+    "lat": 41.33350192178616,
+    "lon": 2.1112571611632744,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L9S"
+    ]
+  },
+  {
+    "stationId": "PARC_LOGISTIC",
+    "lat": 41.341663546077285,
+    "lon": 2.127401250786491,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L9S"
+    ]
+  },
+  {
+    "stationId": "FIRA",
+    "lat": 41.35198805477054,
+    "lon": 2.130451504489052,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L9S"
+    ]
+  },
+  {
+    "stationId": "EUROPA_FIRA",
+    "lat": 41.35756042682608,
+    "lon": 2.1259237814712875,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L9S"
+    ]
+  },
+  {
+    "stationId": "CAN_TRIES_GORNAL",
+    "lat": 41.36089363267124,
+    "lon": 2.117992580878504,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L9S",
+      "L10S"
+    ]
+  },
+  {
+    "stationId": "ONZE_DE_SETEMBRE",
+    "lat": 41.429617492467266,
+    "lon": 2.1936102147938596,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L9N",
+      "L10N"
+    ]
+  },
+  {
+    "stationId": "BON_PASTOR",
+    "lat": 41.436162697479354,
+    "lon": 2.205240266717371,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L9N",
+      "L10N"
+    ]
+  },
+  {
+    "stationId": "LLEFIA",
+    "lat": 41.441359580549786,
+    "lon": 2.216906383705608,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L10N"
+    ]
+  },
+  {
+    "stationId": "LA_SALUT",
+    "lat": 41.442817097125406,
+    "lon": 2.224737073931071,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L10N"
+    ]
+  },
+  {
+    "stationId": "CAN_PEIXAUET",
+    "lat": 41.44398590815181,
+    "lon": 2.2100273277790428,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L9N"
+    ]
+  },
+  {
+    "stationId": "SANTA_ROSA",
+    "lat": 41.44685031178436,
+    "lon": 2.2158089802865106,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L9N"
+    ]
+  },
+  {
+    "stationId": "ESGLESIA_MAJOR",
+    "lat": 41.454797043178395,
+    "lon": 2.212176867433306,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L9N"
+    ]
+  },
+  {
+    "stationId": "SINGUERLIN",
+    "lat": 41.45941351575915,
+    "lon": 2.2054288460907183,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L9N"
+    ]
+  },
+  {
+    "stationId": "CAN_ZAM",
+    "lat": 41.456666111515304,
+    "lon": 2.1985694162738683,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L9N"
+    ]
+  },
+  {
+    "stationId": "ZAL_RIU_VELL",
+    "lat": 41.323705867524254,
+    "lon": 2.1330954281444714,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L10S"
+    ]
+  },
+  {
+    "stationId": "ECOPARC",
+    "lat": 41.33015871130138,
+    "lon": 2.1370711814490084,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L10S"
+    ]
+  },
+  {
+    "stationId": "PORT_COMERCIAL_LA_FACTORIA",
+    "lat": 41.335983045353615,
+    "lon": 2.1406572348295043,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L10S"
+    ]
+  },
+  {
+    "stationId": "ZONA_FRANCA",
+    "lat": 41.34297610170164,
+    "lon": 2.144964431606467,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L10S"
+    ]
+  },
+  {
+    "stationId": "FOC",
+    "lat": 41.35616086809139,
+    "lon": 2.1418043174739214,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L10S"
+    ]
+  },
+  {
+    "stationId": "FONERIA",
+    "lat": 41.3610992396304,
+    "lon": 2.1382289088556874,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L10S"
+    ]
+  },
+  {
+    "stationId": "CIUTAT_DE_LA_JUSTICIA",
+    "lat": 41.36313727354129,
+    "lon": 2.1323149668540133,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L10S"
+    ]
+  },
+  {
+    "stationId": "PROVENCANA",
+    "lat": 41.36135378238542,
+    "lon": 2.124099793279222,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L10S"
+    ]
+  },
+  {
+    "stationId": "CASA_DE_L_AIGUA",
+    "lat": 41.451277844017426,
+    "lon": 2.1848396459573656,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L11"
+    ]
+  },
+  {
+    "stationId": "TORRE_BARO_VALLBONA",
+    "lat": 41.45919574810995,
+    "lon": 2.1798835778205032,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L11"
+    ]
+  },
+  {
+    "stationId": "CIUTAT_MERIDIANA",
+    "lat": 41.46080820561607,
+    "lon": 2.174649879224937,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L11"
+    ]
+  },
+  {
+    "stationId": "CAN_CUIAS",
+    "lat": 41.46241309910048,
+    "lon": 2.173059363097836,
+    "radiusMeters": 80,
+    "lineIds": [
+      "L11"
+    ]
+  }
+]
