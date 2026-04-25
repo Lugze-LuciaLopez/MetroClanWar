@@ -20,13 +20,12 @@ const questions = [
 
 document.addEventListener("DOMContentLoaded", () => {
     if (state.clan) {
-        finishQuiz(); // Si ja tenim clan, anem al dashboard
+        finishQuiz(); 
     } else {
         loadQuestion();
     }
 });
 
-// LÒGICA DEL QUIZ (Mantinguda)
 function loadQuestion() {
     const q = questions[state.currentQuestion];
     document.querySelector("h2").textContent = q.text;
@@ -35,8 +34,8 @@ function loadQuestion() {
 
     Object.entries(q.answers).forEach(([key, value]) => {
         const btn = document.createElement("button");
-        btn.className = "w-full p-4 bg-slate-700 hover:bg-slate-600 rounded-2xl text-left btn-active transition-all";
-        btn.innerHTML = `<span class="font-bold mr-2 text-l5">${key.toUpperCase()}</span> ${value.text}`;
+        btn.className = "w-full p-4 bg-slate-800 hover:bg-slate-700 rounded-2xl text-left btn-active transition-all";
+        btn.innerHTML = `<span class="font-bold mr-2 text-white">${key.toUpperCase()}</span> ${value.text}`;
         btn.onclick = () => selectAnswer(value.clan);
         container.appendChild(btn);
     });
@@ -53,18 +52,15 @@ function selectAnswer(clan) {
 }
 
 function finishQuiz() {
-    // Si no tenim clan guardat, el calculem
     if (!state.clan) {
         state.clan = Object.keys(state.scores).reduce((a, b) => state.scores[a] > state.scores[b] ? a : b);
         localStorage.setItem('userClan', state.clan);
     }
-
     document.getElementById("clan-indicator").textContent = state.clan;
     document.getElementById("score-display").textContent = state.totalPoints;
     
-    // Aplicar estil de clan
-    const colors = { L1: 'border-l1 text-l1', L2: 'border-l2 text-l2', L3: 'border-l3 text-l3', L4: 'border-l4 text-l4', L5: 'border-l5 text-l5', L7: 'border-l7 text-l7', L9sud: 'border-l9sud text-l9sud' };
-    document.getElementById("clan-indicator").className = `w-16 h-16 rounded-full border-4 flex items-center justify-center text-2xl font-black ${colors[state.clan]}`;
+    // El cercle del clan serà negre/fosc per destacar sobre el vermell
+    document.getElementById("clan-indicator").className = `w-16 h-16 rounded-full border-4 border-white bg-black/30 flex items-center justify-center text-2xl font-black`;
 
     showView("view-dashboard");
 }
@@ -74,16 +70,21 @@ function showView(id) {
     document.getElementById(id).classList.remove("hidden");
 }
 
-// TRACKING PASSIU (Nova lògica per a la App)
 function startJourney() {
-    if (state.isTracking) return;
+    const btn = document.getElementById('btn-main-action');
+    
+    // SI JA ESTÀ TRACKEJANT -> PARA EL COMPTADOR
+    if (state.isTracking) {
+        autoFinishJourney();
+        return;
+    }
+
     state.isTracking = true;
     state.sessionPoints = 0;
 
-    const btn = document.getElementById('btn-main-action');
-    btn.disabled = true;
-    btn.innerText = "SCANNING...";
-    btn.className = "w-full py-5 rounded-2xl bg-slate-700 text-white font-bold opacity-50 cursor-not-allowed";
+    // UI Activa: Botó Negre sobre fons vermell
+    btn.innerText = "STOP & SAVE TRIP";
+    btn.className = "btn-active w-full py-5 rounded-2xl bg-black text-white font-black text-sm uppercase tracking-widest shadow-lg";
     
     document.getElementById('radar-ping').classList.remove('hidden');
     document.getElementById('live-data').classList.remove('opacity-20');
@@ -97,11 +98,8 @@ function runAutoDetectionLoop() {
     let stationIdx = 0;
 
     state.trackingInterval = setInterval(() => {
-        // Simulem velocitat (En realitat vindria de Geolocation)
         let speed = 20 + Math.floor(Math.random() * 20);
-
-        // Simulem parada final si portem més de 30 punts
-        if (state.sessionPoints > 30 && Math.random() > 0.8) speed = 2;
+        if (state.sessionPoints > 40 && Math.random() > 0.8) speed = 2;
 
         state.sessionPoints += 1;
         document.getElementById('big-points').innerText = state.sessionPoints;
@@ -109,7 +107,6 @@ function runAutoDetectionLoop() {
         document.getElementById('current-station').innerText = speed > 5 ? stations[stationIdx % 4] : "Station / Stopped";
         if(speed > 5 && state.sessionPoints % 8 === 0) stationIdx++;
 
-        // ALGORITME: Si la velocitat < 5 durant 4 cicles, finalitzem
         if (speed < 5) {
             state.consecutiveLowSpeed++;
         } else {
@@ -131,6 +128,17 @@ function autoFinishJourney() {
     document.getElementById('score-display').innerText = state.totalPoints;
     alert(`Journey Finished! You earned ${state.sessionPoints} points.`);
     
-    // Reset UI
-    location.reload(); // Forma ràpida de fer el reset del botó per a la demo
+    // Reset UI manualment
+    const btn = document.getElementById('btn-main-action');
+    btn.innerText = "START JOURNEY SCAN";
+    btn.className = "btn-active w-full py-5 rounded-2xl bg-white text-red-600 font-black text-sm uppercase tracking-widest shadow-lg";
+    
+    document.getElementById('radar-ping').classList.add('hidden');
+    document.getElementById('live-data').classList.add('opacity-20');
+    document.getElementById('tracking-status').innerText = "SCANNER READY";
+    document.getElementById('big-points').innerText = "0";
+    document.getElementById('speed-display').innerText = "0 km/h";
+    document.getElementById('current-station').innerText = "---";
+    state.sessionPoints = 0;
+    state.consecutiveLowSpeed = 0;
 }
