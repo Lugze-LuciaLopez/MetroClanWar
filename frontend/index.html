@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ca">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <title>Metro Clan War</title>
 
+  <link rel="stylesheet" href="style.css">
   <script src="https://cdn.tailwindcss.com"></script>
 
   <script>
@@ -12,13 +14,8 @@
       theme: {
         extend: {
           colors: {
-            l1: '#ED1C24',
-            l2: '#93278F',
-            l3: '#00A651',
-            l4: '#FDB913',
-            l5: '#005596',
-            l7: '#B97D05',
-            l9sud: '#F37021',
+            l1: '#ED1C24', l2: '#93278F', l3: '#00A651',
+            l4: '#FDB913', l5: '#005596', l7: '#B97D05', l9sud: '#F37021',
           }
         }
       }
@@ -28,159 +25,65 @@
 
 <body class="bg-slate-900 text-white font-sans overflow-hidden">
 
-<!-- QUIZ -->
 <section id="view-quiz" class="h-screen flex flex-col p-6">
-
   <header class="py-6 text-center">
-    <h1 class="text-3xl font-black">
-      METRO <span class="text-l5">CLAN</span> WAR
-    </h1>
+    <h1 class="text-3xl font-black">METRO <span class="text-l5">CLAN</span> WAR</h1>
     <p class="text-sm opacity-60 mt-2">Discover your underground faction</p>
   </header>
 
   <div id="quiz-container" class="flex-1 flex flex-col justify-center">
     <div class="bg-slate-800 p-6 rounded-3xl border border-slate-700">
-
-      <span class="text-xs text-l5 uppercase">Question</span>
-      <h2 class="text-xl font-bold mt-2">Loading...</h2>
-
+      <span class="text-xs text-l5 uppercase font-bold tracking-widest">Question</span>
+      <h2 class="text-xl font-bold mt-2 italic">Loading...</h2>
       <div class="grid gap-3 mt-6"></div>
-
     </div>
   </div>
 </section>
 
-<!-- RESULT -->
-<section id="view-dashboard" class="hidden h-screen flex flex-col">
+<section id="view-dashboard" class="hidden h-screen flex flex-col overflow-y-auto">
+  <div id="event-banner" class="hidden bg-red-600 p-2 text-center text-[10px] font-black uppercase animate-pulse"></div>
 
-  <div class="flex-1 flex items-center justify-center p-6">
-    <div class="bg-slate-800 p-8 rounded-3xl text-center border border-slate-700">
-
-      <div id="clan-indicator" class="text-4xl font-black mb-4">?</div>
-      <p id="clan-description" class="opacity-70"></p>
-
+  <header class="p-6 flex justify-between items-center">
+    <div id="clan-indicator" class="w-16 h-16 rounded-full border-4 flex items-center justify-center text-2xl font-black">?</div>
+    <div class="text-right">
+      <p class="text-[10px] uppercase opacity-50 font-bold">Total Clan Points</p>
+      <p id="score-display" class="text-3xl font-black text-white">0</p>
     </div>
-  </div>
+  </header>
 
+  <main class="flex-1 p-6 space-y-6">
+    <div id="tracking-card" class="bg-slate-800 p-8 rounded-[2.5rem] text-center border border-slate-700 shadow-2xl transition-all">
+      <p id="tracking-status" class="text-[10px] uppercase tracking-widest opacity-40 font-bold mb-6">Scanner Ready</p>
+      
+      <div class="relative flex justify-center items-center mb-8">
+        <div id="radar-ping" class="hidden absolute w-48 h-48 rounded-full border-2 border-l5 animate-ping opacity-20"></div>
+        <div class="w-36 h-36 rounded-full border-2 border-slate-700 flex items-center justify-center bg-slate-900/50">
+            <div class="flex flex-col items-center">
+                <span id="big-points" class="text-4xl font-black">0</span>
+                <span class="text-[8px] uppercase opacity-30">Trip Points</span>
+            </div>
+        </div>
+      </div>
+
+      <button onclick="startJourney()" id="btn-main-action" class="btn-active w-full py-5 rounded-2xl bg-l5 text-white font-black text-sm uppercase tracking-widest shadow-lg">
+        Start Journey Scan
+      </button>
+    </div>
+
+    <div id="live-data" class="grid grid-cols-2 gap-4 opacity-20 transition-all duration-500">
+        <div class="bg-slate-800/80 p-4 rounded-3xl border border-slate-700 text-center">
+            <p class="text-[8px] uppercase opacity-40 font-bold mb-1">Station</p>
+            <p id="current-station" class="text-xs font-bold truncate">---</p>
+        </div>
+        <div class="bg-slate-800/80 p-4 rounded-3xl border border-slate-700 text-center">
+            <p class="text-[8px] uppercase opacity-40 font-bold mb-1">Speed</p>
+            <p id="speed-display" class="text-xs font-bold">0 km/h</p>
+        </div>
+    </div>
+  </main>
 </section>
 
-<script>
-const questions = [
-  {
-    text: "What is your love language?",
-    answers: {
-      a: { text: "Physical touch", clan: "L1" },
-      b: { text: "Gift giving", clan: "L7" },
-      c: { text: "Words of affirmation", clan: "L9sud" },
-      d: { text: "Acts of service", clan: "L5" },
-      e: { text: "Quality time", clan: "L4" },
-      f: { text: "Emotional connection", clan: "L2" },
-      g: { text: "Personal growth support", clan: "L3" }
-    }
-  },
-  {
-    text: "What is your favorite type of pasta?",
-    answers: {
-      a: { text: "Spaghetti", clan: "L5" },
-      b: { text: "Tortellini", clan: "L2" },
-      c: { text: "Fettuccine", clan: "L7" },
-      d: { text: "Penne", clan: "L3" },
-      e: { text: "Ravioli", clan: "L1" },
-      f: { text: "Rigatoni", clan: "L4" },
-      g: { text: "Farfalle", clan: "L9sud" }
-    }
-  },
-  {
-    text: "Someone is following you at night, you…",
-    answers: {
-      a: { text: "Act crazy to scare them away", clan: "L4" },
-      b: { text: "Ignore them and keep walking", clan: "L9sud" },
-      c: { text: "Run away as fast as possible", clan: "L3" },
-      d: { text: "Face them", clan: "L1" },
-      e: { text: "Start following them", clan: "L2" },
-      f: { text: "Walk in circles", clan: "L5" },
-      g: { text: "Call the police", clan: "L7" }
-    }
-  },
-  {
-    text: "Which animal represents you best?",
-    answers: {
-      a: { text: "Pigeon", clan: "L1" },
-      b: { text: "Jellyfish", clan: "L2" },
-      c: { text: "Rhino", clan: "L1" },
-      d: { text: "Horseshoe crab", clan: "L3" },
-      e: { text: "Hyena", clan: "L4" },
-      f: { text: "King cobra", clan: "L7" },
-      g: { text: "White shark", clan: "L9sud" }
-    }
-  },
-  {
-    text: "Among these, which is your favorite metro line?",
-    answers: {
-      a: { text: "L1", clan: "L3" },
-      b: { text: "L2", clan: "L5" },
-      c: { text: "L3", clan: "L1" },
-      d: { text: "L4", clan: "L2" },
-      e: { text: "L5", clan: "L9sud" },
-      f: { text: "L7", clan: "L7" },
-      g: { text: "L9 Sud", clan: "L4" }
-    }
-  }
-];
-
-let currentQuestion = 0;
-let scores = { L1:0, L2:0, L3:0, L4:0, L5:0, L7:0, L9sud:0 };
-
-function loadQuestion() {
-  const q = questions[currentQuestion];
-  document.querySelector("h2").textContent = q.text;
-
-  const container = document.querySelector(".grid");
-  container.innerHTML = "";
-
-  Object.entries(q.answers).forEach(([key, value]) => {
-    const btn = document.createElement("button");
-
-    btn.className = "w-full p-4 bg-slate-700 hover:bg-slate-600 rounded-2xl text-left";
-
-    btn.innerHTML = `<span class="font-bold mr-2 text-l5">${key.toUpperCase()}</span> ${value.text}`;
-
-    btn.onclick = () => selectAnswer(value.clan);
-
-    container.appendChild(btn);
-  });
-}
-
-function selectAnswer(clan) {
-  scores[clan]++;
-  currentQuestion++;
-
-  if (currentQuestion < questions.length) {
-    loadQuestion();
-  } else {
-    finishQuiz();
-  }
-}
-
-function finishQuiz() {
-  const winner = Object.keys(scores).reduce((a, b) =>
-    scores[a] > scores[b] ? a : b
-  );
-
-  document.getElementById("clan-indicator").textContent = winner;
-  document.getElementById("clan-description").textContent =
-    "You belong to line " + winner;
-
-  showView("view-dashboard");
-}
-
-function showView(id) {
-  document.querySelectorAll("section").forEach(s => s.classList.add("hidden"));
-  document.getElementById(id).classList.remove("hidden");
-}
-
-document.addEventListener("DOMContentLoaded", loadQuestion);
-</script>
+<script src="app.js"></script>
 
 </body>
 </html>

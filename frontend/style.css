@@ -1,34 +1,18 @@
-/* Bloqueamos el scroll elástico típico de los navegadores móviles */
 html, body {
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden; /* Evita el scroll global */
-    position: fixed; /* Fija la pantalla para que parezca una App */
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    overflow: hidden; /* Manté el marc fix */
+    position: fixed;
+    background-color: #0f172a;
 }
 
-/* Contenedor principal que sí permite scroll interno si el contenido es largo */
-.app-container {
+section {
+    width: 100%;
     height: 100%;
-    overflow-y: auto;
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: 80px; /* Espacio para la barra de navegación inferior */
-}
-
-/* Animación suave para el cambio de pantallas */
-.fade-in {
-    animation: fadeIn 0.3s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Estilo para que los botones parezcan de sistema operativo */
-.btn-active:active {
-    transform: scale(0.95);
-    transition: transform 0.1s;
+    overflow-y: auto; /* <--- AIXÒ permet l'scroll només dins de cada pantalla */
+    -webkit-overflow-scrolling: touch; /* Fa que l'scroll sigui suau en iPhone */
+    display: flex;
+    flex-direction: column;
 }
