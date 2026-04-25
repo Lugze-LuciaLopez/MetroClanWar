@@ -7,10 +7,12 @@ import { createSwarm, onConnection, broadcast } from './shared/swarm-utils.js'
 import { encode, decode, createLineReader, MSG_TYPE } from './shared/protocol.js'
 import { EventStore } from './shared/event-store.js'
 import { verifyEvent } from '../core/events/event-verifier.js'
-import { buildWeeklyRanking, clanRanking, getLeastActivePlayers } from '../core/scoring/ranking.js'
+import { buildWeeklyRanking, buildGlobalRanking, clanRanking } from '../core/scoring/ranking.js'
+import { computeInvasionResult } from '../core/invasion/invasion-engine.js'
 import { signEvent } from '../core/events/event-signer.js'
 import { EventType } from '../core/events/event-types.js'
 import { weekId, weekStart } from '../core/weekly-engine/week-utils.js'
+import { nowSecs } from '../core/weekly-engine/clock.js'
 import { generateKeypair, playerId, saveKeypair, loadKeypair } from '../core/crypto/identity.js'
 import { homedir } from 'os'
 import { join } from 'path'
@@ -48,9 +50,33 @@ export async function startValidator({
   }
 
   if (computeResults) {
-    // Wait briefly for peers to connect and sync before computing
+    // Receive SYNC_RESPONSE from any peer (persistent validator/replica)
+    // and persist those events to the local store before computing.
+    onConnection(swarm, (conn) => {
+      createLineReader(conn, async (line) => {
+        const msg = decode(line)
+        if (!msg) return
+        if (msg.msgType === MSG_TYPE.SYNC_RESPONSE) {
+          const events = msg.payload?.events ?? []
+          const known = await store.knownIds()
+          for (const event of events) {
+            if (!event?.eventId || !event?.playerId) continue
+            const { valid } = verifyEvent(event, Buffer.from(event.playerId, 'hex'))
+            if (!valid) continue
+            if (known.has(event.eventId)) continue
+            await store.append(event)
+            known.add(event.eventId)
+          }
+          if (verbose && events.length > 0) console.log(`[validator] synced ${events.length} events from peer`)
+        }
+      })
+    })
+
+    await swarm.flush()
     await new Promise(r => setTimeout(r, 2000))
-    const wid = weekId(Math.floor(Date.now() / 1000))
+    const total = (await store.readAll()).length
+    if (verbose) console.log(`[validator] store has ${total} events`)
+    const wid = weekId(nowSecs())
     await computeAndPublish(wid, keypair, validatorId, store, swarm, verbose)
     await swarm.destroy()
     process.exit(0)
@@ -109,79 +135,147 @@ export async function startValidator({
 }
 
 async function computeAndPublish(wid, keypair, validatorId, store, swarm, verbose) {
-  const scoreEvents = await store.readByType(EventType.SCORE_GRANTED)
-  const weekEvents  = scoreEvents.filter(e => e.weekId === wid)
+  // ── War pair from previous week's nextWarPair ─────────────────────────────
+  const now    = nowSecs()
+  const prevWid = weekId(weekStart(now) - 1)
+  const allWeeklyResults = await store.readByType(EventType.WEEKLY_RESULT)
+  const prevResult = allWeeklyResults.find(e => e.weekId === prevWid)
+  const warPair = prevResult?.payload?.nextWarPair ?? null
 
-  if (weekEvents.length === 0) {
+  // ── Split events by war / non-war clans ──────────────────────────────────
+  const allScoreEvents = await store.readByType(EventType.SCORE_GRANTED)
+  const thisWeekEvents = allScoreEvents.filter(e => e.weekId === wid)
+
+  if (thisWeekEvents.length === 0) {
     if (verbose) console.log(`[validator] no SCORE_GRANTED events for week ${wid}`)
     return null
   }
 
-  const { playerScores, clanScores } = buildWeeklyRanking(weekEvents)
-  const clans = clanRanking(clanScores, wid)
-  const winner = clans[0] ?? null
+  const warClanIds   = warPair ? new Set([warPair.attackerClanId, warPair.defenderClanId]) : new Set()
+  const warEvents    = thisWeekEvents.filter(e => warClanIds.has(e.payload?.clanId))
+  const nonWarEvents = thisWeekEvents.filter(e => !warClanIds.has(e.payload?.clanId))
 
-  // Build per-player summary for invasion check
-  const playerSummary = buildPlayerSummary(weekEvents, wid)
-  let membersTransferred = []
+  // ── War result ────────────────────────────────────────────────────────────
+  const existingInvasion = await store.readByType(EventType.INVASION_RESULT)
+  const alreadyDone = existingInvasion.some(e => e.weekId === wid)
 
-  if (winner && clans.length >= 2) {
-    const runnerUp = clans[1]
-    const defenders = Object.values(playerSummary).filter(p => p.clanId === runnerUp.clanId)
-    const least = getLeastActivePlayers(defenders, wid, 0.25)
-    membersTransferred = least.map(p => p.playerId)
+  let hadInvasion = false
+  let newInvasionResult = null
+
+  if (warPair && !alreadyDone) {
+    const { attackerClanId, defenderClanId } = warPair
+    if (verbose) console.log(`[validator] war: ${attackerClanId} → ${defenderClanId}`)
+
+    const invasion = computeInvasionResult({ scoreGrantedEvents: warEvents, attackerClanId, defenderClanId, weekId: wid })
+    const winnerClanId = invasion.winner === 'ATTACKER' ? attackerClanId : defenderClanId
+    const loserClanId  = invasion.winner === 'ATTACKER' ? defenderClanId : attackerClanId
+
+    // Upset bonus: if defender wins, transfer 1% of attacker's all-time global points
+    let upsetBonus = null
+    if (invasion.winner === 'DEFENDER') {
+      const attackerGlobalPts = allScoreEvents
+        .filter(e => e.payload?.clanId === attackerClanId)
+        .reduce((sum, e) => sum + (e.payload?.points ?? 0), 0)
+      const amount = Math.floor(attackerGlobalPts * 0.01)
+      if (amount > 0) upsetBonus = { amount, fromClanId: attackerClanId, toClanId: defenderClanId }
+    }
+
+    const invasionResult = signEvent({
+      schemaVersion: 1,
+      type: EventType.INVASION_RESULT,
+      playerId: validatorId,
+      timestamp: now,
+      weekId: wid,
+      sequence: 0,
+      prevHash: null,
+      payload: {
+        weekId: wid,
+        attackerClanId,
+        defenderClanId,
+        targetLineId: invasion.targetLineId,
+        attackerPoints: invasion.attackerPoints,
+        defenderPoints: invasion.defenderPoints,
+        winner: invasion.winner,
+        membersToTransfer: invasion.membersToTransfer,
+        upsetBonus
+      }
+    }, keypair)
+
+    await store.append(invasionResult)
+    broadcast(swarm, encode(MSG_TYPE.EVENT, invasionResult))
+    newInvasionResult = invasionResult
+
+    for (const affectedPlayerId of invasion.membersToTransfer) {
+      const membership = signEvent({
+        schemaVersion: 1,
+        type: EventType.CLAN_MEMBERSHIP_CHANGED,
+        playerId: validatorId,
+        timestamp: now,
+        weekId: wid,
+        sequence: 0,
+        prevHash: null,
+        payload: {
+          affectedPlayerId,
+          fromClanId: loserClanId,
+          toClanId: winnerClanId,
+          reason: 'INVASION_LOSS'
+        }
+      }, keypair)
+
+      await store.append(membership)
+      broadcast(swarm, encode(MSG_TYPE.EVENT, membership))
+    }
+
+    hadInvasion = true
+    if (verbose) {
+      console.log(`[validator] WAR RESULT: ${winnerClanId} wins (${invasion.winner}), ${invasion.attackerPoints} vs ${invasion.defenderPoints} pts`)
+      if (invasion.membersToTransfer.length) console.log(`[validator] transferred ${invasion.membersToTransfer.length} members: ${loserClanId} → ${winnerClanId}`)
+      if (upsetBonus) console.log(`[validator] upset bonus: ${upsetBonus.amount} pts from ${upsetBonus.fromClanId} to ${upsetBonus.toClanId}`)
+    }
   }
 
-  const now = Math.floor(Date.now() / 1000)
-  let sequence = 0
-  const bare = {
+  // ── Weekly ranking (non-war clans only, this week) ────────────────────────
+  const { clanScores: weekClanScores } = buildWeeklyRanking(nonWarEvents)
+  const weeklyRanking = clanRanking(weekClanScores, wid)
+
+  // ── Global ranking (all clans, all time + upset bonus adjustments) ────────
+  const allInvasionResults = [...existingInvasion, ...(newInvasionResult ? [newInvasionResult] : [])]
+  const globalRanking = buildGlobalRanking(allScoreEvents, allInvasionResults)
+
+  // ── Next war pair = top 2 of weekly ranking ───────────────────────────────
+  // War clans are excluded from weeklyRanking → automatic 1-week truce
+  const nextWarPair = weeklyRanking.length >= 2
+    ? { attackerClanId: weeklyRanking[0].clanId, defenderClanId: weeklyRanking[1].clanId }
+    : null
+
+  // ── Publish WEEKLY_RESULT ─────────────────────────────────────────────────
+  const weeklyResult = signEvent({
     schemaVersion: 1,
     type: EventType.WEEKLY_RESULT,
     playerId: validatorId,
     timestamp: now,
     weekId: wid,
-    sequence,
+    sequence: 0,
     prevHash: null,
     payload: {
       weekId: wid,
-      clanRanking: clans,
-      playerScores,
-      clanScores,
-      winner: winner?.clanId ?? null,
-      membersTransferred
+      weeklyRanking,
+      globalRanking,
+      warResult: newInvasionResult?.payload ?? null,
+      nextWarPair,
+      hadInvasion
     }
-  }
+  }, keypair)
 
-  const signed = signEvent(bare, keypair)
-  await store.append(signed)
-  broadcast(swarm, encode(MSG_TYPE.WEEKLY_RESULT, signed))
+  await store.append(weeklyResult)
+  broadcast(swarm, encode(MSG_TYPE.EVENT, weeklyResult))
 
   if (verbose) {
     console.log(`[validator] WEEKLY_RESULT published for ${wid}`)
-    if (winner) console.log(`[validator] winner: ${winner.clanId} (${winner.points} pts)`)
-    if (membersTransferred.length) console.log(`[validator] transferred: ${membersTransferred.length} members`)
+    if (weeklyRanking.length) console.log(`[validator] weekly top: ${weeklyRanking[0].clanId} (${weeklyRanking[0].points} pts)`)
+    if (nextWarPair) console.log(`[validator] next war: ${nextWarPair.attackerClanId} → ${nextWarPair.defenderClanId}`)
   }
 
-  return signed
+  return weeklyResult
 }
 
-function buildPlayerSummary(scoreEvents, wid) {
-  const map = {}
-  for (const ev of scoreEvents) {
-    if (ev.weekId !== wid) continue
-    const pid = ev.playerId
-    const clanId = ev.payload?.clanId
-    if (!map[pid]) {
-      map[pid] = { playerId: pid, clanId, weekScores: {}, weekSessions: {}, activeDays: {} }
-    }
-    const p = map[pid]
-    p.weekScores[wid] = (p.weekScores[wid] ?? 0) + (ev.payload?.points ?? 0)
-    p.weekSessions[wid] = (p.weekSessions[wid] ?? 0) + 1
-    // Approximate active days from timestamp
-    const day = Math.floor(ev.timestamp / 86400)
-    if (!p._days) p._days = new Set()
-    p._days.add(day)
-    p.activeDays[wid] = p._days.size
-  }
-  return map
-}
