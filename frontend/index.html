@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metro Clan War</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                l1: '#ED1C24', // Rojo
+                l2: '#93278F', // Lila
+                l3: '#00A651', // Verde
+                l4: '#FDB913', // Amarillo
+                l5: '#005596', // Azul
+                l7: '#B97D05',    // Marrón
+                l9sud: '#F37021', //Naranja
+              }
+            }
+          }
+        }
+    </script>
+</head>
+<body class="bg-slate-900 text-white min-h-screen">
+
+    <div id="app">
+        <div class="p-10 text-center">
+            <h1 class="text-4xl font-black text-l5">METRO CLAN WAR</h1>
+            <p class="mt-4 opacity-70">Cargando sistema de facciones...</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
