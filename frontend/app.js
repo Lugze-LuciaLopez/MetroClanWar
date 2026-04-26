@@ -242,7 +242,7 @@ function startJourney() {
         // 3. AUTO-STOP: Si anem a < 10km/h
         if (currentKmh < 10 && tripPath.length > 0) {
             state.consecutiveLowSpeed++;
-            console.log(`⚠️ Velocitat baixa: ${state.consecutiveLowSpeed}/${CONFIG.AUTO_STOP_THRESHOLD}`);
+            console.log(`⚠️ Low speed: ${state.consecutiveLowSpeed}/${CONFIG.AUTO_STOP_THRESHOLD}`);
             if (state.consecutiveLowSpeed >= CONFIG.AUTO_STOP_THRESHOLD) {
                 stopJourney();
                 return;
@@ -406,9 +406,9 @@ function renderRanking() {
     if (weekLabel) {
         if (useWeekly) {
             const wid = demo.latestWeeklyResult?.weekId;
-            weekLabel.textContent = wid ? `Després de ${wid}` : 'Setmana en curs';
+            weekLabel.textContent = wid ? `After ${wid}` : 'Current Week';
         } else {
-            weekLabel.textContent = 'Acumulat des de l\'inici';
+            weekLabel.textContent = 'Accumulated from the beginning';
         }
     }
 
@@ -417,11 +417,11 @@ function renderRanking() {
     if (entries.length === 0) {
         const li = document.createElement('li');
         li.className = 'opacity-40 text-center py-8 text-sm';
-        li.innerText = useWeekly ? 'Sense punts aquesta setmana' : 'Sense punts encara';
+        li.innerText = useWeekly ? 'No points this week' : 'No points yet';
         list.appendChild(li);
         if (hint) {
             if (useWeekly && demo.warClans.size) {
-                hint.textContent = `Clans en guerra exclosos: ${[...demo.warClans].join(' vs ')}`;
+                hint.textContent = `Clans in war: ${[...demo.warClans].join(' vs ')}`;
                 hint.classList.remove('hidden');
             } else hint.classList.add('hidden');
         }
@@ -449,7 +449,7 @@ function renderRanking() {
 
     if (hint) {
         if (useWeekly && demo.warClans.size) {
-            hint.textContent = `Clans en guerra exclosos: ${[...demo.warClans].join(' vs ')}`;
+            hint.textContent = `Clans in war excluded: ${[...demo.warClans].join(' vs ')}`;
             hint.classList.remove('hidden');
         } else hint.classList.add('hidden');
     }
@@ -483,13 +483,13 @@ function updateWarBanner() {
     const myColor = CLAN_COLORS[me] || '#fff';
 
     document.getElementById('war-banner-week').textContent =
-        `Guerra de ${demo.latestWeeklyResult?.weekId ?? 'aquesta setmana'}`;
+        `War of ${demo.latestWeeklyResult?.weekId ?? 'this week'}`;
     document.getElementById('war-banner-role').textContent =
-        isAttacker ? `⚔️ Estàs ATACANT` : `🛡️ Estàs DEFENSANT`;
+        isAttacker ? `⚔️ You are ATTACKING` : `🛡️ You are DEFENDING`;
     document.getElementById('war-banner-target').textContent =
         isAttacker
-            ? `Juga estacions de ${opponent} per sumar a la invasió`
-            : `${opponent} t'envaeix — defensa la teva línia jugant a ${me}`;
+            ? `Play stations of ${opponent} to contribute to the invasion`
+            : `${opponent} is attacking — defend your line by playing at ${me}`;
 
     banner.style.background = `linear-gradient(90deg, ${myColor}66, ${opponentColor}66)`;
     banner.style.borderColor = isAttacker ? opponentColor : myColor;
@@ -507,28 +507,28 @@ function showWeeklyResultModal(event) {
     let body = '';
     if (wr) {
         const winner = wr.winner === 'ATTACKER' ? wr.attackerClanId : wr.defenderClanId;
-        body += `Guerra: ${wr.attackerClanId} vs ${wr.defenderClanId}\n`;
-        body += `→ ${winner} guanya (${wr.attackerPoints} vs ${wr.defenderPoints})\n\n`;
+        body += `War: ${wr.attackerClanId} vs ${wr.defenderClanId}\n`;
+        body += `→ ${winner} wins (${wr.attackerPoints} vs ${wr.defenderPoints})\n\n`;
     }
     if (ranking.length) {
-        body += `Top setmanal:\n`;
+        body += `Top weekly:\n`;
         body += ranking.slice(0, 3).map((c, i) => `${i + 1}. ${c.clanId} — ${c.points} pts`).join('\n');
         body += '\n\n';
     } else if (global.length) {
-        body += `Ranking global:\n`;
+        body += `Global ranking:\n`;
         body += global.slice(0, 3).map((c, i) => `${i + 1}. ${c.clanId} — ${c.points} pts`).join('\n');
         body += '\n\n';
     }
     if (pair) {
-        const myRole = state.clan === pair.attackerClanId ? '  ⚔️ ATAQUES TU'
-                     : state.clan === pair.defenderClanId ? '  🛡️ DEFENSES TU'
+        const myRole = state.clan === pair.attackerClanId ? '  ⚔️ YOU ARE ATTACKING'
+                     : state.clan === pair.defenderClanId ? '  🛡️ YOU ARE DEFENDING'
                      : '';
-        body += `Pròxima guerra:\n${pair.attackerClanId} → ${pair.defenderClanId}${myRole}`;
+        body += `Next war:\n${pair.attackerClanId} → ${pair.defenderClanId}${myRole}`;
     } else {
-        body += `Pròxima setmana: cap guerra programada`;
+        body += `Next week: no wars scheduled`;
     }
 
-    showMessage(`SETMANA ${wid}`, body, '🏁');
+    showMessage(`WEEK ${wid}`, body, '🏁');
 }
 
 function renderRoutes(routes) {
@@ -692,7 +692,7 @@ function handleDemoMessage(msg) {
             setTripSpeed('0 km/h');
 
             if (isMine) {
-                showMessage('RUTA INVALIDADA', `${reason}\n\nNo es comptabilitzen punts d'aquest trajecte.`, '🚫');
+                showMessage('INVALID ROUTE', `${reason}\n\nNo points are counted for this journey.`, '🚫');
             }
             break;
         }
@@ -723,9 +723,9 @@ function handleDemoMessage(msg) {
                     const { fromClanId, toClanId } = demo.pendingTransfer;
                     demo.pendingTransfer = null;
                     showMessage(
-                        'CANVI DE CLAN',
-                        `${fromClanId} ha perdut la guerra contra ${toClanId}.\n\n` +
-                        `Eres dels jugadors menys actius del clan ${fromClanId}, així que passes a formar part del clan ${toClanId}.`,
+                        'CLAN TRANSFER',
+                        `${fromClanId} has lost the war against ${toClanId}.\n\n` +
+                        `You are one of the least active players in the ${fromClanId} clan, so you are now part of the ${toClanId} clan.`,
                         '🚩'
                     );
                 }
@@ -735,7 +735,7 @@ function handleDemoMessage(msg) {
         case 'INVASION_RESULT': {
             const p = msg.payload || {};
             const winner = p.winner === 'ATTACKER' ? p.attackerClanId : p.defenderClanId;
-            pushDemoEvent(`★ INVASIÓ: ${winner} guanya (${p.attackerClanId} vs ${p.defenderClanId})`);
+            pushDemoEvent(`★ INVASION: ${winner} wins (${p.attackerClanId} vs ${p.defenderClanId})`);
             break;
         }
         case 'CLAN_MEMBERSHIP_CHANGED': {

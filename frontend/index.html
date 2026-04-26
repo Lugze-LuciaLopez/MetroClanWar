@@ -40,7 +40,7 @@
     <main class="flex-1 p-6 space-y-6">
       <!-- War banner — visible only when this peer's clan is in nextWarPair -->
       <div id="war-banner" class="hidden rounded-2xl p-4 border-2 text-center font-black uppercase tracking-widest shadow-2xl">
-        <p class="text-[10px] opacity-80 mb-1" id="war-banner-week">Setmana —</p>
+        <p class="text-[10px] opacity-80 mb-1" id="war-banner-week">Week —</p>
         <p class="text-base" id="war-banner-role">—</p>
         <p class="text-xs opacity-90 mt-1" id="war-banner-target">—</p>
       </div>
@@ -61,11 +61,11 @@
 
       <div id="live-data" class="grid grid-cols-2 gap-4 opacity-30 text-center text-white">
           <div class="bg-black/10 p-4 rounded-3xl border border-white/10">
-              <p class="text-[9px] uppercase font-bold opacity-60 mb-1">Estació</p>
+              <p class="text-[9px] uppercase font-bold opacity-60 mb-1">Station</p>
               <p id="current-station" class="text-sm font-black truncate">---</p>
           </div>
           <div class="bg-black/10 p-4 rounded-3xl border border-white/10">
-              <p class="text-[9px] uppercase font-bold opacity-60 mb-1">Velocitat</p>
+              <p class="text-[9px] uppercase font-bold opacity-60 mb-1">Speed</p>
               <p id="speed-display" class="text-sm font-black">0 km/h</p>
           </div>
       </div>
@@ -88,7 +88,7 @@
         </div>
 
         <div class="border-t border-white/10 pt-3">
-          <p class="uppercase font-bold tracking-widest opacity-60 mb-1">Events recents</p>
+          <p class="uppercase font-bold tracking-widest opacity-60 mb-1">Recent events</p>
           <ul id="demo-events" class="space-y-0.5 text-[10px] opacity-80 max-h-28 overflow-y-auto"></ul>
         </div>
       </div>
@@ -96,9 +96,9 @@
   </div>
 
   <aside id="ranking-sidebar" class="relative w-80 shrink-0 bg-black/50 border-l border-white/10 flex flex-col p-5 overflow-hidden">
-    <p class="text-[10px] uppercase font-bold tracking-widest opacity-60 mb-2">Ranking en viu</p>
-    <p class="text-[10px] opacity-50 mb-4">Suma dels SCORE_GRANTED rebuts pel swarm</p>
-    
+    <p class="text-[10px] uppercase font-bold tracking-widest opacity-60 mb-2">Live Ranking</p>
+    <p class="text-[10px] opacity-50 mb-4">Sum of SCORE_GRANTED received by the swarm</p>
+
     <ul id="demo-ranking" class="space-y-3 flex-1 overflow-y-auto"></ul>
 
     <div class="absolute bottom-0 right-0 w-full flex justify-end pointer-events-none">
