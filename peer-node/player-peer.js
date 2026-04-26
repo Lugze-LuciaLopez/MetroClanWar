@@ -1,7 +1,7 @@
 // Player peer: connects to the swarm, sends signed events, receives WEEKLY_RESULT.
 // In --simulate mode it drives the weekly simulator and broadcasts the produced events.
 
-import { createSwarm, onConnection } from './shared/swarm-utils.js'
+import { createSwarm, onConnection, broadcast } from './shared/swarm-utils.js'
 import { encode, decode, createLineReader, MSG_TYPE } from './shared/protocol.js'
 import { generateKeypair, playerId, saveIdentity, loadIdentity } from '../core/crypto/identity.js'
 import { homedir } from 'os'
@@ -35,6 +35,9 @@ function promptUser(question) {
 export async function startPlayer({
   identityPath = IDENTITY_PATH,
   simulate = false,
+  demo = false,
+  demoPort = 8787,
+  autoClan = null,
   verbose = true
 } = {}) {
   await mkdir(join(homedir(), '.metro-clan-war'), { recursive: true })
@@ -48,16 +51,28 @@ export async function startPlayer({
   // First run: assign clan and save
   if (!identity.clanId) {
     const lines = JSON.parse(await readFile(new URL('../data/lines.json', import.meta.url), 'utf8'))
-    console.log(`\nBenvingut a MetroClanWar!`)
-    console.log(`Clans disponibles: ${Object.keys(lines).join(', ')}`)
-    let clanId
-    do {
-      clanId = await promptUser('Escull el teu clan: ')
-      if (!lines[clanId]) console.log(`  Clan "${clanId}" no existeix.`)
-    } while (!lines[clanId])
-    identity.clanId = clanId
-    await saveIdentity(identity, identityPath)
-    console.log(`  Clan ${clanId} guardat.`)
+    if (autoClan && lines[autoClan]) {
+      identity.clanId = autoClan
+      await saveIdentity(identity, identityPath)
+      if (verbose) console.log(`[player] auto-assigned clan ${autoClan}`)
+    } else if (demo) {
+      // Demo mode without --clan: defer clan assignment to the UI quiz.
+      // The demo-bridge will accept an `assignClan` command from the
+      // browser, persist it here, and the player can start signing events
+      // with that clan from then on.
+      if (verbose) console.log('[player] no clan yet — UI quiz will assign one via the demo bridge')
+    } else {
+      console.log(`\nBenvingut a MetroClanWar!`)
+      console.log(`Clans disponibles: ${Object.keys(lines).join(', ')}`)
+      let clanId
+      do {
+        clanId = await promptUser('Escull el teu clan: ')
+        if (!lines[clanId]) console.log(`  Clan "${clanId}" no existeix.`)
+      } while (!lines[clanId])
+      identity.clanId = clanId
+      await saveIdentity(identity, identityPath)
+      console.log(`  Clan ${clanId} guardat.`)
+    }
   }
 
   const { keypair, clanId } = identity
@@ -70,6 +85,7 @@ export async function startPlayer({
   const results = []
   const seenEventIds = new Set()
   let lastIntroWeek = null
+  let demoBridge = null
 
   const { swarm } = createSwarm({ server: false, client: true })
 
@@ -85,6 +101,8 @@ export async function startPlayer({
         const ev = msg.payload
         if (!ev?.eventId || seenEventIds.has(ev.eventId)) return
         seenEventIds.add(ev.eventId)
+
+        if (demoBridge) demoBridge.forwardSwarmEvent(ev)
 
         if (ev.type === 'WEEKLY_RESULT') {
           results.push(ev)
@@ -107,6 +125,7 @@ export async function startPlayer({
         const events = msg.payload?.events ?? []
         let syncLatest = null
         for (const ev of events) {
+          if (demoBridge) demoBridge.forwardSwarmEvent(ev)
           if (ev.type === 'WEEKLY_RESULT') {
             if (!seenEventIds.has(ev.eventId)) {
               results.push(ev)
@@ -161,8 +180,34 @@ export async function startPlayer({
     }
   }
 
-  await swarm.flush()
-  if (verbose) console.log('[player] connected to swarm')
+  // Start the demo bridge BEFORE swarm.flush() so the UI can connect to the
+  // WebSocket immediately. swarm.flush() can take several seconds (DHT
+  // bootstrap) but the bridge doesn't need it to begin accepting commands —
+  // by the time the user clicks a button, the swarm connections are already
+  // established (and broadcastEvent simply iterates swarm.connections, which
+  // is populated on each 'connection' event regardless of flush state).
+  if (demo) {
+    const linesData = JSON.parse(await readFile(new URL('../data/lines.json', import.meta.url), 'utf8'))
+    const stationsArr = JSON.parse(await readFile(new URL('../data/stations.json', import.meta.url), 'utf8'))
+    const stationsIndex = Object.fromEntries(stationsArr.map(s => [s.stationId, s]))
+    const { startDemoBridge } = await import('./demo-bridge.js')
+    demoBridge = startDemoBridge({
+      port: demoPort,
+      swarm,
+      broadcast,
+      keypair,
+      pid,
+      identity,
+      identityPath,
+      linesData,
+      stationsIndex,
+      verbose
+    })
+  }
+
+  swarm.flush().then(() => {
+    if (verbose) console.log('[player] connected to swarm')
+  }).catch(() => {})
 
   if (simulate) {
     // Wait for SYNC_RESPONSE to arrive before starting simulation

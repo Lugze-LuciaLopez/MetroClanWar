@@ -3,7 +3,7 @@
 // ==========================================
 const state = {
     currentQuestion: 0,
-    scores: { L1:0, L2:0, L3:0, L4:0, L5:0, L7:0, L9sud:0 },
+    scores: { L1:0, L2:0, L3:0, L4:0, L5:0, L9S:0, L11:0 },
     clan: localStorage.getItem('userClan') || null,
     totalPoints: parseInt(localStorage.getItem('totalPoints')) || 0,
     
@@ -31,16 +31,20 @@ const CONFIG = {
 // PREGUNTES DEL TEST (Senceres)
 // ==========================================
 const questions = [
-    { text: "What is your love language?", answers: { a: { text: "Physical touch", clan: "L1" }, b: { text: "Gift giving", clan: "L7" }, c: { text: "Words of affirmation", clan: "L9sud" }, d: { text: "Acts of service", clan: "L5" }, e: { text: "Quality time", clan: "L4" }, f: { text: "Emotional connection", clan: "L2" }, g: { text: "Personal growth support", clan: "L3" } } },
-    { text: "What is your favorite type of pasta?", answers: { a: { text: "Spaghetti", clan: "L5" }, b: { text: "Tortellini", clan: "L2" }, c: { text: "Fettuccine", clan: "L7" }, d: { text: "Penne", clan: "L3" }, e: { text: "Ravioli", clan: "L1" }, f: { text: "Rigatoni", clan: "L4" }, g: { text: "Farfalle", clan: "L9sud" } } },
-    { text: "Someone is following you at night, you…", answers: { a: { text: "Act crazy to scare them away", clan: "L4" }, b: { text: "Ignore them and keep walking", clan: "L9sud" }, c: { text: "Run away as fast as possible", clan: "L3" }, d: { text: "Face them", clan: "L1" }, e: { text: "Start following them", clan: "L2" }, f: { text: "Walk in circles", clan: "L5" }, g: { text: "Call the police", clan: "L7" } } },
-    { text: "Which animal represents you best?", answers: { a: { text: "Pigeon", clan: "L1" }, b: { text: "Jellyfish", clan: "L2" }, c: { text: "Rhino", clan: "L1" }, d: { text: "Horseshoe crab", clan: "L3" }, e: { text: "Hyena", clan: "L4" }, f: { text: "King cobra", clan: "L7" }, g: { text: "White shark", clan: "L9sud" } } },
-    { text: "Among these, which is your favorite metro line?", answers: { a: { text: "L1", clan: "L3" }, b: { text: "L2", clan: "L5" }, c: { text: "L3", clan: "L1" }, d: { text: "L4", clan: "L2" }, e: { text: "L5", clan: "L9sud" }, f: { text: "L7", clan: "L7" }, g: { text: "L9 Sud", clan: "L4" } } }
+    { text: "What is your love language?", answers: { a: { text: "Physical touch", clan: "L1" }, b: { text: "Gift giving", clan: "L11" }, c: { text: "Words of affirmation", clan: "L9S" }, d: { text: "Acts of service", clan: "L5" }, e: { text: "Quality time", clan: "L4" }, f: { text: "Emotional connection", clan: "L2" }, g: { text: "Personal growth support", clan: "L3" } } },
+    { text: "What is your favorite type of pasta?", answers: { a: { text: "Spaghetti", clan: "L5" }, b: { text: "Tortellini", clan: "L2" }, c: { text: "Fettuccine", clan: "L11" }, d: { text: "Penne", clan: "L3" }, e: { text: "Ravioli", clan: "L1" }, f: { text: "Rigatoni", clan: "L4" }, g: { text: "Farfalle", clan: "L9S" } } },
+    { text: "Someone is following you at night, you…", answers: { a: { text: "Act crazy to scare them away", clan: "L4" }, b: { text: "Ignore them and keep walking", clan: "L9S" }, c: { text: "Run away as fast as possible", clan: "L3" }, d: { text: "Face them", clan: "L1" }, e: { text: "Start following them", clan: "L2" }, f: { text: "Walk in circles", clan: "L5" }, g: { text: "Call the police", clan: "L11" } } },
+    { text: "Which animal represents you best?", answers: { a: { text: "Pigeon", clan: "L1" }, b: { text: "Jellyfish", clan: "L2" }, c: { text: "Rhino", clan: "L1" }, d: { text: "Horseshoe crab", clan: "L3" }, e: { text: "Hyena", clan: "L4" }, f: { text: "King cobra", clan: "L11" }, g: { text: "White shark", clan: "L9S" } } },
+    { text: "Among these, which is your favorite metro line?", answers: { a: { text: "L1", clan: "L3" }, b: { text: "L2", clan: "L5" }, c: { text: "L3", clan: "L1" }, d: { text: "L4", clan: "L2" }, e: { text: "L5", clan: "L9S" }, f: { text: "L11", clan: "L11" }, g: { text: "L9 Sud", clan: "L4" } } }
 ];
 
 // ==========================================
 // INICIALITZACIÓ I UI
 // ==========================================
+const DEMO_PORT = new URLSearchParams(location.search).get('port');
+const DEMO_MODE = !!DEMO_PORT;
+const CLAN_COLORS = { L1:'#ED1C24', L2:'#93278F', L3:'#00A651', L4:'#FDB913', L5:'#005596', L9N:'#FB712B', L9S:'#FB712B', L10N:'#00A6D6', L10S:'#00A6D6', L11:'#89B94C' };
+
 document.addEventListener("DOMContentLoaded", async () => {
     try {
         const response = await fetch('../data/geofences.json');
@@ -48,9 +52,24 @@ document.addEventListener("DOMContentLoaded", async () => {
     } catch (e) {
         console.error("❌ Error carregant geofences.");
     }
-    if (state.clan) {
+    if (DEMO_MODE) {
+        // Demo mode: clan comes from the connected player-peer via HELLO.
+        // If the peer has no clan yet, the HELLO will be { clanId: null }
+        // and we'll show the quiz; otherwise we'll jump straight to the
+        // dashboard. Until HELLO arrives, show a transient "Connectant…"
+        // message in the quiz view (red default background).
+        state.clan = null;
+        state.totalPoints = 0;
+        document.getElementById('score-display').textContent = '0';
+        document.getElementById('clan-indicator').textContent = '…';
+        const h2 = document.querySelector('#view-quiz h2');
+        if (h2) h2.textContent = 'Connectant amb el peer…';
+        const grid = document.querySelector('#view-quiz .grid');
+        if (grid) grid.innerHTML = '';
+        showView('view-quiz');
+    } else if (state.clan) {
         updateAppColor();
-        finishQuiz(); 
+        finishQuiz();
     } else {
         loadQuestion();
     }
@@ -67,8 +86,7 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 }
 
 function updateAppColor() {
-    const clanColors = { L1:'#ED1C24', L2:'#93278F', L3:'#00A651', L4:'#FDB913', L5:'#005596', L7:'#B97D05', L9sud:'#F37021' };
-    const color = clanColors[state.clan] || '#ED1C24';
+    const color = CLAN_COLORS[state.clan] || '#ED1C24';
     document.body.style.backgroundColor = color;
 }
 
@@ -111,8 +129,21 @@ function selectAnswer(clan) {
 }
 
 function finishQuiz() {
+    const winner = Object.keys(state.scores).reduce((a, b) => state.scores[a] > state.scores[b] ? a : b);
+
+    if (DEMO_MODE) {
+        // Send the result to the player-peer; the next HELLO will advance us
+        // to the dashboard. Show a transient confirmation in the quiz view.
+        sendDemo({ action: 'assignClan', clanId: winner });
+        const h2 = document.querySelector('#view-quiz h2');
+        if (h2) h2.textContent = `Assignant-te al clan ${winner}…`;
+        const grid = document.querySelector('#view-quiz .grid');
+        if (grid) grid.innerHTML = '';
+        return;
+    }
+
     if (!state.clan) {
-        state.clan = Object.keys(state.scores).reduce((a, b) => state.scores[a] > state.scores[b] ? a : b);
+        state.clan = winner;
         localStorage.setItem('userClan', state.clan);
     }
     updateAppColor();
@@ -236,3 +267,305 @@ function resetUI() {
     document.getElementById('big-points').innerText = "0";
     document.getElementById('current-station').innerText = "---";
 }
+
+// ==========================================
+// DEMO PANEL (P2P simulation via WebSocket bridge)
+// ==========================================
+const DEMO_SPEED_PLACEHOLDER = '30 km/h';
+
+const demo = {
+    ws: null,
+    port: DEMO_PORT || '8787',
+    clanScores: {},
+    eventCount: 0,
+    inTrip: false,
+    // Sessions the player has just published and is awaiting validator
+    // confirmation for. If the validator rejects one, we roll back the
+    // points we tentatively credited.
+    pendingSessions: {}, // { [sessionId]: { clan, points, mine } }
+    // Event IDs the UI has already counted (either via STATE_SNAPSHOT on
+    // (re)connect or via a live SCORE_GRANTED tick). Lets us dedupe so a
+    // late-joining UI doesn't double-count an event that was both in the
+    // snapshot and arrived again as a live forwarded event.
+    seenEventIds: new Set()
+};
+
+function setDemoStatus(text)     { document.getElementById('demo-status').innerText = text; }
+function setDemoPlayer(text)     { document.getElementById('demo-player').innerText = text; }
+function setDemoValidation(text) { document.getElementById('demo-validation').innerText = text; }
+
+// Trip data goes into the existing main UI fields (header line + central
+// circle + live-data row) so the dashboard reflects "what's happening" in
+// the same shape as the GPS flow does.
+function setTripLine(lineId)        { document.getElementById('trip-line').innerText = lineId || '—'; }
+function setTripStation(name)       { document.getElementById('current-station').innerText = name || '---'; }
+function setTripSpeed(text)         { document.getElementById('speed-display').innerText = text; }
+function setTripBigPoints(points)   { document.getElementById('big-points').innerText = String(points); }
+function setLiveDataActive(active) {
+    document.getElementById('live-data').classList.toggle('opacity-30', !active);
+    document.getElementById('live-data').classList.toggle('opacity-100', active);
+}
+function setRadar(active) {
+    document.getElementById('radar-ping').classList.toggle('hidden', !active);
+}
+
+function clearTripFields() {
+    setTripStation('---');
+    setTripSpeed('0 km/h');
+    setTripBigPoints(0);
+    setRadar(false);
+    setLiveDataActive(false);
+}
+
+function applyClan(clanId) {
+    if (!clanId) return;
+    state.clan = clanId;
+    document.getElementById('clan-indicator').textContent = clanId;
+    updateAppColor();
+}
+
+function pushDemoEvent(line) {
+    const list = document.getElementById('demo-events');
+    const li = document.createElement('li');
+    li.innerText = line;
+    list.prepend(li);
+    while (list.children.length > 12) list.lastChild.remove();
+}
+
+function renderRanking() {
+    const list = document.getElementById('demo-ranking');
+    list.innerHTML = '';
+    const entries = Object.entries(demo.clanScores).sort((a, b) => b[1] - a[1]);
+    if (entries.length === 0) {
+        const li = document.createElement('li');
+        li.className = 'opacity-40 text-center py-8 text-sm';
+        li.innerText = 'Sense punts encara';
+        list.appendChild(li);
+        return;
+    }
+    entries.forEach(([clan, pts], idx) => {
+        const color = CLAN_COLORS[clan] || '#666';
+        const isMe = clan === state.clan;
+        const li = document.createElement('li');
+        li.className = 'flex justify-between items-center px-4 py-3 rounded-xl';
+        li.style.background = `${color}33`;
+        li.style.borderLeft = `5px solid ${color}`;
+        if (isMe) li.style.boxShadow = `0 0 0 2px ${color}`;
+        li.innerHTML = `
+            <div class="flex items-center gap-3">
+              <span class="text-xs opacity-60 font-mono">#${idx + 1}</span>
+              <span class="font-black text-xl" style="color:${color}">${clan}</span>
+              ${isMe ? '<span class="text-[9px] uppercase opacity-70 font-bold">tu</span>' : ''}
+            </div>
+            <span class="text-2xl font-black tabular-nums">${pts}</span>
+        `;
+        list.appendChild(li);
+    });
+}
+
+function renderRoutes(routes) {
+    const grid = document.getElementById('demo-routes');
+    grid.innerHTML = '';
+    for (const r of routes) {
+        const btn = document.createElement('button');
+        const isCheat = r.routeId === 'CHEAT';
+        btn.className = 'btn-active py-3 rounded-xl text-[11px] font-black uppercase tracking-wide border ' +
+            (isCheat ? 'bg-black/40 text-white/90 border-white/20' : 'bg-white text-black border-transparent');
+        btn.innerText = r.label;
+        btn.onclick = () => sendDemo({ action: 'runRoute', routeId: r.routeId });
+        grid.appendChild(btn);
+    }
+}
+
+function sendDemo(obj) {
+    if (demo.ws && demo.ws.readyState === WebSocket.OPEN) {
+        demo.ws.send(JSON.stringify(obj));
+    }
+}
+
+function handleDemoMessage(msg) {
+    switch (msg.type) {
+        case 'HELLO':
+            setDemoPlayer(`${msg.playerId.slice(0, 8)}… / ${msg.clanId ?? '—'}`);
+            if (msg.clanId) {
+                applyClan(msg.clanId);
+                renderRanking();
+                showView('view-dashboard');
+            } else {
+                // No clan yet — start the quiz with red default background.
+                state.currentQuestion = 0;
+                state.scores = { L1:0, L2:0, L3:0, L4:0, L5:0, L9S:0, L11:0 };
+                document.body.style.backgroundColor = '#ED1C24';
+                showView('view-quiz');
+                loadQuestion();
+            }
+            break;
+        case 'AVAILABLE_ROUTES':
+            renderRoutes(msg.routes);
+            break;
+        case 'STATE_SNAPSHOT':
+            // Hydrate ranking + own total from the accumulated state held by
+            // the bridge. Subsequent live SCORE_GRANTED events with the same
+            // eventId will be deduped via demo.seenEventIds.
+            demo.clanScores = { ...(msg.clanScores || {}) };
+            state.totalPoints = msg.myTotalPoints || 0;
+            for (const id of (msg.seenEventIds || [])) demo.seenEventIds.add(id);
+            document.getElementById('score-display').innerText = state.totalPoints;
+            renderRanking();
+            break;
+        case 'ROUTE_STARTED':
+            demo.inTrip = true;
+            setTripLine(msg.lineId);
+            setTripStation('—');
+            setTripBigPoints(0);
+            setTripSpeed(DEMO_SPEED_PLACEHOLDER);
+            setRadar(true);
+            setLiveDataActive(true);
+            setDemoValidation('pendent');
+            pushDemoEvent(`▶ ${msg.label}`);
+            break;
+        case 'STATION_DETECTED':
+            setTripLine(msg.lineId);
+            setTripStation(msg.stationName ?? msg.stationId);
+            setTripSpeed(DEMO_SPEED_PLACEHOLDER);
+            setTripBigPoints(msg.accumulatedPoints);
+            pushDemoEvent(`[self] ${msg.stationName ?? msg.stationId}`);
+            break;
+        case 'METRO_SESSION_CONFIRMED': {
+            const tag = msg.source === 'self' ? '[self]' : '[swarm]';
+            pushDemoEvent(`${tag} METRO_SESSION_CONFIRMED ${msg.payload?.lineId ?? ''}`);
+            if (msg.source === 'self') {
+                setDemoValidation('Trajecte enviat · esperant validator…');
+                demo.inTrip = false;
+                setRadar(false);
+                setTripSpeed('0 km/h');
+            } else if (msg.source === 'swarm') {
+                // Validator accepted (else would have emitted METRO_SESSION_REJECTED first).
+                const sid = msg.payload?.sessionId;
+                if (sid && demo.pendingSessions[sid]?.mine) {
+                    setDemoValidation('Acceptada pel validator ✓');
+                }
+            }
+            break;
+        }
+        case 'SCORE_GRANTED': {
+            const clan = msg.payload?.clanId;
+            const pts  = msg.payload?.points ?? 0;
+            const sid  = msg.payload?.sessionId;
+            const eid  = msg.eventId;
+            const tag  = msg.source === 'self' ? '[self]' : '[swarm]';
+            const alreadyCounted = eid && demo.seenEventIds.has(eid);
+            if (eid) demo.seenEventIds.add(eid);
+
+            if (!alreadyCounted) {
+                if (clan) {
+                    demo.clanScores[clan] = (demo.clanScores[clan] || 0) + pts;
+                    renderRanking();
+                }
+                if (msg.source === 'self') {
+                    state.totalPoints += pts;
+                    document.getElementById('score-display').innerText = state.totalPoints;
+                }
+            }
+            if (msg.source === 'self') {
+                setDemoValidation('Pendent — esperant validator…');
+            }
+            if (sid) {
+                demo.pendingSessions[sid] = { clan, points: pts, mine: msg.source === 'self' };
+            }
+            pushDemoEvent(`${tag} SCORE_GRANTED ${clan} +${pts}`);
+            break;
+        }
+        case 'METRO_SESSION_REJECTED': {
+            const sid    = msg.payload?.sessionId;
+            const reason = msg.payload?.reason ?? msg.reason;
+            const eid    = msg.eventId;
+            const pending = sid ? demo.pendingSessions[sid] : null;
+
+            // If the rejection event was already in the snapshot, the
+            // bridge already removed its score from clanScores. Skip the
+            // local rollback to avoid double-subtracting.
+            const alreadyApplied = eid && demo.seenEventIds.has(eid);
+            if (eid) demo.seenEventIds.add(eid);
+
+            if (pending && !alreadyApplied) {
+                // Roll back the points we tentatively credited.
+                if (pending.clan && demo.clanScores[pending.clan] != null) {
+                    demo.clanScores[pending.clan] -= pending.points;
+                    if (demo.clanScores[pending.clan] <= 0) delete demo.clanScores[pending.clan];
+                    renderRanking();
+                }
+                if (pending.mine) {
+                    state.totalPoints = Math.max(0, state.totalPoints - pending.points);
+                    document.getElementById('score-display').innerText = state.totalPoints;
+                }
+                delete demo.pendingSessions[sid];
+            }
+
+            const isMine = pending?.mine || msg.source === 'self';
+            setDemoValidation(`Rebutjada: ${reason}`);
+            pushDemoEvent(`✗ REJECTED: ${reason}`);
+            demo.inTrip = false;
+            setRadar(false);
+            setTripSpeed('0 km/h');
+
+            if (isMine) {
+                showMessage('RUTA INVALIDADA', `${reason}\n\nNo es comptabilitzen punts d'aquest trajecte.`, '🚫');
+            }
+            break;
+        }
+        case 'WEEKLY_RESULT':
+            pushDemoEvent(`[swarm] WEEKLY_RESULT ${msg.payload?.weekId ?? ''}`);
+            break;
+        case 'INVASION_RESULT': {
+            const p = msg.payload || {};
+            const winner = p.winner === 'ATTACKER' ? p.attackerClanId : p.defenderClanId;
+            pushDemoEvent(`★ INVASIÓ: ${winner} guanya (${p.attackerClanId} vs ${p.defenderClanId})`);
+            break;
+        }
+        case 'CLAN_MEMBERSHIP_CHANGED':
+            pushDemoEvent(`[swarm] ${msg.payload?.affectedPlayerId?.slice(0, 8)}… → ${msg.payload?.toClanId}`);
+            break;
+        case 'RESET':
+            demo.clanScores = {};
+            demo.inTrip = false;
+            state.totalPoints = 0;
+            document.getElementById('score-display').innerText = '0';
+            renderRanking();
+            clearTripFields();
+            setTripLine('—');
+            setDemoValidation('—');
+            document.getElementById('demo-events').innerHTML = '';
+            break;
+        case 'ERROR':
+            pushDemoEvent(`! ERROR: ${msg.reason}`);
+            break;
+    }
+}
+
+function connectDemoBridge() {
+    const url = `ws://localhost:${demo.port}`;
+    setDemoStatus(`connectant a ${url}…`);
+    try {
+        demo.ws = new WebSocket(url);
+    } catch (e) {
+        setDemoStatus('error connexió');
+        return;
+    }
+    demo.ws.onopen    = () => setDemoStatus(`connectat (port ${demo.port})`);
+    demo.ws.onclose   = () => { setDemoStatus('desconnectat — reintentant en 2s'); setTimeout(connectDemoBridge, 2000); };
+    demo.ws.onerror   = () => {};
+    demo.ws.onmessage = (e) => {
+        try { handleDemoMessage(JSON.parse(e.data)); } catch {}
+    };
+}
+
+function bindDemoButtons() {
+    document.getElementById('btn-demo-reset').onclick = () => sendDemo({ action: 'reset' });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    bindDemoButtons();
+    renderRanking();
+    connectDemoBridge();
+});

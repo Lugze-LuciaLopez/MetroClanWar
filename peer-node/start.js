@@ -40,13 +40,18 @@ if (role === 'replica') {
   const { startValidator } = await import('./validator-peer.js')
   await startValidator({
     storePath: expandPath(args['store']),
-    computeResults: args['compute-results'] === true || args['compute-results'] === 'true'
+    computeResults: args['compute-results'] === true || args['compute-results'] === 'true',
+    demo: args['demo'] === true || args['demo'] === 'true',
+    demoPort: args['demo-port'] ? Number(args['demo-port']) : undefined
   })
 
 } else {
   const { startPlayer } = await import('./player-peer.js')
   await startPlayer({
     simulate: args['simulate'] === true || args['simulate'] === 'true',
+    demo: args['demo'] === true || args['demo'] === 'true',
+    demoPort: args['demo-port'] ? Number(args['demo-port']) : undefined,
+    autoClan: args['clan'] || undefined,
     identityPath: expandPath(args['identity']) || undefined
   })
 }

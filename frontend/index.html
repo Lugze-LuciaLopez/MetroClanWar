@@ -23,37 +23,77 @@
   </div>
 </section>
 
-<section id="view-dashboard" class="hidden h-screen flex flex-col overflow-y-auto">
-  <header class="p-6 flex justify-between items-center">
-    <div id="clan-indicator" class="w-16 h-16 rounded-full border-4 border-white flex items-center justify-center text-2xl font-black shadow-lg">?</div>
-    <div class="text-right">
-      <p id="score-display" class="text-3xl font-black text-white">0</p>
-    </div>
-  </header>
-  <main class="flex-1 p-6 space-y-6">
-    <div class="bg-black/20 p-8 rounded-[2.5rem] text-center border border-white/10 shadow-2xl">
-      <div class="relative flex justify-center items-center mb-8 mt-4">
-        <div id="radar-ping" class="hidden absolute w-48 h-48 rounded-full border-2 border-white animate-ping opacity-40"></div>
-        <div class="w-36 h-36 rounded-full border-2 border-white/20 flex items-center justify-center bg-black/10">
-            <span id="big-points" class="text-4xl font-black text-white">0</span>
+<section id="view-dashboard" class="hidden h-screen" style="flex-direction:row;overflow:hidden">
+  <!-- Main column (header + dashboard + demo panel) -->
+  <div class="flex-1 flex flex-col overflow-y-auto min-w-0">
+    <header class="p-6 flex justify-between items-center">
+      <div id="clan-indicator" class="w-16 h-16 rounded-full border-4 border-white flex items-center justify-center text-2xl font-black shadow-lg">?</div>
+      <div class="text-right">
+        <p id="trip-line-label" class="text-[10px] uppercase font-bold opacity-60">Línia</p>
+        <p id="trip-line" class="text-2xl font-black">—</p>
+      </div>
+      <div class="text-right">
+        <p class="text-[10px] uppercase font-bold opacity-60">Total</p>
+        <p id="score-display" class="text-3xl font-black text-white">0</p>
+      </div>
+    </header>
+    <main class="flex-1 p-6 space-y-6">
+      <div class="bg-black/20 p-8 rounded-[2.5rem] text-center border border-white/10 shadow-2xl">
+        <div class="relative flex justify-center items-center mb-8 mt-4">
+          <div id="radar-ping" class="hidden absolute w-48 h-48 rounded-full border-2 border-white animate-ping opacity-40"></div>
+          <div class="w-36 h-36 rounded-full border-2 border-white/20 flex items-center justify-center bg-black/10">
+              <span id="big-points" class="text-4xl font-black text-white">0</span>
+          </div>
+        </div>
+        <p id="tracking-status" class="text-[10px] uppercase font-bold mb-6 opacity-50 text-white">Scanner Ready</p>
+
+        <button onmousedown="handleMainAction(event)" id="btn-main-action" class="btn-active w-full py-5 rounded-2xl bg-white text-black font-black text-sm uppercase tracking-widest shadow-lg">
+          Start Journey Scan
+        </button>
+      </div>
+
+      <div id="live-data" class="grid grid-cols-2 gap-4 opacity-30 text-center text-white">
+          <div class="bg-black/10 p-4 rounded-3xl border border-white/10">
+              <p class="text-[9px] uppercase font-bold opacity-60 mb-1">Estació</p>
+              <p id="current-station" class="text-sm font-black truncate">---</p>
+          </div>
+          <div class="bg-black/10 p-4 rounded-3xl border border-white/10">
+              <p class="text-[9px] uppercase font-bold opacity-60 mb-1">Velocitat</p>
+              <p id="speed-display" class="text-sm font-black">0 km/h</p>
+          </div>
+      </div>
+
+      <!-- ========== DEMO PANEL (P2P simulation, smaller, below the GPS button) ========== -->
+      <div id="demo-panel" class="bg-black/20 p-5 rounded-3xl border border-white/10 text-white text-xs space-y-3">
+        <div class="flex justify-between items-center">
+          <p class="uppercase font-bold tracking-widest opacity-60">Demo P2P</p>
+          <p id="demo-status" class="opacity-60">desconnectat</p>
+        </div>
+        <p>Player: <span id="demo-player" class="font-mono">—</span></p>
+
+        <div id="demo-routes" class="grid grid-cols-2 gap-2">
+          <!-- buttons injected by app.js when AVAILABLE_ROUTES arrives -->
+        </div>
+        <button id="btn-demo-reset" class="btn-active w-full py-2 rounded-xl text-white/70 text-[10px] uppercase tracking-widest border border-white/10">Reset</button>
+
+        <div class="border-t border-white/10 pt-3">
+          <p>Validació: <span id="demo-validation">—</span></p>
+        </div>
+
+        <div class="border-t border-white/10 pt-3">
+          <p class="uppercase font-bold tracking-widest opacity-60 mb-1">Events recents</p>
+          <ul id="demo-events" class="space-y-0.5 text-[10px] opacity-80 max-h-28 overflow-y-auto"></ul>
         </div>
       </div>
-      <p id="tracking-status" class="text-[10px] uppercase font-bold mb-6 opacity-50 text-white">Scanner Ready</p>
-      
-      <button onmousedown="handleMainAction(event)" id="btn-main-action" class="btn-active w-full py-5 rounded-2xl bg-white text-black font-black text-sm uppercase tracking-widest shadow-lg">
-        Start Journey Scan
-      </button>
-    </div>
-    
-    <div id="live-data" class="grid grid-cols-2 gap-4 opacity-20 text-center italic text-white">
-        <div class="bg-black/10 p-4 rounded-3xl border border-white/10">
-            <p id="current-station" class="text-xs font-bold truncate">---</p>
-        </div>
-        <div class="bg-black/10 p-4 rounded-3xl border border-white/10">
-            <p id="speed-display" class="text-xs font-bold">0 km/h</p>
-        </div>
-    </div>
-  </main>
+    </main>
+  </div>
+
+  <!-- Right sidebar: live ranking -->
+  <aside id="ranking-sidebar" class="w-80 shrink-0 bg-black/50 border-l border-white/10 flex flex-col p-5 overflow-y-auto">
+    <p class="text-[10px] uppercase font-bold tracking-widest opacity-60 mb-2">Ranking en viu</p>
+    <p class="text-[10px] opacity-50 mb-4">Suma dels SCORE_GRANTED rebuts pel swarm</p>
+    <ul id="demo-ranking" class="space-y-3"></ul>
+  </aside>
 </section>
 
 <div id="message-overlay" class="hidden fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/80 backdrop-blur-sm">

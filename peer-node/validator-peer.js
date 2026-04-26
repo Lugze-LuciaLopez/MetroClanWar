@@ -14,9 +14,10 @@ import { EventType } from '../core/events/event-types.js'
 import { weekId, weekStart } from '../core/weekly-engine/week-utils.js'
 import { nowSecs } from '../core/weekly-engine/clock.js'
 import { generateKeypair, playerId, saveKeypair, loadKeypair } from '../core/crypto/identity.js'
+import { validateStaticRoute } from '../simulator/demo/static-validator.js'
 import { homedir } from 'os'
 import { join } from 'path'
-import { mkdir } from 'fs/promises'
+import { mkdir, readFile } from 'fs/promises'
 
 const DEFAULT_STORE   = join(homedir(), '.metro-clan-war', 'validator-store')
 const IDENTITY_PATH   = join(homedir(), '.metro-clan-war', 'validator-identity.json')
@@ -34,6 +35,8 @@ export async function startValidator({
   storePath = DEFAULT_STORE,
   identityPath = IDENTITY_PATH,
   computeResults = false,
+  demo = false,
+  demoPort = 8786,
   verbose = true
 } = {}) {
   const keypair = await loadOrCreateKeypair(identityPath)
@@ -42,11 +45,28 @@ export async function startValidator({
   const store = new EventStore(storePath)
   await store.init()
 
+  // Load metro graph data once for static-route validation.
+  const linesData = JSON.parse(await readFile(new URL('../data/lines.json', import.meta.url), 'utf8'))
+  const stationsArr = JSON.parse(await readFile(new URL('../data/stations.json', import.meta.url), 'utf8'))
+  const stationsIndex = Object.fromEntries(stationsArr.map(s => [s.stationId, s]))
+  const rejectedSessionIds = new Set()
+
   const { swarm } = createSwarm({ server: true, client: true })
 
   if (verbose) {
     console.log('[validator] starting, id:', validatorId.slice(0, 16) + '...')
     console.log('[validator] store:', storePath)
+  }
+
+  let bridge = null
+  if (demo) {
+    const { startValidatorBridge } = await import('./validator-bridge.js')
+    bridge = startValidatorBridge({
+      port: demoPort,
+      validatorId,
+      computeNow: () => computeAndPublish(weekId(nowSecs()), keypair, validatorId, store, swarm, verbose, bridge),
+      verbose
+    })
   }
 
   if (computeResults) {
@@ -99,10 +119,61 @@ export async function startValidator({
         const event = msg.payload
         if (!event?.eventId || !event?.playerId) return
 
+        if (bridge) bridge.notifyReceived(event)
+
         const pubKey = Buffer.from(event.playerId, 'hex')
         const result = verifyEvent(event, pubKey)
         if (!result.valid) {
           if (verbose) console.warn('[validator] rejected:', result.error)
+          if (bridge) bridge.notifyRejected(event, result.error)
+          return
+        }
+
+        // Static-route gate for METRO_SESSION_CONFIRMED. Catches impossible
+        // routes (different lines, non-consecutive stops, teleport timings)
+        // signed by an authentic player.
+        if (event.type === EventType.METRO_SESSION_CONFIRMED) {
+          const stops = (event.payload?.stations ?? []).map((id, i, arr) => ({
+            stationId: id,
+            tOffsetSecs: arr.length > 1 && event.payload?.durationSeconds
+              ? Math.round((event.payload.durationSeconds * i) / (arr.length - 1))
+              : i * 90
+          }))
+          const check = validateStaticRoute(stops, linesData, stationsIndex)
+          if (!check.valid) {
+            const ts = nowSecs()
+            const rejection = signEvent({
+              schemaVersion: 1,
+              type: EventType.METRO_SESSION_REJECTED,
+              playerId: validatorId,
+              timestamp: ts,
+              weekId: weekId(ts),
+              sequence: 0,
+              prevHash: null,
+              payload: {
+                sessionId: event.payload?.sessionId,
+                originalEventId: event.eventId,
+                originalPlayerId: event.playerId,
+                reason: check.reason
+              }
+            }, keypair)
+            await store.append(rejection)
+            rejectedSessionIds.add(event.payload?.sessionId)
+            broadcast(swarm, encode(MSG_TYPE.EVENT, rejection))
+            if (verbose) console.log(`[validator] route rejected: session ${event.payload?.sessionId} — ${check.reason}`)
+            if (bridge) {
+              bridge.notifyRejected(event, check.reason)
+              bridge.notifyPublished(rejection)
+            }
+            return
+          }
+        }
+
+        // Drop SCORE_GRANTED events tied to a session we've already rejected.
+        if (event.type === EventType.SCORE_GRANTED &&
+            rejectedSessionIds.has(event.payload?.sessionId)) {
+          if (verbose) console.log(`[validator] dropping SCORE_GRANTED for rejected session ${event.payload?.sessionId}`)
+          if (bridge) bridge.notifyRejected(event, 'session previously rejected')
           return
         }
 
@@ -111,6 +182,7 @@ export async function startValidator({
 
         await store.append(event)
         if (verbose) console.log(`[validator] accepted ${event.type} from ${event.playerId.slice(0, 8)}`)
+        if (bridge) bridge.notifyAccepted(event)
 
         // Re-broadcast to other peers
         broadcast(swarm, encode(MSG_TYPE.EVENT, event), conn)
@@ -131,10 +203,10 @@ export async function startValidator({
     process.exit(0)
   })
 
-  return { swarm, store, computeAndPublish: (wid) => computeAndPublish(wid, keypair, validatorId, store, swarm, verbose) }
+  return { swarm, store, computeAndPublish: (wid) => computeAndPublish(wid, keypair, validatorId, store, swarm, verbose, bridge) }
 }
 
-async function computeAndPublish(wid, keypair, validatorId, store, swarm, verbose) {
+async function computeAndPublish(wid, keypair, validatorId, store, swarm, verbose, bridge = null) {
   // ── War pair from previous week's nextWarPair ─────────────────────────────
   const now    = nowSecs()
   const prevWid = weekId(weekStart(now) - 1)
@@ -203,6 +275,7 @@ async function computeAndPublish(wid, keypair, validatorId, store, swarm, verbos
 
     await store.append(invasionResult)
     broadcast(swarm, encode(MSG_TYPE.EVENT, invasionResult))
+    if (bridge) bridge.notifyPublished(invasionResult)
     newInvasionResult = invasionResult
 
     for (const affectedPlayerId of invasion.membersToTransfer) {
@@ -269,6 +342,7 @@ async function computeAndPublish(wid, keypair, validatorId, store, swarm, verbos
 
   await store.append(weeklyResult)
   broadcast(swarm, encode(MSG_TYPE.EVENT, weeklyResult))
+  if (bridge) bridge.notifyPublished(weeklyResult)
 
   if (verbose) {
     console.log(`[validator] WEEKLY_RESULT published for ${wid}`)
