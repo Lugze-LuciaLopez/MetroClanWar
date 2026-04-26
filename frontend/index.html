@@ -88,17 +88,15 @@
     </main>
   </div>
 
-  <aside id="ranking-sidebar" class="w-80 shrink-0 bg-black/50 border-l border-white/10 flex flex-col p-5 overflow-y-auto">
+  <aside id="ranking-sidebar" class="relative w-80 shrink-0 bg-black/50 border-l border-white/10 flex flex-col p-5 overflow-hidden">
     <p class="text-[10px] uppercase font-bold tracking-widest opacity-60 mb-2">Ranking en viu</p>
     <p class="text-[10px] opacity-50 mb-4">Suma dels SCORE_GRANTED rebuts pel swarm</p>
     
-    <ul id="demo-ranking" class="space-y-3 flex-1"></ul>
+    <ul id="demo-ranking" class="space-y-3 flex-1 overflow-y-auto"></ul>
 
-    <div class="mt-8 flex justify-end">
-        <div class="relative w-24 h-24 bg-white/10 rounded-2xl border border-white/20 flex items-center justify-center overflow-hidden shadow-2xl">
-            <img id="clan-avatar" src="" alt="Clan Sprite" 
-                 class="w-20 h-20 object-contain pixelated">
-        </div>
+    <div class="absolute bottom-0 right-0 w-full flex justify-end pointer-events-none">
+        <img id="clan-avatar" src="" alt="Clan Sprite" 
+             class="w-48 h-48 object-contain pixelated translate-y-4">
     </div>
 </aside>
 

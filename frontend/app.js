@@ -128,6 +128,7 @@ function selectAnswer(clan) {
     else finishQuiz();
 }
 
+/*
 function finishQuiz() {
     const winner = Object.keys(state.scores).reduce((a, b) => state.scores[a] > state.scores[b] ? a : b);
 
@@ -149,6 +150,54 @@ function finishQuiz() {
     updateAppColor();
     document.getElementById("clan-indicator").textContent = state.clan;
     document.getElementById("score-display").textContent = state.totalPoints;
+    showView("view-dashboard");
+}*/
+function finishQuiz() {
+    // Calculem qui ha guanyat el test
+    const winner = Object.keys(state.scores).reduce((a, b) => state.scores[a] > state.scores[b] ? a : b);
+
+    // Lògica per a la DEMO (P2P)
+    if (typeof DEMO_MODE !== 'undefined' && DEMO_MODE) {
+        // Enviem el resultat al player-peer; el següent missatge HELLO ens farà entrar al dashboard
+        sendDemo({ action: 'assignClan', clanId: winner });
+        
+        const h2 = document.querySelector('#view-quiz h2');
+        if (h2) h2.textContent = `Assignant-te al clan ${winner}…`;
+        
+        const grid = document.querySelector('#view-quiz .grid');
+        if (grid) grid.innerHTML = '';
+        
+        return; // Sortim, el dashboard es mostrarà quan el peer ens ho confirmi
+    }
+
+    // Lògica estàndard (sense P2P demo)
+    if (!state.clan) {
+        state.clan = winner;
+        localStorage.setItem('userClan', state.clan);
+    }
+
+    // Actualitzem colors de la interfície
+    updateAppColor();
+
+    // --- ACTUALITZACIÓ DE L'AVATAR (SPRITE) ---
+    const avatarImg = document.getElementById("clan-avatar");
+    if (avatarImg && state.clan) {
+        // Assignem la ruta del PNG: assets/avatars/L1.png, etc.
+        avatarImg.src = `assets/avatars/${state.clan}.png`;
+        
+        // Gestió d'error: si no troba la imatge, la ocultem o posem un log
+        avatarImg.onerror = () => {
+            console.warn(`No s'ha trobat l'avatar a: assets/avatars/${state.clan}.png`);
+            avatarImg.style.opacity = "0"; 
+        };
+        avatarImg.style.opacity = "1"; // Ens assegurem que sigui visible
+    }
+
+    // Mostrem la info al Dashboard
+    document.getElementById("clan-indicator").textContent = state.clan;
+    document.getElementById("score-display").textContent = state.totalPoints;
+    
+    // Canviem a la vista de joc
     showView("view-dashboard");
 }
 
