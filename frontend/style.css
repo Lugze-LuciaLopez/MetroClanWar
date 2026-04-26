@@ -1,34 +1,121 @@
-/* Bloqueamos el scroll elástico típico de los navegadores móviles */
+/* style.css */
+
+/* --- ESTRUCTURA BASE --- */
 html, body {
     margin: 0;
     padding: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden; /* Evita el scroll global */
-    position: fixed; /* Fija la pantalla para que parezca una App */
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    overflow: hidden; 
+    position: fixed;
+    /* Tipografia Helvetica/Arial estil TMB */
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+    background-color: #ED1C24; /* Color base L1 */
+    color: white;
+    transition: background-color 0.8s ease;
 }
 
-/* Contenedor principal que sí permite scroll interno si el contenido es largo */
-.app-container {
+section {
+    width: 100%;
     height: 100%;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
-    padding-bottom: 80px; /* Espacio para la barra de navegación inferior */
+    display: flex;
+    flex-direction: column;
 }
 
-/* Animación suave para el cambio de pantallas */
-.fade-in {
-    animation: fadeIn 0.3s ease-in-out;
+/* --- INTERACCIÓ --- */
+button {
+    touch-action: none; 
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    pointer-events: auto !important;
+    transition: transform 0.1s ease;
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Estilo para que los botones parezcan de sistema operativo */
 .btn-active:active {
     transform: scale(0.95);
-    transition: transform 0.1s;
+    filter: brightness(0.9);
+}
+
+.hidden { display: none !important; }
+
+/* --- ANIMACIONS UI --- */
+@keyframes ping {
+    75%, 100% { transform: scale(2.2); opacity: 0; }
+}
+.animate-ping {
+    animation: ping 1.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes modalPop {
+    0% { opacity: 0; transform: scale(0.85); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+#message-overlay:not(.hidden) > div {
+    animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* --- MISSATGES I MODALS --- */
+#message-title {
+    font-size: 1.25rem !important;
+    line-height: 1.1 !important;
+    letter-spacing: -0.05em !important;
+    white-space: nowrap !important;
+}
+
+@media (min-width: 380px) {
+    #message-title {
+        font-size: 1.5rem !important;
+    }
+}
+
+/* --- IMPLEMENTACIÓ AVATAR PIXEL ART --- */
+.pixelated {
+    /* Evita que el navegador suavitzi els píxels en fer-lo gran */
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
+}
+
+#clan-avatar {
+    /* Efecte de resplendor suau per separar l'sprite del fons fosc de la barra lateral */
+    filter: drop-shadow(0 -5px 15px rgba(255, 255, 255, 0.15));
+    
+    /* Animació de flotació */
+    animation: float-bottom 4s ease-in-out infinite;
+    
+    /* Fixem la base de l'animació a la part inferior */
+    transform-origin: bottom;
+    
+    /* Evitem que l'avatar bloquegi clics al rànquing que hi ha darrere */
+    pointer-events: none;
+}
+
+@keyframes float-bottom {
+    0% { 
+        transform: translateY(16px) scale(1); 
+    }
+    50% { 
+        transform: translateY(4px) scale(1.03); /* Puja lleugerament i creix un pèl */
+    }
+    100% { 
+        transform: translateY(16px) scale(1); 
+    }
+}
+
+/* Ajust per a la barra lateral del rànquing */
+#ranking-sidebar {
+    /* Necessari per poder posicionar l'avatar de forma absoluta respecte la barra */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Estil de la llista de rànquing perquè no quedi tapada per l'avatar */
+#demo-ranking {
+    position: relative;
+    z-index: 1; /* El rànquing per sota de la resplendor, però interactuable */
+    padding-bottom: 120px; /* Espai extra a sota per fer scroll i que l'avatar no tapi l'últim peer */
 }

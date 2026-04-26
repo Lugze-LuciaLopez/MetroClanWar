@@ -34,3 +34,27 @@ export async function loadKeypair(filePath) {
     return null
   }
 }
+
+// Full player identity: keypair + assigned clan.
+export async function saveIdentity(identity, filePath) {
+  await writeFile(filePath, JSON.stringify({
+    publicKey: identity.keypair.publicKey.toString('hex'),
+    secretKey: identity.keypair.secretKey.toString('hex'),
+    clanId: identity.clanId ?? null
+  }, null, 2), 'utf8')
+}
+
+export async function loadIdentity(filePath) {
+  try {
+    const raw = JSON.parse(await readFile(filePath, 'utf8'))
+    return {
+      keypair: {
+        publicKey: Buffer.from(raw.publicKey, 'hex'),
+        secretKey: Buffer.from(raw.secretKey, 'hex')
+      },
+      clanId: raw.clanId ?? null
+    }
+  } catch {
+    return null
+  }
+}

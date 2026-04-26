@@ -23,6 +23,26 @@ export function buildWeeklyRanking(scoreGrantedEvents) {
   return { playerScores, clanScores }
 }
 
+// All-time cumulative clan ranking from all SCORE_GRANTED events across all weeks.
+// Applies upset-bonus transfers from INVASION_RESULT events (upsetBonus field).
+export function buildGlobalRanking(allScoreEvents, invasionResults = []) {
+  const totals = {}
+  for (const e of allScoreEvents) {
+    const { clanId, points } = e.payload
+    if (!clanId) continue
+    totals[clanId] = (totals[clanId] ?? 0) + points
+  }
+  for (const inv of invasionResults) {
+    const b = inv.payload?.upsetBonus
+    if (!b) continue
+    totals[b.fromClanId] = (totals[b.fromClanId] ?? 0) - b.amount
+    totals[b.toClanId]   = (totals[b.toClanId]   ?? 0) + b.amount
+  }
+  return Object.entries(totals)
+    .map(([clanId, points]) => ({ clanId, points: Math.max(0, points) }))
+    .sort((a, b) => b.points - a.points)
+}
+
 // Returns clans sorted by descending score for a given weekId.
 export function clanRanking(clanScores, weekId) {
   return Object.entries(clanScores)

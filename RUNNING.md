@@ -106,3 +106,93 @@ Tots els nodes guarden la seva informació a `~/.metro-clan-war/`:
 | `validator-store/events.jsonl` | Events validats pel validator |
 
 Per reiniciar des de zero: `rm -rf ~/.metro-clan-war/`
+
+cd Desktop/MetroClanWar
+
+node peer-node/start.js --role=replica
+node peer-node/start.js --role=validator
+
+node peer-node/start.js --role=player --simulate
+node peer-node/start.js --role=player --simulate --identity=~/.metro-clan-war/player2.json
+
+node peer-node/start.js --role=validator --compute-results
+node peer-node/start.js --role=validator --compute-results --week-offset=1
+
+---
+
+## Demo del hackathon (UI gràfica + P2P real)
+
+Substitueix el `--simulate` interactiu per la UI gràfica. La frontend
+(carpeta `frontend/`) es connecta per WebSocket al `player-peer` corresponent
+i li demana que executi rutes estàtiques pre-definides; el `player-peer`
+valida, signa i broadcasteja al swarm exactament igual que abans.
+
+> **Producció / xarxes diferents**: els player-peers s'anuncien al DHT i
+> mantenen presència estable, així que un player pot connectar-se a la
+> xarxa des de qualsevol màquina sense necessitat de córrer un peer-server
+> local. Per estabilitat encara recomanem tenir almenys un validator i una
+> replica always-on (al núvol o a una màquina fixa) que actuïn de
+> backbone — no calen "side servers" als dispositius dels jugadors.
+
+### Flags nous
+
+| Flag                | Aplicació                            | Per defecte |
+|---------------------|--------------------------------------|-------------|
+| `--demo`            | activa el bridge WebSocket           | (off)       |
+| `--demo-port=N`     | port del bridge                      | 8787 (player) / 8786 (validator) |
+| `--clan=CLAN`       | preselecciona clan al `--role=player` (evita el prompt) | — |
+
+### Escenari A — un jugador
+
+```bash
+# Terminal 1
+node peer-node/start.js --role=replica
+
+# Terminal 2
+node peer-node/start.js --role=validator --demo
+
+# Terminal 3
+node peer-node/start.js --role=player --demo \
+  --demo-port=8787 \
+  --identity=~/.metro-clan-war/playerA.json --clan=L4
+```
+
+Obre al navegador:
+- `frontend/index.html?port=8787` — finestra del jugador A.
+- `frontend/validator.html` — finestra de validació (port 8786).
+
+A la UI A clica "L4 Barceloneta → Urquinaona" → progressió en ~6 s, "Acceptada", +N punts. La UI validator mostra `EVENT_RECEIVED` i `EVENT_ACCEPTED`. El botó "Compute Weekly" del validator publica el `WEEKLY_RESULT`.
+
+### Escenari B — dos jugadors
+
+A més dels anteriors:
+
+```bash
+# Terminal 4
+node peer-node/start.js --role=player --demo \
+  --demo-port=8788 \
+  --identity=~/.metro-clan-war/playerB.json --clan=L2
+```
+
+Obre `frontend/index.html?port=8788` per a B.
+
+A (L4) fa "L4 BCN→URQ", B (L2) fa "L2 PAR→PG". Els dos veuen el ranking creixent en viu (alimentat pels SCORE_GRANTED rebuts pel swarm). "Compute Weekly" publica el ranking oficial i, segons el setting, fixa el `nextWarPair`.
+
+### Escenari C — invasió
+
+Fes que els dos juguin un cop l'escenari B, premeu `Compute Weekly`. Això genera un `WEEKLY_RESULT` que defineix el `nextWarPair`. Ara reinicieu tots els peers afegint `--week-offset=1` per moure'ns a la setmana següent (la de la invasió):
+
+```bash
+node peer-node/start.js --role=replica
+node peer-node/start.js --role=validator --demo --week-offset=1
+node peer-node/start.js --role=player --demo --demo-port=8787 \
+  --identity=~/.metro-clan-war/playerA.json --week-offset=1
+node peer-node/start.js --role=player --demo --demo-port=8788 \
+  --identity=~/.metro-clan-war/playerB.json --week-offset=1
+```
+
+A i B fan trajectes a la línia atacada. Premeu `Compute Weekly` → la UI mostra `INVASION_RESULT` i, si toca, transferència de membres. La UI dels jugadors mostra el banner ★ INVASIÓ.
+
+### Què fa el rebuig de la trampa
+
+El botó "Trampa" envia una ruta amb estacions de línies diferents (BARCELONETA → HOSPITAL_DE_BELLVITGE en 10 s). El `player-peer` la rebutja **abans de signar**: la UI marca "Rebutjada (player): Estacions de línies diferents", i **no s'envia res al swarm**. El validator-peer no veu res — exactament el comportament que l'usuari va demanar (validació estàtica al player abans d'enviar).
