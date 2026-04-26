@@ -34,10 +34,9 @@ const questions = [
     { text: "What is your love language?", answers: { a: { text: "Physical touch", clan: "L1" }, b: { text: "Gift giving", clan: "L11" }, c: { text: "Words of affirmation", clan: "L9S" }, d: { text: "Acts of service", clan: "L5" }, e: { text: "Quality time", clan: "L4" }, f: { text: "Emotional connection", clan: "L2" }, g: { text: "Personal growth support", clan: "L3" } } },
     { text: "What is your favorite type of pasta?", answers: { a: { text: "Spaghetti", clan: "L5" }, b: { text: "Tortellini", clan: "L2" }, c: { text: "Fettuccine", clan: "L11" }, d: { text: "Penne", clan: "L3" }, e: { text: "Ravioli", clan: "L1" }, f: { text: "Rigatoni", clan: "L4" }, g: { text: "Farfalle", clan: "L9S" } } },
     { text: "Someone is following you at night, you…", answers: { a: { text: "Act crazy to scare them away", clan: "L4" }, b: { text: "Ignore them and keep walking", clan: "L9S" }, c: { text: "Run away as fast as possible", clan: "L3" }, d: { text: "Face them", clan: "L1" }, e: { text: "Start following them", clan: "L2" }, f: { text: "Walk in circles", clan: "L5" }, g: { text: "Call the police", clan: "L11" } } },
-    { text: "Which animal represents you best?", answers: { a: { text: "Pigeon", clan: "L1" }, b: { text: "Jellyfish", clan: "L2" }, c: { text: "Rhino", clan: "L1" }, d: { text: "Horseshoe crab", clan: "L3" }, e: { text: "Hyena", clan: "L4" }, f: { text: "King cobra", clan: "L11" }, g: { text: "White shark", clan: "L9S" } } },
+    { text: "Which animal represents you best?", answers: { a: { text: "Pigeon", clan: "L1" }, b: { text: "Jellyfish", clan: "L2" }, c: { text: "Rhino", clan: "L3" }, d: { text: "Horseshoe crab", clan: "L3" }, e: { text: "Hyena", clan: "L4" }, f: { text: "King cobra", clan: "L11" }, g: { text: "White shark", clan: "L9S" } } },
     { text: "Among these, which is your favorite metro line?", answers: { a: { text: "L1", clan: "L3" }, b: { text: "L2", clan: "L5" }, c: { text: "L3", clan: "L1" }, d: { text: "L4", clan: "L2" }, e: { text: "L5", clan: "L9S" }, f: { text: "L11", clan: "L11" }, g: { text: "L9S", clan: "L4" } } }
 ];
-
 
 // ==========================================
 // INICIALITZACIÓ I UI
@@ -91,7 +90,24 @@ function updateAppColor() {
     document.body.style.backgroundColor = color;
 }
 
+// Modals are queued. If a new showMessage arrives while one is already
+// open, it waits its turn — important because end-of-week + clan-transfer
+// notifications can fire back-to-back and the user must see both.
+const messageQueue = [];
+let messageOpen = false;
+
 function showMessage(title, body, icon = "🏆") {
+    messageQueue.push({ title, body, icon });
+    if (!messageOpen) showNextMessage();
+}
+
+function showNextMessage() {
+    if (messageQueue.length === 0) {
+        messageOpen = false;
+        return;
+    }
+    const { title, body, icon } = messageQueue.shift();
+    messageOpen = true;
     const overlay = document.getElementById('message-overlay');
     document.getElementById('message-title').innerText = title;
     const bodyEl = document.getElementById('message-body');
@@ -104,6 +120,9 @@ function showMessage(title, body, icon = "🏆") {
 
 function closeMessage() {
     document.getElementById('message-overlay').classList.add('hidden');
+    // Brief delay before showing the next queued modal so the close animation
+    // is visible to the user.
+    setTimeout(showNextMessage, 200);
 }
 
 function showView(id) {
@@ -293,7 +312,9 @@ const demo = {
     eventCount: 0,
     inTrip: false,
     pendingSessions: {},
-    seenEventIds: new Set()
+    seenEventIds: new Set(),
+    playerId: null,            // set from HELLO so we can detect events about us
+    pendingTransfer: null      // { fromClanId, toClanId } when we've just been transferred
 };
 
 function setDemoStatus(text)     { document.getElementById('demo-status').innerText = text; }
@@ -499,6 +520,7 @@ function sendDemo(obj) {
 function handleDemoMessage(msg) {
     switch (msg.type) {
         case 'HELLO':
+            demo.playerId = msg.playerId;
             setDemoPlayer(`${msg.playerId.slice(0, 8)}… / ${msg.clanId ?? '—'}`);
             if (msg.clanId) {
                 applyClan(msg.clanId);
@@ -659,7 +681,21 @@ function handleDemoMessage(msg) {
             updateWarBanner();
             pushDemoEvent(`[swarm] WEEKLY_RESULT ${p.weekId ?? ''}`);
 
-            if (!alreadySeen) showWeeklyResultModal(msg);
+            if (!alreadySeen) {
+                showWeeklyResultModal(msg);
+                // If we got transferred during this week's invasion, queue
+                // the personal explanation right after the weekly modal.
+                if (demo.pendingTransfer) {
+                    const { fromClanId, toClanId } = demo.pendingTransfer;
+                    demo.pendingTransfer = null;
+                    showMessage(
+                        'CANVI DE CLAN',
+                        `${fromClanId} ha perdut la guerra contra ${toClanId}.\n\n` +
+                        `Eres dels jugadors menys actius del clan ${fromClanId}, així que passes a formar part del clan ${toClanId}.`,
+                        '🚩'
+                    );
+                }
+            }
             break;
         }
         case 'INVASION_RESULT': {
@@ -668,9 +704,17 @@ function handleDemoMessage(msg) {
             pushDemoEvent(`★ INVASIÓ: ${winner} guanya (${p.attackerClanId} vs ${p.defenderClanId})`);
             break;
         }
-        case 'CLAN_MEMBERSHIP_CHANGED':
-            pushDemoEvent(`[swarm] ${msg.payload?.affectedPlayerId?.slice(0, 8)}… → ${msg.payload?.toClanId}`);
+        case 'CLAN_MEMBERSHIP_CHANGED': {
+            const p = msg.payload || {};
+            pushDemoEvent(`[swarm] ${p.affectedPlayerId?.slice(0, 8)}… → ${p.toClanId}`);
+            // Defer the personal "you've been transferred" modal until the
+            // WEEKLY_RESULT modal has been shown, so the user sees the
+            // big-picture result first and the personal consequence after.
+            if (p.affectedPlayerId === demo.playerId && p.toClanId) {
+                demo.pendingTransfer = { fromClanId: p.fromClanId, toClanId: p.toClanId };
+            }
             break;
+        }
         case 'RESET':
             demo.globalScores = {};
             demo.weeklyScores = {};

@@ -127,6 +127,13 @@ Substitueix el `--simulate` interactiu per la UI gràfica. La frontend
 i li demana que executi rutes estàtiques pre-definides; el `player-peer`
 valida, signa i broadcasteja al swarm exactament igual que abans.
 
+> **Producció / xarxes diferents**: els player-peers s'anuncien al DHT i
+> mantenen presència estable, així que un player pot connectar-se a la
+> xarxa des de qualsevol màquina sense necessitat de córrer un peer-server
+> local. Per estabilitat encara recomanem tenir almenys un validator i una
+> replica always-on (al núvol o a una màquina fixa) que actuïn de
+> backbone — no calen "side servers" als dispositius dels jugadors.
+
 ### Flags nous
 
 | Flag                | Aplicació                            | Per defecte |

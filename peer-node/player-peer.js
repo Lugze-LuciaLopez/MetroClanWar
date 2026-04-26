@@ -87,7 +87,14 @@ export async function startPlayer({
   let lastIntroWeek = null
   let demoBridge = null
 
-  const { swarm } = createSwarm({ server: false, client: true })
+  // Players announce themselves on the DHT (server: true) AND keep doing
+  // lookups (client: true). The two flags are independent: keeping client
+  // active means we actively look for validators/replicas; adding server
+  // means we're also findable, which keeps a stable DHT presence and helps
+  // UDP hole-punching from restrictive NATs. Without server: true a player
+  // behind NAT may fail to connect to remote peers because pure-client
+  // peers don't keep a stable DHT presence to assist hole-punching.
+  const { swarm } = createSwarm({ server: true, client: true })
 
   onConnection(swarm, (conn) => {
     if (verbose && !simulate) console.log('[player] connected to peer')

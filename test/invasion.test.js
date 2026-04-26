@@ -86,7 +86,30 @@ test('invasion: no events on target line → defender wins 0-0', t => {
   t.is(result.winner, 'DEFENDER')
   t.is(result.attackerPoints, 0)
   t.is(result.defenderPoints, 0)
-  t.is(result.membersToTransfer.length, 0)
+  // attacker-p1 is in the L3 roster (played any line this week as L3) and
+  // L3 lost, so they're eligible to be transferred even though they never
+  // scored on the target line.
+  t.is(result.membersToTransfer.length, 1)
+  t.is(result.membersToTransfer[0], 'attacker-p1')
+})
+
+test('invasion: roster includes off-target plays so non-participating attackers can be transferred', t => {
+  // Scenario: L3 attacker only played their own line, L5 defender played at home.
+  // L3 should lose with 0 points and the L3 player should be eligible for transfer.
+  const events = [
+    scoreEvent('attacker-p1', 'L3', 'L3', 30),  // off-target
+    scoreEvent('attacker-p2', 'L3', 'L1', 10),  // some other line
+    scoreEvent('defender-p1', 'L5', 'L5', 20),  // defending at home
+  ]
+  const result = computeInvasionResult({ scoreGrantedEvents: events, attackerClanId: 'L3', defenderClanId: 'L5', weekId: WEEK })
+  t.is(result.winner, 'DEFENDER')
+  t.is(result.attackerPoints, 0)
+  t.is(result.defenderPoints, 20)
+  // 2 L3 players in roster → ceil(2 × 0.05) = 1 transferred.
+  // Tiebreak: same active days (1 each), session count (1 each), but different
+  // points (10 vs 30) — the lower-scoring one (attacker-p2) is "less active".
+  t.is(result.membersToTransfer.length, 1)
+  t.is(result.membersToTransfer[0], 'attacker-p2')
 })
 
 test('invasion: ignores events from wrong week', t => {

@@ -17,23 +17,30 @@ export function computeInvasionResult({
 }) {
   const targetLineId = defenderClanId
 
-  const relevant = scoreGrantedEvents.filter(e =>
-    e.weekId === weekId &&
-    e.payload?.lineId === targetLineId &&
-    (e.payload?.clanId === attackerClanId || e.payload?.clanId === defenderClanId)
-  )
-
+  // 1) Score for the war: only events on the defender's home line count.
   let attackerPoints = 0
   let defenderPoints = 0
-  const playerMap = {}
-
-  for (const ev of relevant) {
-    const { clanId, points } = ev.payload
-    const pid = ev.playerId
-
+  for (const ev of scoreGrantedEvents) {
+    if (ev.weekId !== weekId) continue
+    if (ev.payload?.lineId !== targetLineId) continue
+    const clanId = ev.payload?.clanId
+    const points = ev.payload?.points ?? 0
     if (clanId === attackerClanId) attackerPoints += points
-    else defenderPoints += points
+    else if (clanId === defenderClanId) defenderPoints += points
+  }
 
+  // 2) Roster for transfer eligibility: any event of either war clan during
+  //    the war week, regardless of which line it was on. This is what makes
+  //    the "least active" semantic meaningful — a clan member who didn't
+  //    attempt the invasion at all is still a candidate to be transferred,
+  //    they just count as "0 score this week".
+  const playerMap = {}
+  for (const ev of scoreGrantedEvents) {
+    if (ev.weekId !== weekId) continue
+    const { clanId, points = 0 } = ev.payload ?? {}
+    if (clanId !== attackerClanId && clanId !== defenderClanId) continue
+
+    const pid = ev.playerId
     if (!playerMap[pid]) {
       playerMap[pid] = {
         playerId: pid,
