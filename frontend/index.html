@@ -38,6 +38,13 @@
       </div>
     </header>
     <main class="flex-1 p-6 space-y-6">
+      <!-- War banner — visible only when this peer's clan is in nextWarPair -->
+      <div id="war-banner" class="hidden rounded-2xl p-4 border-2 text-center font-black uppercase tracking-widest shadow-2xl">
+        <p class="text-[10px] opacity-80 mb-1" id="war-banner-week">Setmana —</p>
+        <p class="text-base" id="war-banner-role">—</p>
+        <p class="text-xs opacity-90 mt-1" id="war-banner-target">—</p>
+      </div>
+
       <div class="bg-black/20 p-8 rounded-[2.5rem] text-center border border-white/10 shadow-2xl">
         <div class="relative flex justify-center items-center mb-8 mt-4">
           <div id="radar-ping" class="hidden absolute w-48 h-48 rounded-full border-2 border-white animate-ping opacity-40"></div>

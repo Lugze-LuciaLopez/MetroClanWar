@@ -44,7 +44,15 @@ export function startDemoBridge({
   const clients = new Set()
   const caps = { dailyTotal: 0, weeklyTotal: 0 }
   let activeRun = null
-  let clanId = identity?.clanId ?? null
+
+  // Read the clan freshly from the shared identity object every time we
+  // need it. The player-peer can mutate identity.clanId at any moment
+  // (assignClan via UI, or CLAN_MEMBERSHIP_CHANGED via swarm) and signing
+  // must reflect the latest value. Caching the clan in a local variable
+  // would silently produce events with the wrong clanId after a transfer.
+  function currentClanId() {
+    return identity?.clanId ?? null
+  }
 
   // Running accumulator of events seen by this peer. Used to send a
   // STATE_SNAPSHOT to UIs when they connect, so a fresh page or a peer that
@@ -53,6 +61,7 @@ export function startDemoBridge({
   // demand, which keeps the result self-consistent even if events arrive
   // out of order (e.g. a SCORE_GRANTED via sync followed by its rejection).
   const scoreEvents = []
+  const weeklyResults = []
   const rejectedSessionIds = new Set()
   const seenEventIds = new Set()
 
@@ -65,24 +74,61 @@ export function startDemoBridge({
     } else if (event.type === EventType.METRO_SESSION_REJECTED) {
       const sid = event.payload?.sessionId
       if (sid) rejectedSessionIds.add(sid)
+    } else if (event.type === EventType.WEEKLY_RESULT) {
+      weeklyResults.push(event)
     }
   }
 
+  function latestWeeklyResult() {
+    if (weeklyResults.length === 0) return null
+    return weeklyResults.reduce((a, b) => (a.timestamp > b.timestamp ? a : b))
+  }
+
   function buildSnapshot() {
-    const clanScores = {}
+    // Two parallel views: global (cumulative all-time) and current-week
+    // (events submitted strictly after the most recent finalized WEEKLY_RESULT).
+    // War clans are excluded from the weekly view because they have their
+    // own war ranking — same rule the validator applies.
+    const globalScores = {}
+    const weeklyScores = {}
     let myTotalPoints = 0
     const includedEventIds = []
+
+    const lastWR = latestWeeklyResult()
+    const lastWeekId = lastWR?.weekId ?? null
+    const warPair = lastWR?.payload?.nextWarPair ?? null
+    const warClans = new Set([
+      warPair?.attackerClanId,
+      warPair?.defenderClanId
+    ].filter(Boolean))
+
     for (const ev of scoreEvents) {
       const sid = ev.payload?.sessionId
       if (sid && rejectedSessionIds.has(sid)) continue
       const clan = ev.payload?.clanId
       const pts = ev.payload?.points ?? 0
       if (!clan || !pts) continue
-      clanScores[clan] = (clanScores[clan] || 0) + pts
+
+      globalScores[clan] = (globalScores[clan] || 0) + pts
       if (ev.playerId === pid) myTotalPoints += pts
+
+      const isCurrentWeek = !lastWeekId || (ev.weekId && ev.weekId > lastWeekId)
+      if (isCurrentWeek && !warClans.has(clan)) {
+        weeklyScores[clan] = (weeklyScores[clan] || 0) + pts
+      }
       includedEventIds.push(ev.eventId)
     }
-    return { clanScores, myTotalPoints, seenEventIds: includedEventIds }
+    if (lastWR) includedEventIds.push(lastWR.eventId)
+
+    return {
+      globalScores,
+      weeklyScores,
+      myTotalPoints,
+      warClans: Array.from(warClans),
+      warPair,
+      latestWeeklyResult: lastWR ?? null,
+      seenEventIds: includedEventIds
+    }
   }
 
   if (verbose) console.log(`[demo-bridge] listening ws://localhost:${port}`)
@@ -101,7 +147,7 @@ export function startDemoBridge({
   wss.on('connection', (ws) => {
     clients.add(ws)
     if (verbose) console.log('[demo-bridge] ui connected')
-    send(ws, { type: 'HELLO', playerId: pid, clanId })
+    send(ws, { type: 'HELLO', playerId: pid, clanId: currentClanId() })
     send(ws, { type: 'AVAILABLE_ROUTES', routes: describeRoutes() })
     send(ws, { type: 'STATE_SNAPSHOT', ...buildSnapshot() })
 
@@ -121,7 +167,7 @@ export function startDemoBridge({
       }
 
       if (msg.action === 'runRoute') {
-        if (!clanId) {
+        if (!currentClanId()) {
           send(ws, { type: 'ERROR', reason: 'Cap clan assignat encara' })
           return
         }
@@ -141,12 +187,11 @@ export function startDemoBridge({
       sendAll({ type: 'ERROR', reason: `Clan desconegut: ${requestedClan}` })
       return
     }
-    if (clanId === requestedClan) {
+    if (currentClanId() === requestedClan) {
       // already set; just re-emit HELLO so the UI advances
-      sendAll({ type: 'HELLO', playerId: pid, clanId })
+      sendAll({ type: 'HELLO', playerId: pid, clanId: requestedClan })
       return
     }
-    clanId = requestedClan
     if (identity) {
       identity.clanId = requestedClan
       if (identityPath) {
@@ -158,7 +203,7 @@ export function startDemoBridge({
         }
       }
     }
-    sendAll({ type: 'HELLO', playerId: pid, clanId })
+    sendAll({ type: 'HELLO', playerId: pid, clanId: requestedClan })
   }
 
   async function handleRunRoute(routeId) {
@@ -234,7 +279,7 @@ export function startDemoBridge({
       payload: {
         sessionId: sessionPayload.sessionId,
         lineId: sessionPayload.lineId,
-        clanId,
+        clanId: currentClanId(),
         points,
         reason: 'VALIDATED_METRO_SESSION'
       }
@@ -258,6 +303,28 @@ export function startDemoBridge({
     // Always accumulate so the snapshot stays current — including own
     // events that come back via SYNC_RESPONSE on rejoin.
     recordEvent(event)
+
+    // Side-effects on bridge state when certain events arrive:
+    //   - CLAN_MEMBERSHIP_CHANGED for us → update identity and re-broadcast
+    //     HELLO so all UI clients repaint clan colour, indicator and banner.
+    //   - WEEKLY_RESULT → reset per-week point caps so the next week starts
+    //     with a clean budget (otherwise applyScoreCaps would clamp every
+    //     new SCORE_GRANTED to 0 once the weekly limit was hit).
+    if (event.type === EventType.CLAN_MEMBERSHIP_CHANGED &&
+        event.payload?.affectedPlayerId === pid &&
+        event.payload?.toClanId) {
+      if (identity) identity.clanId = event.payload.toClanId
+      if (identityPath && identity) {
+        saveIdentity(identity, identityPath).catch(() => {})
+      }
+      sendAll({ type: 'HELLO', playerId: pid, clanId: currentClanId() })
+      if (verbose) console.log(`[demo-bridge] clan changed to ${event.payload.toClanId} via invasion`)
+    }
+
+    if (event.type === EventType.WEEKLY_RESULT) {
+      caps.dailyTotal = 0
+      caps.weeklyTotal = 0
+    }
 
     if (event.playerId === pid) return // already sent as 'self' when it was created
     sendAll({ ...event, source: 'swarm' })

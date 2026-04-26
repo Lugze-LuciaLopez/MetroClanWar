@@ -12,7 +12,7 @@ import { computeInvasionResult } from '../core/invasion/invasion-engine.js'
 import { signEvent } from '../core/events/event-signer.js'
 import { EventType } from '../core/events/event-types.js'
 import { weekId, weekStart } from '../core/weekly-engine/week-utils.js'
-import { nowSecs } from '../core/weekly-engine/clock.js'
+import { nowSecs, getWeekOffset, setWeekOffset } from '../core/weekly-engine/clock.js'
 import { generateKeypair, playerId, saveKeypair, loadKeypair } from '../core/crypto/identity.js'
 import { validateStaticRoute } from '../simulator/demo/static-validator.js'
 import { homedir } from 'os'
@@ -64,7 +64,20 @@ export async function startValidator({
     bridge = startValidatorBridge({
       port: demoPort,
       validatorId,
-      computeNow: () => computeAndPublish(weekId(nowSecs()), keypair, validatorId, store, swarm, verbose, bridge),
+      computeNow: async () => {
+        const wid = weekId(nowSecs())
+        const result = await computeAndPublish(wid, keypair, validatorId, store, swarm, verbose, bridge)
+        // Auto-advance the validator's clock only if a WEEKLY_RESULT was
+        // actually published — otherwise the players (which auto-advance on
+        // receiving the WEEKLY_RESULT, see player-peer.js maybeAdvanceWeek)
+        // would stay behind and the validator would drift.
+        if (result) {
+          const offsetWeeks = getWeekOffset() / (7 * 86400)
+          setWeekOffset(offsetWeeks + 1)
+          if (verbose) console.log(`[validator] week advanced to ${weekId(nowSecs())}`)
+        }
+        return result
+      },
       verbose
     })
   }
