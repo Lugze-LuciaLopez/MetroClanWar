@@ -38,6 +38,13 @@
       </div>
     </header>
     <main class="flex-1 p-6 space-y-6">
+      <!-- War banner — visible only when this peer's clan is in nextWarPair -->
+      <div id="war-banner" class="hidden rounded-2xl p-4 border-2 text-center font-black uppercase tracking-widest shadow-2xl">
+        <p class="text-[10px] opacity-80 mb-1" id="war-banner-week">Setmana —</p>
+        <p class="text-base" id="war-banner-role">—</p>
+        <p class="text-xs opacity-90 mt-1" id="war-banner-target">—</p>
+      </div>
+
       <div class="bg-black/20 p-8 rounded-[2.5rem] text-center border border-white/10 shadow-2xl">
         <div class="relative flex justify-center items-center mb-8 mt-4">
           <div id="radar-ping" class="hidden absolute w-48 h-48 rounded-full border-2 border-white animate-ping opacity-40"></div>
@@ -88,11 +95,16 @@
     </main>
   </div>
 
-  <!-- Right sidebar: live ranking -->
+  <!-- Right sidebar: live ranking with Global/Weekly tabs -->
   <aside id="ranking-sidebar" class="w-80 shrink-0 bg-black/50 border-l border-white/10 flex flex-col p-5 overflow-y-auto">
-    <p class="text-[10px] uppercase font-bold tracking-widest opacity-60 mb-2">Ranking en viu</p>
-    <p class="text-[10px] opacity-50 mb-4">Suma dels SCORE_GRANTED rebuts pel swarm</p>
+    <p class="text-[10px] uppercase font-bold tracking-widest opacity-60 mb-3">Ranking en viu</p>
+    <div class="flex gap-2 mb-4">
+      <button id="tab-global"  class="ranking-tab flex-1 py-2 rounded-lg text-[11px] font-black uppercase tracking-wide bg-white text-black">Global</button>
+      <button id="tab-weekly"  class="ranking-tab flex-1 py-2 rounded-lg text-[11px] font-black uppercase tracking-wide bg-black/40 text-white/80 border border-white/10">Setmanal</button>
+    </div>
+    <p id="ranking-week-label" class="text-[10px] opacity-50 mb-3">Setmana en curs</p>
     <ul id="demo-ranking" class="space-y-3"></ul>
+    <p id="ranking-empty-hint" class="text-[10px] opacity-40 mt-4 hidden"></p>
   </aside>
 </section>
 

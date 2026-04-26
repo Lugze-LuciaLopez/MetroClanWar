@@ -3,7 +3,7 @@
 // ==========================================
 const state = {
     currentQuestion: 0,
-    scores: { L1:0, L2:0, L3:0, L4:0, L5:0, L9S:0, L11:0 },
+    scores: { L1:0, L2:0, L3:0, L4:0, L5:0, L11:0, L9S:0 },
     clan: localStorage.getItem('userClan') || null,
     totalPoints: parseInt(localStorage.getItem('totalPoints')) || 0,
     
@@ -35,8 +35,9 @@ const questions = [
     { text: "What is your favorite type of pasta?", answers: { a: { text: "Spaghetti", clan: "L5" }, b: { text: "Tortellini", clan: "L2" }, c: { text: "Fettuccine", clan: "L11" }, d: { text: "Penne", clan: "L3" }, e: { text: "Ravioli", clan: "L1" }, f: { text: "Rigatoni", clan: "L4" }, g: { text: "Farfalle", clan: "L9S" } } },
     { text: "Someone is following you at night, you…", answers: { a: { text: "Act crazy to scare them away", clan: "L4" }, b: { text: "Ignore them and keep walking", clan: "L9S" }, c: { text: "Run away as fast as possible", clan: "L3" }, d: { text: "Face them", clan: "L1" }, e: { text: "Start following them", clan: "L2" }, f: { text: "Walk in circles", clan: "L5" }, g: { text: "Call the police", clan: "L11" } } },
     { text: "Which animal represents you best?", answers: { a: { text: "Pigeon", clan: "L1" }, b: { text: "Jellyfish", clan: "L2" }, c: { text: "Rhino", clan: "L1" }, d: { text: "Horseshoe crab", clan: "L3" }, e: { text: "Hyena", clan: "L4" }, f: { text: "King cobra", clan: "L11" }, g: { text: "White shark", clan: "L9S" } } },
-    { text: "Among these, which is your favorite metro line?", answers: { a: { text: "L1", clan: "L3" }, b: { text: "L2", clan: "L5" }, c: { text: "L3", clan: "L1" }, d: { text: "L4", clan: "L2" }, e: { text: "L5", clan: "L9S" }, f: { text: "L11", clan: "L11" }, g: { text: "L9 Sud", clan: "L4" } } }
+    { text: "Among these, which is your favorite metro line?", answers: { a: { text: "L1", clan: "L3" }, b: { text: "L2", clan: "L5" }, c: { text: "L3", clan: "L1" }, d: { text: "L4", clan: "L2" }, e: { text: "L5", clan: "L9S" }, f: { text: "L11", clan: "L11" }, g: { text: "L9S", clan: "L4" } } }
 ];
+
 
 // ==========================================
 // INICIALITZACIÓ I UI
@@ -93,7 +94,10 @@ function updateAppColor() {
 function showMessage(title, body, icon = "🏆") {
     const overlay = document.getElementById('message-overlay');
     document.getElementById('message-title').innerText = title;
-    document.getElementById('message-body').innerText = body;
+    const bodyEl = document.getElementById('message-body');
+    bodyEl.innerText = body;
+    bodyEl.style.whiteSpace = 'pre-line';
+    bodyEl.style.textAlign = 'left';
     document.getElementById('message-icon').innerText = icon;
     overlay.classList.remove('hidden');
 }
@@ -276,17 +280,19 @@ const DEMO_SPEED_PLACEHOLDER = '30 km/h';
 const demo = {
     ws: null,
     port: DEMO_PORT || '8787',
-    clanScores: {},
+    // Two ranking views, both fed by the bridge:
+    //   global: cumulative all-time (never resets).
+    //   weekly: events submitted strictly after the last finalized
+    //           WEEKLY_RESULT and excluding clans currently at war.
+    globalScores: {},
+    weeklyScores: {},
+    warPair: null,             // { attackerClanId, defenderClanId } | null
+    warClans: new Set(),
+    latestWeeklyResult: null,
+    rankingTab: 'global',      // 'global' | 'weekly'
     eventCount: 0,
     inTrip: false,
-    // Sessions the player has just published and is awaiting validator
-    // confirmation for. If the validator rejects one, we roll back the
-    // points we tentatively credited.
-    pendingSessions: {}, // { [sessionId]: { clan, points, mine } }
-    // Event IDs the UI has already counted (either via STATE_SNAPSHOT on
-    // (re)connect or via a live SCORE_GRANTED tick). Lets us dedupe so a
-    // late-joining UI doesn't double-count an event that was both in the
-    // snapshot and arrived again as a live forwarded event.
+    pendingSessions: {},
     seenEventIds: new Set()
 };
 
@@ -322,6 +328,7 @@ function applyClan(clanId) {
     state.clan = clanId;
     document.getElementById('clan-indicator').textContent = clanId;
     updateAppColor();
+    updateWarBanner();
 }
 
 function pushDemoEvent(line) {
@@ -334,15 +341,38 @@ function pushDemoEvent(line) {
 
 function renderRanking() {
     const list = document.getElementById('demo-ranking');
+    const hint = document.getElementById('ranking-empty-hint');
+    const weekLabel = document.getElementById('ranking-week-label');
     list.innerHTML = '';
-    const entries = Object.entries(demo.clanScores).sort((a, b) => b[1] - a[1]);
+
+    const useWeekly = demo.rankingTab === 'weekly';
+    const scores = useWeekly ? demo.weeklyScores : demo.globalScores;
+
+    if (weekLabel) {
+        if (useWeekly) {
+            const wid = demo.latestWeeklyResult?.weekId;
+            weekLabel.textContent = wid ? `Després de ${wid}` : 'Setmana en curs';
+        } else {
+            weekLabel.textContent = 'Acumulat des de l\'inici';
+        }
+    }
+
+    const entries = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+
     if (entries.length === 0) {
         const li = document.createElement('li');
         li.className = 'opacity-40 text-center py-8 text-sm';
-        li.innerText = 'Sense punts encara';
+        li.innerText = useWeekly ? 'Sense punts aquesta setmana' : 'Sense punts encara';
         list.appendChild(li);
+        if (hint) {
+            if (useWeekly && demo.warClans.size) {
+                hint.textContent = `Clans en guerra exclosos: ${[...demo.warClans].join(' vs ')}`;
+                hint.classList.remove('hidden');
+            } else hint.classList.add('hidden');
+        }
         return;
     }
+
     entries.forEach(([clan, pts], idx) => {
         const color = CLAN_COLORS[clan] || '#666';
         const isMe = clan === state.clan;
@@ -361,6 +391,89 @@ function renderRanking() {
         `;
         list.appendChild(li);
     });
+
+    if (hint) {
+        if (useWeekly && demo.warClans.size) {
+            hint.textContent = `Clans en guerra exclosos: ${[...demo.warClans].join(' vs ')}`;
+            hint.classList.remove('hidden');
+        } else hint.classList.add('hidden');
+    }
+}
+
+function setRankingTab(tab) {
+    demo.rankingTab = tab;
+    const tg = document.getElementById('tab-global');
+    const tw = document.getElementById('tab-weekly');
+    if (tg && tw) {
+        const active = 'bg-white text-black border-transparent';
+        const inactive = 'bg-black/40 text-white/80 border border-white/10';
+        tg.className = `ranking-tab flex-1 py-2 rounded-lg text-[11px] font-black uppercase tracking-wide ${tab === 'global' ? active : inactive}`;
+        tw.className = `ranking-tab flex-1 py-2 rounded-lg text-[11px] font-black uppercase tracking-wide ${tab === 'weekly' ? active : inactive}`;
+    }
+    renderRanking();
+}
+
+function updateWarBanner() {
+    const banner = document.getElementById('war-banner');
+    if (!banner) return;
+    const pair = demo.warPair;
+    const me = state.clan;
+    if (!pair || !me || (me !== pair.attackerClanId && me !== pair.defenderClanId)) {
+        banner.classList.add('hidden');
+        return;
+    }
+    const isAttacker = me === pair.attackerClanId;
+    const opponent = isAttacker ? pair.defenderClanId : pair.attackerClanId;
+    const opponentColor = CLAN_COLORS[opponent] || '#fff';
+    const myColor = CLAN_COLORS[me] || '#fff';
+
+    document.getElementById('war-banner-week').textContent =
+        `Guerra de ${demo.latestWeeklyResult?.weekId ?? 'aquesta setmana'}`;
+    document.getElementById('war-banner-role').textContent =
+        isAttacker ? `⚔️ Estàs ATACANT` : `🛡️ Estàs DEFENSANT`;
+    document.getElementById('war-banner-target').textContent =
+        isAttacker
+            ? `Juga estacions de ${opponent} per sumar a la invasió`
+            : `${opponent} t'envaeix — defensa la teva línia jugant a ${me}`;
+
+    banner.style.background = `linear-gradient(90deg, ${myColor}66, ${opponentColor}66)`;
+    banner.style.borderColor = isAttacker ? opponentColor : myColor;
+    banner.classList.remove('hidden');
+}
+
+function showWeeklyResultModal(event) {
+    const p = event?.payload || {};
+    const wid = p.weekId ?? event?.weekId ?? '?';
+    const ranking = p.weeklyRanking || [];
+    const global = p.globalRanking || [];
+    const pair = p.nextWarPair;
+    const wr = p.warResult;
+
+    let body = '';
+    if (wr) {
+        const winner = wr.winner === 'ATTACKER' ? wr.attackerClanId : wr.defenderClanId;
+        body += `Guerra: ${wr.attackerClanId} vs ${wr.defenderClanId}\n`;
+        body += `→ ${winner} guanya (${wr.attackerPoints} vs ${wr.defenderPoints})\n\n`;
+    }
+    if (ranking.length) {
+        body += `Top setmanal:\n`;
+        body += ranking.slice(0, 3).map((c, i) => `${i + 1}. ${c.clanId} — ${c.points} pts`).join('\n');
+        body += '\n\n';
+    } else if (global.length) {
+        body += `Ranking global:\n`;
+        body += global.slice(0, 3).map((c, i) => `${i + 1}. ${c.clanId} — ${c.points} pts`).join('\n');
+        body += '\n\n';
+    }
+    if (pair) {
+        const myRole = state.clan === pair.attackerClanId ? '  ⚔️ ATAQUES TU'
+                     : state.clan === pair.defenderClanId ? '  🛡️ DEFENSES TU'
+                     : '';
+        body += `Pròxima guerra:\n${pair.attackerClanId} → ${pair.defenderClanId}${myRole}`;
+    } else {
+        body += `Pròxima setmana: cap guerra programada`;
+    }
+
+    showMessage(`SETMANA ${wid}`, body, '🏁');
 }
 
 function renderRoutes(routes) {
@@ -394,7 +507,7 @@ function handleDemoMessage(msg) {
             } else {
                 // No clan yet — start the quiz with red default background.
                 state.currentQuestion = 0;
-                state.scores = { L1:0, L2:0, L3:0, L4:0, L5:0, L9S:0, L11:0 };
+                state.scores = { L1:0, L2:0, L3:0, L4:0, L5:0, L11:0, L9S:0 };
                 document.body.style.backgroundColor = '#ED1C24';
                 showView('view-quiz');
                 loadQuestion();
@@ -407,11 +520,16 @@ function handleDemoMessage(msg) {
             // Hydrate ranking + own total from the accumulated state held by
             // the bridge. Subsequent live SCORE_GRANTED events with the same
             // eventId will be deduped via demo.seenEventIds.
-            demo.clanScores = { ...(msg.clanScores || {}) };
+            demo.globalScores = { ...(msg.globalScores || {}) };
+            demo.weeklyScores = { ...(msg.weeklyScores || {}) };
+            demo.warPair = msg.warPair || null;
+            demo.warClans = new Set(msg.warClans || []);
+            demo.latestWeeklyResult = msg.latestWeeklyResult || null;
             state.totalPoints = msg.myTotalPoints || 0;
             for (const id of (msg.seenEventIds || [])) demo.seenEventIds.add(id);
             document.getElementById('score-display').innerText = state.totalPoints;
             renderRanking();
+            updateWarBanner();
             break;
         case 'ROUTE_STARTED':
             demo.inTrip = true;
@@ -457,11 +575,12 @@ function handleDemoMessage(msg) {
             const alreadyCounted = eid && demo.seenEventIds.has(eid);
             if (eid) demo.seenEventIds.add(eid);
 
-            if (!alreadyCounted) {
-                if (clan) {
-                    demo.clanScores[clan] = (demo.clanScores[clan] || 0) + pts;
-                    renderRanking();
+            if (!alreadyCounted && clan && pts) {
+                demo.globalScores[clan] = (demo.globalScores[clan] || 0) + pts;
+                if (!demo.warClans.has(clan)) {
+                    demo.weeklyScores[clan] = (demo.weeklyScores[clan] || 0) + pts;
                 }
+                renderRanking();
                 if (msg.source === 'self') {
                     state.totalPoints += pts;
                     document.getElementById('score-display').innerText = state.totalPoints;
@@ -489,10 +608,17 @@ function handleDemoMessage(msg) {
             if (eid) demo.seenEventIds.add(eid);
 
             if (pending && !alreadyApplied) {
-                // Roll back the points we tentatively credited.
-                if (pending.clan && demo.clanScores[pending.clan] != null) {
-                    demo.clanScores[pending.clan] -= pending.points;
-                    if (demo.clanScores[pending.clan] <= 0) delete demo.clanScores[pending.clan];
+                // Roll back the points we tentatively credited (both views).
+                const clan = pending.clan;
+                if (clan) {
+                    if (demo.globalScores[clan] != null) {
+                        demo.globalScores[clan] -= pending.points;
+                        if (demo.globalScores[clan] <= 0) delete demo.globalScores[clan];
+                    }
+                    if (demo.weeklyScores[clan] != null) {
+                        demo.weeklyScores[clan] -= pending.points;
+                        if (demo.weeklyScores[clan] <= 0) delete demo.weeklyScores[clan];
+                    }
                     renderRanking();
                 }
                 if (pending.mine) {
@@ -514,9 +640,28 @@ function handleDemoMessage(msg) {
             }
             break;
         }
-        case 'WEEKLY_RESULT':
-            pushDemoEvent(`[swarm] WEEKLY_RESULT ${msg.payload?.weekId ?? ''}`);
+        case 'WEEKLY_RESULT': {
+            const eid = msg.eventId;
+            const alreadySeen = eid && demo.seenEventIds.has(eid);
+            if (eid) demo.seenEventIds.add(eid);
+
+            // The end-of-week event arrives here only via the swarm (signed
+            // by the validator). Update local view to match: war pair becomes
+            // the new nextWarPair; weekly counter resets to start counting
+            // events submitted from now on.
+            const p = msg.payload || {};
+            demo.warPair = p.nextWarPair || null;
+            demo.warClans = new Set([p.nextWarPair?.attackerClanId, p.nextWarPair?.defenderClanId].filter(Boolean));
+            demo.latestWeeklyResult = msg;
+            demo.weeklyScores = {};
+
+            renderRanking();
+            updateWarBanner();
+            pushDemoEvent(`[swarm] WEEKLY_RESULT ${p.weekId ?? ''}`);
+
+            if (!alreadySeen) showWeeklyResultModal(msg);
             break;
+        }
         case 'INVASION_RESULT': {
             const p = msg.payload || {};
             const winner = p.winner === 'ATTACKER' ? p.attackerClanId : p.defenderClanId;
@@ -527,7 +672,8 @@ function handleDemoMessage(msg) {
             pushDemoEvent(`[swarm] ${msg.payload?.affectedPlayerId?.slice(0, 8)}… → ${msg.payload?.toClanId}`);
             break;
         case 'RESET':
-            demo.clanScores = {};
+            demo.globalScores = {};
+            demo.weeklyScores = {};
             demo.inTrip = false;
             state.totalPoints = 0;
             document.getElementById('score-display').innerText = '0';
@@ -562,6 +708,10 @@ function connectDemoBridge() {
 
 function bindDemoButtons() {
     document.getElementById('btn-demo-reset').onclick = () => sendDemo({ action: 'reset' });
+    const tg = document.getElementById('tab-global');
+    const tw = document.getElementById('tab-weekly');
+    if (tg) tg.onclick = () => setRankingTab('global');
+    if (tw) tw.onclick = () => setRankingTab('weekly');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
