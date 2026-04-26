@@ -95,18 +95,17 @@
     </main>
   </div>
 
-  <!-- Right sidebar: live ranking with Global/Weekly tabs -->
-  <aside id="ranking-sidebar" class="w-80 shrink-0 bg-black/50 border-l border-white/10 flex flex-col p-5 overflow-y-auto">
-    <p class="text-[10px] uppercase font-bold tracking-widest opacity-60 mb-3">Ranking en viu</p>
-    <div class="flex gap-2 mb-4">
-      <button id="tab-global"  class="ranking-tab flex-1 py-2 rounded-lg text-[11px] font-black uppercase tracking-wide bg-white text-black">Global</button>
-      <button id="tab-weekly"  class="ranking-tab flex-1 py-2 rounded-lg text-[11px] font-black uppercase tracking-wide bg-black/40 text-white/80 border border-white/10">Setmanal</button>
+  <aside id="ranking-sidebar" class="relative w-80 shrink-0 bg-black/50 border-l border-white/10 flex flex-col p-5 overflow-hidden">
+    <p class="text-[10px] uppercase font-bold tracking-widest opacity-60 mb-2">Ranking en viu</p>
+    <p class="text-[10px] opacity-50 mb-4">Suma dels SCORE_GRANTED rebuts pel swarm</p>
+    
+    <ul id="demo-ranking" class="space-y-3 flex-1 overflow-y-auto"></ul>
+
+    <div class="absolute bottom-0 right-0 w-full flex justify-end pointer-events-none">
+        <img id="clan-avatar" src="" alt="Clan Sprite" 
+             class="w-48 h-48 object-contain pixelated translate-y-4">
     </div>
-    <p id="ranking-week-label" class="text-[10px] opacity-50 mb-3">Setmana en curs</p>
-    <ul id="demo-ranking" class="space-y-3"></ul>
-    <p id="ranking-empty-hint" class="text-[10px] opacity-40 mt-4 hidden"></p>
-  </aside>
-</section>
+</aside>
 
 <div id="message-overlay" class="hidden fixed inset-0 z-50 flex items-center justify-center p-6 bg-black/80 backdrop-blur-sm">
   <div class="bg-white rounded-[2.5rem] p-8 w-full max-w-sm text-center shadow-2xl">

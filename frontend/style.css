@@ -1,4 +1,6 @@
 /* style.css */
+
+/* --- ESTRUCTURA BASE --- */
 html, body {
     margin: 0;
     padding: 0;
@@ -22,12 +24,14 @@ section {
     flex-direction: column;
 }
 
+/* --- INTERACCIÓ --- */
 button {
     touch-action: none; 
     cursor: pointer;
     -webkit-tap-highlight-color: transparent;
     user-select: none;
     pointer-events: auto !important;
+    transition: transform 0.1s ease;
 }
 
 .btn-active:active {
@@ -37,7 +41,7 @@ button {
 
 .hidden { display: none !important; }
 
-/* Radar */
+/* --- ANIMACIONS UI --- */
 @keyframes ping {
     75%, 100% { transform: scale(2.2); opacity: 0; }
 }
@@ -45,27 +49,73 @@ button {
     animation: ping 1.2s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
 
-/* --- AJUSTOS PEL MISSATGE --- */
-#message-overlay:not(.hidden) > div {
-    animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
 @keyframes modalPop {
     0% { opacity: 0; transform: scale(0.85); }
     100% { opacity: 1; transform: scale(1); }
 }
 
-/* Forcem que el títol encaixi */
+#message-overlay:not(.hidden) > div {
+    animation: modalPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* --- MISSATGES I MODALS --- */
 #message-title {
-    /* Mida més petita que abans perquè encaixi "CONGRATULATIONS!" */
-    font-size: 1.25rem !important; /* Aproximadament text-xl */
+    font-size: 1.25rem !important;
     line-height: 1.1 !important;
-    letter-spacing: -0.05em !important; /* Espaiat estret */
-    white-space: nowrap !important; /* Evita que es trenqui en dues línies */
+    letter-spacing: -0.05em !important;
+    white-space: nowrap !important;
 }
 
 @media (min-width: 380px) {
     #message-title {
-        font-size: 1.5rem !important; /* text-2xl per a pantalles una mica més grans */
+        font-size: 1.5rem !important;
     }
+}
+
+/* --- IMPLEMENTACIÓ AVATAR PIXEL ART --- */
+.pixelated {
+    /* Evita que el navegador suavitzi els píxels en fer-lo gran */
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+    -ms-interpolation-mode: nearest-neighbor;
+}
+
+#clan-avatar {
+    /* Efecte de resplendor suau per separar l'sprite del fons fosc de la barra lateral */
+    filter: drop-shadow(0 -5px 15px rgba(255, 255, 255, 0.15));
+    
+    /* Animació de flotació */
+    animation: float-bottom 4s ease-in-out infinite;
+    
+    /* Fixem la base de l'animació a la part inferior */
+    transform-origin: bottom;
+    
+    /* Evitem que l'avatar bloquegi clics al rànquing que hi ha darrere */
+    pointer-events: none;
+}
+
+@keyframes float-bottom {
+    0% { 
+        transform: translateY(16px) scale(1); 
+    }
+    50% { 
+        transform: translateY(4px) scale(1.03); /* Puja lleugerament i creix un pèl */
+    }
+    100% { 
+        transform: translateY(16px) scale(1); 
+    }
+}
+
+/* Ajust per a la barra lateral del rànquing */
+#ranking-sidebar {
+    /* Necessari per poder posicionar l'avatar de forma absoluta respecte la barra */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Estil de la llista de rànquing perquè no quedi tapada per l'avatar */
+#demo-ranking {
+    position: relative;
+    z-index: 1; /* El rànquing per sota de la resplendor, però interactuable */
+    padding-bottom: 120px; /* Espai extra a sota per fer scroll i que l'avatar no tapi l'últim peer */
 }
