@@ -151,30 +151,6 @@ function selectAnswer(clan) {
     else finishQuiz();
 }
 
-/*
-function finishQuiz() {
-    const winner = Object.keys(state.scores).reduce((a, b) => state.scores[a] > state.scores[b] ? a : b);
-
-    if (DEMO_MODE) {
-        // Send the result to the player-peer; the next HELLO will advance us
-        // to the dashboard. Show a transient confirmation in the quiz view.
-        sendDemo({ action: 'assignClan', clanId: winner });
-        const h2 = document.querySelector('#view-quiz h2');
-        if (h2) h2.textContent = `Assignant-te al clan ${winner}…`;
-        const grid = document.querySelector('#view-quiz .grid');
-        if (grid) grid.innerHTML = '';
-        return;
-    }
-
-    if (!state.clan) {
-        state.clan = winner;
-        localStorage.setItem('userClan', state.clan);
-    }
-    updateAppColor();
-    document.getElementById("clan-indicator").textContent = state.clan;
-    document.getElementById("score-display").textContent = state.totalPoints;
-    showView("view-dashboard");
-}*/
 function finishQuiz() {
     // Calculem qui ha guanyat el test
     const winner = Object.keys(state.scores).reduce((a, b) => state.scores[a] > state.scores[b] ? a : b);
@@ -398,7 +374,16 @@ function applyClan(clanId) {
     state.clan = clanId;
     document.getElementById('clan-indicator').textContent = clanId;
     updateAppColor();
+    updateClanAvatar();
     updateWarBanner();
+}
+
+function updateClanAvatar() {
+    const avatarImg = document.getElementById('clan-avatar');
+    if (!avatarImg || !state.clan) return;
+    avatarImg.src = `assets/avatars/${state.clan}.png`;
+    avatarImg.onerror = () => { avatarImg.style.opacity = '0'; };
+    avatarImg.style.opacity = '1';
 }
 
 function pushDemoEvent(line) {
