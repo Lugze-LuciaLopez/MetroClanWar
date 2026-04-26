@@ -77,11 +77,11 @@ function handle(msg) {
 
 function connect() {
     const url = `ws://localhost:${port}`;
-    setStatus(`connectant…`);
+    setStatus(`connecting…`);
     try { ws = new WebSocket(url); }
     catch { setStatus('error'); return; }
-    ws.onopen    = () => setStatus(`connectat (port ${port})`);
-    ws.onclose   = () => { setStatus('desconnectat — reintent en 2s'); setTimeout(connect, 2000); };
+    ws.onopen    = () => setStatus(`connected (port ${port})`);
+    ws.onclose   = () => { setStatus('disconnected — retrying in 2s'); setTimeout(connect, 2000); };
     ws.onerror   = () => {};
     ws.onmessage = (e) => { try { handle(JSON.parse(e.data)); } catch {} };
 }

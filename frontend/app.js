@@ -50,20 +50,20 @@ document.addEventListener("DOMContentLoaded", async () => {
         const response = await fetch('../data/geofences.json');
         geofencesData = await response.json();
     } catch (e) {
-        console.error("❌ Error carregant geofences.");
+        console.error("❌ Error loading geofences.");
     }
     if (DEMO_MODE) {
         // Demo mode: clan comes from the connected player-peer via HELLO.
         // If the peer has no clan yet, the HELLO will be { clanId: null }
         // and we'll show the quiz; otherwise we'll jump straight to the
-        // dashboard. Until HELLO arrives, show a transient "Connectant…"
+        // dashboard. Until HELLO arrives, show a transient "Connecting…"
         // message in the quiz view (red default background).
         state.clan = null;
         state.totalPoints = 0;
         document.getElementById('score-display').textContent = '0';
         document.getElementById('clan-indicator').textContent = '…';
         const h2 = document.querySelector('#view-quiz h2');
-        if (h2) h2.textContent = 'Connectant amb el peer…';
+        if (h2) h2.textContent = 'Connecting to peer…';
         const grid = document.querySelector('#view-quiz .grid');
         if (grid) grid.innerHTML = '';
         showView('view-quiz');
@@ -161,7 +161,7 @@ function finishQuiz() {
         sendDemo({ action: 'assignClan', clanId: winner });
         
         const h2 = document.querySelector('#view-quiz h2');
-        if (h2) h2.textContent = `Assignant-te al clan ${winner}…`;
+        if (h2) h2.textContent = `Assigning you to clan ${winner}…`;
         
         const grid = document.querySelector('#view-quiz .grid');
         if (grid) grid.innerHTML = '';
@@ -186,7 +186,7 @@ function finishQuiz() {
         
         // Gestió d'error: si no troba la imatge, la ocultem o posem un log
         avatarImg.onerror = () => {
-            console.warn(`No s'ha trobat l'avatar a: assets/avatars/${state.clan}.png`);
+            console.warn(`No avatar found at: assets/avatars/${state.clan}.png`);
             avatarImg.style.opacity = "0"; 
         };
         avatarImg.style.opacity = "1"; // Ens assegurem que sigui visible
@@ -609,7 +609,7 @@ function handleDemoMessage(msg) {
             const tag = msg.source === 'self' ? '[self]' : '[swarm]';
             pushDemoEvent(`${tag} METRO_SESSION_CONFIRMED ${msg.payload?.lineId ?? ''}`);
             if (msg.source === 'self') {
-                setDemoValidation('Trajecte enviat · esperant validator…');
+                setDemoValidation('Trip submitted · waiting for validator…');
                 demo.inTrip = false;
                 setRadar(false);
                 setTripSpeed('0 km/h');
@@ -617,7 +617,7 @@ function handleDemoMessage(msg) {
                 // Validator accepted (else would have emitted METRO_SESSION_REJECTED first).
                 const sid = msg.payload?.sessionId;
                 if (sid && demo.pendingSessions[sid]?.mine) {
-                    setDemoValidation('Acceptada pel validator ✓');
+                    setDemoValidation('Accepted by validator ✓');
                 }
             }
             break;
@@ -643,7 +643,7 @@ function handleDemoMessage(msg) {
                 }
             }
             if (msg.source === 'self') {
-                setDemoValidation('Pendent — esperant validator…');
+                setDemoValidation('Pending — waiting for validator…');
             }
             if (sid) {
                 demo.pendingSessions[sid] = { clan, points: pts, mine: msg.source === 'self' };
@@ -685,7 +685,7 @@ function handleDemoMessage(msg) {
             }
 
             const isMine = pending?.mine || msg.source === 'self';
-            setDemoValidation(`Rebutjada: ${reason}`);
+            setDemoValidation(`Rejected: ${reason}`);
             pushDemoEvent(`✗ REJECTED: ${reason}`);
             demo.inTrip = false;
             setRadar(false);
@@ -769,15 +769,15 @@ function handleDemoMessage(msg) {
 
 function connectDemoBridge() {
     const url = `ws://localhost:${demo.port}`;
-    setDemoStatus(`connectant a ${url}…`);
+    setDemoStatus(`connecting to ${url}…`);
     try {
         demo.ws = new WebSocket(url);
     } catch (e) {
-        setDemoStatus('error connexió');
+        setDemoStatus('error connecting');
         return;
     }
-    demo.ws.onopen    = () => setDemoStatus(`connectat (port ${demo.port})`);
-    demo.ws.onclose   = () => { setDemoStatus('desconnectat — reintentant en 2s'); setTimeout(connectDemoBridge, 2000); };
+    demo.ws.onopen    = () => setDemoStatus(`connected (port ${demo.port})`);
+    demo.ws.onclose   = () => { setDemoStatus('disconnected — retrying in 2s'); setTimeout(connectDemoBridge, 2000); };
     demo.ws.onerror   = () => {};
     demo.ws.onmessage = (e) => {
         try { handleDemoMessage(JSON.parse(e.data)); } catch {}
